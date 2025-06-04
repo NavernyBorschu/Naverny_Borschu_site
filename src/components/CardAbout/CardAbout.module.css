@@ -1,0 +1,21 @@
+.cardConteiner{
+    padding: 50px;
+}
+.imgConteiner {
+    overflow: hidden;
+    text-align: center;
+    width: 300px;
+    height: 200px;
+    border-radius: 12px;
+    margin: 0 auto;
+}
+
+.image {
+    background-size: 100% auto;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

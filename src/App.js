@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import { BrowserRouter, Routes, Route} from "react-router-dom";
+import {MapPage} from "./page/MapPage";
+import {Login} from "./page/Login";
+import { Layout } from "./components/Layout";
+import { Profile } from "./page/Profile/Profile";
+import { LikeBorsch } from "./page/LikeBorsch/LikeBorsch";
+import { List } from "./page/List";
+import { AddPage } from "./page/AddPage/AddPage";
+import { ListPage } from "./page/ListPage/ListPage";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+
+
+export default function App() {  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter  basename="/">
+      <Layout>              
+          <Routes>
+            <Route path="/" element={<MapPage/>}/>
+            <Route path="/login" element={<Login/>}/>            
+            <Route path="/favorite" element={<LikeBorsch/>}/>  
+            <Route path="/reviews" element={<List/>}/> 
+            <Route path="/profile" element={<Profile/>}/>
+            <Route path="/add-borsch" element={<PrivateRoute><AddPage/></PrivateRoute>}/> 
+            <Route path="/list" element={<ListPage/>}/>               
+          </Routes>
+      </Layout>
+    </BrowserRouter>        
   );
 }
 
-export default App;
+

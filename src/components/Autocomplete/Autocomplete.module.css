@@ -1,0 +1,21 @@
+.container{
+    position: relative;
+    width: 100%;
+    height: 60px;
+   
+}
+.input{
+    background-color: azure;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding-left: 50px;
+}
+.select{
+    position: absolute;
+    top: 30px;
+    padding-left: 50px;
+    width: 100%;
+    background-color: azure;
+    z-index: 99;
+}

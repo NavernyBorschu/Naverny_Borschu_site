@@ -1,0 +1,40 @@
+.clientPage{
+  display: flex;
+  justify-content: center;
+}
+.clientCard {
+    width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 16px;
+    background-color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    margin-top: 100px;
+  }
+  
+  .clientHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  .clientAvatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+  
+  .clientInfo {
+    margin: 0;
+    font-size: 25px;
+  }
+  
+  .clientId {
+    margin: 4px 0 0;
+    color: #555;
+  }
+  
+  .clientDetails {
+    margin: 8px 0;
+  }
