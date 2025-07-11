@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { ReactComponent as IconDelete } from './cross-small.svg';
 import styles from './Modal.module.css';
 
 
@@ -24,15 +23,12 @@ export class Modal extends Component  {
     };
 
     render() {
-        const {children,onClose} = this.props;
+        const {children} = this.props;
         return ( 
             <>
                 <div className={styles.Backdrop}/>     
                 <div className={styles.Overlay} onClick={this.handleClose}>
-                    <div className={styles.Modal}>
-                        <button type="button" onClick={onClose} className={styles.deleteButton}>                               
-                            <IconDelete className={styles.icon} aria-label={'icon-cross'} id='search'/>
-                        </button>
+                    <div className={styles.Modal}>                        
                         <div>{children}</div>
                     </div>
                 </div>      

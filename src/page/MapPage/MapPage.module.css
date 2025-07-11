@@ -1,42 +1,25 @@
 .pageHome{
     display: flex;
     justify-content: center; 
-    margin:0 auto ;   
+    margin:0 auto ;     
 }
-.addButton{
-    position: absolute;
-    top:110px;
-    left: 0;
-    z-index: 2;
-    background-color: rgb(86, 185, 152);   
-    padding: 15px 20px;    
-}
-.btnLogoutWrap{
-    position: absolute;
-    top: 5px;
-    right:  50px;
-    z-index: 100; 
-    display: flex;
-    gap: 20px;  
-}
-.btnLogout{   
-    padding: 10px 30px;   
-}
+
 
 .btnWrap{
     position: absolute;
     z-index: 99;
-    top:20px;
+    top:90px;
     display: flex;   
     background-color: var(--color-bg-main);
-    border-radius: 14px;   
+    border-radius: 14px;
+    padding: 3px;   
 }
 
 .btn{
-    padding:10px 50px;
+    padding:6px;
     width: 170px;
     border-radius: 14px;
-    font-size: 20px;
+    font-size: 14px;
     background-color: var(--color-text-active); 
     color:var( --color-text-btn-active);  
     list-style: none;    
@@ -46,5 +29,35 @@
 
 .btn:hover {
     background-color:  var(--color-text); 
-    color:var( --color-text-btn);  
+    color:var( --color-text-active);
+    cursor: pointer;  
+}
+
+.btn_inl{
+    padding:6px;
+    width: 170px;
+    border-radius: 14px;
+    font-size: 14px;
+    background-color: var(--color-text-btn-active); 
+    color:var( --color-text);  
+    list-style: none;    
+    text-align:center;
+    text-decoration: none;    
+}
+
+.btn_inl:hover {
+    cursor: pointer;
+    color:var(--color-text-active);  
+}
+.borsch{
+    position: absolute;
+    z-index: 99;
+    top:140px;
+    /* width: 200px; */
+    border-radius: 14px;
+    font-size: 14px;    
+    color:var( --color-text-btn); 
+    background-color: var(--color-text-btn-active);
+    padding: 10px;
+    text-align: center;
 }

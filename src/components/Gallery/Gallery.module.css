@@ -1,0 +1,21 @@
+.deleteButton {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    border: none;
+    margin: 0;
+    padding: 0;
+    height: 24px;
+    width: 24px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:none;
+}
+
+.icon {
+    pointer-events: none;
+    height: 24px;
+    width: 24px;
+}

@@ -1,0 +1,56 @@
+.filterWrap{
+    position: absolute;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    background-color:var(--color-text-btn-active);    
+}
+.inputWrap{
+    position: relative;
+}
+.input{   
+    border: 1px solid var(--color-text-main);
+    border-radius: 14px;
+    font-size: 14px; 
+    padding: 12px; 
+    width: 240px;  
+}
+.input::placeholder{
+    padding-left: 40px;
+}
+.input:hover, .input:focus{
+    border: 1px solid var(--color-text-active);
+}
+.searchButton{
+   position: absolute;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    z-index: 99; 
+    left: 10px; 
+    top:8px;  
+}
+.searchButton:hover .icon, .searchButton:focus .icon{    
+    fill: var(--color-text-active); 
+}
+.button{
+    border: 1px solid var(--color-text-main);
+    border-radius: 14px;
+    padding: 8px;
+    
+}
+.button :global(svg) {
+  color: var(--color-text-btn); 
+  transition: color 0.2s ease;
+}
+.button:hover,.button:focus{
+    border: 1px solid var(--color-text-active);
+       
+}
+.button:hover .icon {
+  fill: var(--color-text-active); 
+}
