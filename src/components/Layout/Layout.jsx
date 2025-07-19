@@ -27,9 +27,9 @@ export const Layout = ({ children }) => {
                             Обране</Link>
                         </li>
                          <li>                        
-                            <Link to="/add-borsch" className={style.link} onClick={()=>localStorage.setItem('mode', MODES.SET_MARKER)}>
+                            <Link to="/add-borsch" className={style.addBorsch} onClick={()=>localStorage.setItem('mode', MODES.SET_MARKER)}>
                             <Icon path={mdiPlus} size={2} />
-                            Додати борщ</Link>
+                           </Link>
                         </li>                                               
                         <li>
                             <Link to="/reviews" className={style.link}>

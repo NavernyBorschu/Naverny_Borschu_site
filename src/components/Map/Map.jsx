@@ -4,6 +4,7 @@ import {defaultTheme} from './Theme';
 import { CurrentLocationMarker } from '../CurrentLocationMarker/CurrentLocationMarker';
 import {Modal} from '../Modal/Modal';
 import {Gallery} from '../Gallery/Gallary';
+import borsch from '../../data/borsch.json';
 import style from './Map.module.css';
 
 const containerStyle = {
@@ -86,7 +87,19 @@ export const Map=({center,mode,places,onMarkerAdd})=>{
         isActiveAbout===true?setIsActiveAbout(false):setIsActiveAbout(true); 
           
     };     
-   
+    const getAverageOverallRating=(borsch, placeId)=> {
+        const filtered = borsch.filter(item => item.place_id === placeId);
+
+        if (filtered.length === 0) return null;
+
+        const total = filtered.reduce((sum, item) => {
+        return sum + parseFloat(item.overall_rating);
+    }, 0);
+
+  const average = total / filtered.length;
+
+  return average.toFixed(1); 
+}
     
     return(
         <div className={style.container}>
@@ -102,13 +115,13 @@ export const Map=({center,mode,places,onMarkerAdd})=>{
             {places.map((pos,index)=>{                   
                 return (
                     <div key={index}>
-                        <CurrentLocationMarker position={pos.location} id={pos.id} onClick={onClickMarker} grade={'5'}/>                            
+                        <CurrentLocationMarker position={pos.location} id={pos.id} onClick={onClickMarker} grade={getAverageOverallRating(borsch, pos.id)}/>                            
                     </div>
                 )                    
             })}  
                      
             {isActiveAbout&&<Modal onClose={onClickMarker}>                    
-                <Gallery onClose={onClickMarker} id_place={place.id}/>
+                <Gallery onClose={onClickMarker} id_place={place.id} place={place}/>
             </Modal>}
             {isActiveAddForm&&<Modal onClose={changeIsActiveAddForm}>
                 <button  type='button' onClick={onAddMarker}>Зберегти</button>

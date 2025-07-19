@@ -5,7 +5,7 @@
     --color-text-btn-active:#FFFFFF;
     --color-bg-main:#F9F9F9;
     --color-text-grade:#A6A6A6;
-    
+    --color-add-btn:#b9f4a8;    
 }
 
 body {
@@ -34,6 +34,9 @@ a {
 a {
     outline: 0;
     text-decoration: none;
+}  
+
+button{
+    padding: 0;
 }
-  
 

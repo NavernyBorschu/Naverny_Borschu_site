@@ -81,7 +81,7 @@ export const MapPage = ( )=> {
           <Link to="/"  className={style.btn}>Мапа</Link>          
           <Link to="/list"  className={style.btn_inl}>Список</Link>               
         </div>
-         <div className={style.borsch}>(зареєстровано {borsch.length} борщів)</div>
+        <div className={style.borsch}>(зареєстровано {borsch.length} борщів)</div>
       </>
      } 
           

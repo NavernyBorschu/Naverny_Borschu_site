@@ -1,10 +1,11 @@
-.pageHome{
+.pageList{
     display: flex;
     justify-content: center; 
-    margin:0 auto ;     
+    margin:0 auto ; 
+    background-color:#edecec; 
+    height: 100vh; 
+    overflow: hidden;
 }
-
-
 .btnWrap{
     position: absolute;
     z-index: 99;
@@ -52,11 +53,52 @@
 .borsch{
     position: absolute;
     z-index: 99;
-    top:140px;   
+    top:140px;    
     border-radius: 14px;
     font-size: 14px;    
     color:var( --color-text-btn); 
     background-color: var(--color-text-btn-active);
     padding: 10px;
     text-align: center;
+}
+.wrappBorsch{
+    margin-top: 210px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.card{
+    position: relative;
+    background-color: var(--color-text-btn-active);
+    border-radius: 12px;
+    padding: 6px;  
+}
+.imageStyle {
+    width: 100%;   
+    border-radius: 12px;    
+    object-fit: cover
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+    margin:10px 0;   
+}
+.borschName{
+    font-size: 14px;
+    font-weight: 500;
+}
+.borschPrice{
+    color: var(--color-text-main);
+}
+
+.box{
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    display:flex;    
+    justify-content: center;
+   align-items: center;
+   z-index: 999;
 }

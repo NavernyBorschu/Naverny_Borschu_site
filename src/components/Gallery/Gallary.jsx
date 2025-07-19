@@ -1,21 +1,18 @@
 import  { useState } from "react";
 import { ReactComponent as IconDelete } from './close.svg';
-import { ReactComponent as IconLike } from './like.svg';
+// import { ReactComponent as IconLike } from './like.svg';
 import { ReactComponent as IconLikeInl } from './like_inl.svg';
+import { RatingIconsSvg } from "../RatingIconsSvg";
 import borsch from '../../data/borsch.json';
-const images = [
-  "https://picsum.photos/id/1011/600/400",
-  "https://picsum.photos/id/1012/600/400",
-  "https://picsum.photos/id/1013/600/400",
-  "https://picsum.photos/id/1014/600/400",
-  "https://picsum.photos/id/1015/600/400",
-];
+// import data from '../../data/places.json';
 
-export const Gallery=({onClose,id_place})=> {
+
+
+
+export const Gallery=({onClose,id_place,place})=> {
   const [activeIndex, setActiveIndex] = useState(0);
-  const arrayBorsch=[];
-  borsch.map((i)=>{i.place_id=id_place?arrayBorsch.push(i):[...arrayBorsch]})
-
+  const arrayBorsch = borsch.filter(i => i.place_id === id_place);
+  
   
   const containerStyle = {
     width: "100vw",   
@@ -38,20 +35,17 @@ export const Gallery=({onClose,id_place})=> {
     display:"flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",    
   }
   const closeButton={
     display: "flex",
     justifyContent: "center",
     alignItems: "center",    
     border:"none" ,
-    background:"none" ,
-    gap:"8px"     
+    background:"none"    
   };
   const icon={
-    pointerEvents:"none",
-    height: "24px",
-    width: "24px"
+    pointerEvents:"none"    
   };
   
   const cardStyle = (isActive) => ({
@@ -73,15 +67,25 @@ export const Gallery=({onClose,id_place})=> {
   });
 
   const imageStyle = {
-    width: "100%",
+    width: "100%",   
     borderRadius: "12px",    
     objectFit: "cover",
   };
+  const borschName={
+    fontSize:"14px",
+    fontWeight:"500"
+  };
+  const flex={
+    display: "flex",
+    justifyContent:"space-between",
+    margin:"10px 0",
+    color:"#878787"
+  }
 
   return (
     <div style={containerStyle}>
       <div style={rowStyle}>
-        {images.map((src, index) => {
+        { arrayBorsch.map((borsch, index) => {
           const isActive = index === activeIndex;
           return (
             <div
@@ -89,14 +93,21 @@ export const Gallery=({onClose,id_place})=> {
               style={cardStyle(isActive)}
               onClick={() => setActiveIndex(index)}
             >
-              <img src={src} alt={`img-${index}`} style={imageStyle} />
+              <img src={borsch.photo_urls[0]} alt={`img-${index}`} style={imageStyle} />
               <div style={box}>
                 <button type="button" onClick={onClose} style={closeButton}>                               
-                  <IconDelete  className={icon} aria-label={'close'} id='close'/>
+                  <IconDelete  style={icon} aria-label={'close'} id='close'/>
                 </button>
-                <IconLike/>
+                {/* <IconLike/> */}
                 <IconLikeInl/>
-              </div>              
+              </div>
+              <p style={borschName}>{borsch.name}</p>
+              <div style={flex}>
+                <p>{borsch.price}</p>
+                <p>{borsch.weight}</p>
+              </div>
+              <RatingIconsSvg overall_rating={borsch.overall_rating} /> 
+              <p>{place.name}</p>         
             </div>
           );
         })}
