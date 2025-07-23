@@ -1,15 +1,15 @@
-// import { googleLogout } from '@react-oauth/google';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { useCallback, useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-  import { useLocation } from "react-router-dom";
 import { getBrowserLocation } from '../../utils/geo';
-// import { Autocomplete } from '../../components/Autocomplete';
 import {Link} from "react-router-dom";
+import { Autocomplete } from '../../components/Autocomplete';
 import { Map } from '../../components/Map';
+import { Filters } from '../../components/Filters/Filters';
 import { MODES } from '../../components/Map/Map';
-import data from '../../data/data.json';
+import data from '../../data/places.json';
+import borsch from '../../data/borsch.json';
 import style from './MapPage.module.css';
+
 
 
 const API_KEY=process.env.REACT_APP_API_KEY_MAP;
@@ -22,11 +22,7 @@ const defaultCenter = {
 
 export const MapPage = ( )=> {  
   const [center,setCenter] = useState(defaultCenter);  
-  const [markers,setMarkers] = useState(data);  
-  const location = useLocation();
-  let currentPath = location.pathname;
-  console.log(currentPath);
-  console.log(currentPath = '/');
+  const [places,setPlaces] = useState(data);   
   
   const mode = Number(localStorage.getItem('mode')) || MODES.MOVE; 
   const { isLoaded } = useJsApiLoader({
@@ -36,12 +32,21 @@ export const MapPage = ( )=> {
   })
 
   const onMarkerAdd=useCallback((coordinates)=>{            
-    setMarkers([...markers,
-      {location:coordinates,
-      id:`${coordinates.lat}`,
-      url:'fotoborsh.jpg'
+    setPlaces([...places,
+      {id:`${coordinates.lat}`,
+        adress:"",        
+        country:"", 
+        city:"",
+        name_shopping_mall:"",
+        location:coordinates,      
+        places:[  
+           {place_id:`${coordinates.lat}+1`,
+            name:"Кафе",
+            type:"ресторан"},           
+        ],
+        grade:"9.0"
     }]);      
-  },[markers])  
+  },[places])  
 
   useEffect(()=>{
     getBrowserLocation().then((curLoc)=>{
@@ -50,45 +55,41 @@ export const MapPage = ( )=> {
     .catch((defaultCenter)=>{
       setCenter(defaultCenter)
     })
-  },[])
+  },[])  
   
+  
+ const onPlaceSelect=useCallback((coordinates)=>{
+    setCenter(coordinates);
+  },[])
+
   // const handleLogout=()=>{    
   //   googleLogout();
   //   localStorage.clear();
   //   navigate('/');  
   // }
-  
- // const onPlaceSelect=useCallback((coordinates)=>{
-  //   setCenter(coordinates);
-  // },[])
-
-  // const toggleMode=useCallback(()=>{
-  //   switch(mode){
-  //     case MODES.MOVE:
-  //       setMode(MODES.SET_MARKER);       
-  //       break;
-  //     case MODES.SET_MARKER:
-  //       setMode(MODES.MOVE);        
-  //       break;
-  //       default:
-  //         setMode(MODES.MOVE);          
-  //   }   
-  // },[mode])
 
   return (        
     <div className={style.pageHome}>      
        {/* {mode===MODES.SET_MARKER && <div className={style.btnLogoutWrap}>                   
           <button onClick={handleLogout} className={style.btnLogout}>Logout</button>
         </div>} */}
-      {/* <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect}/> */}
-      {mode===MODES.MOVE && <div className={style.btnWrap}>             
-        <Link to="/list"  className={style.btn}>Список</Link>               
-      </div> }      
+      {mode===MODES.SET_MARKER && <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect}/>}
+      {mode===MODES.MOVE &&   
+      <> 
+        <Filters/>  
+        <div className={style.btnWrap}> 
+          <Link to="/"  className={style.btn}>Мапа</Link>          
+          <Link to="/list"  className={style.btn_inl}>Список</Link>               
+        </div>
+        <div className={style.borsch}>(зареєстровано {borsch.length} борщів)</div>
+      </>
+     } 
+          
       {isLoaded 
       ?<Map 
           center={center} 
           mode={mode} 
-          markers={markers} 
+          places={places} 
           onMarkerAdd={onMarkerAdd}          
         /> 
       : <>Loading</> } 

@@ -2,9 +2,9 @@ import React, { useCallback,useState } from 'react';
 import { GoogleMap} from "@react-google-maps/api";
 import {defaultTheme} from './Theme';
 import { CurrentLocationMarker } from '../CurrentLocationMarker/CurrentLocationMarker';
-import {Marker } from "@react-google-maps/api";
 import {Modal} from '../Modal/Modal';
-import { CardAbout } from '../CardAbout/CardAbout';
+import {Gallery} from '../Gallery/Gallary';
+import borsch from '../../data/borsch.json';
 import style from './Map.module.css';
 
 const containerStyle = {
@@ -32,13 +32,14 @@ export const MODES={
     SET_MARKER:1
 }
 
-export const Map=({center,mode,markers,onMarkerAdd})=>{ 
+export const Map=({center,mode,places,onMarkerAdd})=>{ 
     const [isActiveAbout,setIsActiveAbout] =useState(false);
     const [isActiveAddForm,setIsActiveAddForm] =useState(false);
     const[newMarker,setIsNewMarker]=useState();
-    const[marker,setIsMarker]=useState();
+    const[place,setIsPlace]=useState();
     const mapRef=React.useRef(undefined);   
-   const [newMarkerAddress, setNewMarkerAddress] = useState('');
+    const [newMarkerAddress, setNewMarkerAddress] = useState('');
+
 
     const onLoad = React.useCallback(function callback(map) {
         mapRef.current=map;
@@ -53,77 +54,79 @@ export const Map=({center,mode,markers,onMarkerAdd})=>{
         changeIsActiveAddForm();           
     };
 
-    // const onClickMap=useCallback((loc)=>{
-    //     if(mode===MODES.SET_MARKER){
-    //         const lat=loc.latLng.lat();
-    //         const lng=loc.latLng.lng();            
-    //         setIsNewMarker({lat,lng})         
-    //         changeIsActiveAddForm();                                                      
-    //     }       
-    // },[mode, onMarkerAdd]);
-const onClickMap = useCallback((loc) => {
-    if (mode === MODES.SET_MARKER) {
-        const lat = loc.latLng.lat();
-        const lng = loc.latLng.lng();
-        const position = { lat, lng };
+    const changeIsActiveAddForm=useCallback(()=>{
+        isActiveAddForm===true?setIsActiveAddForm(false):setIsActiveAddForm(true);                
+    },[ isActiveAddForm]);  
 
-        setIsNewMarker(position);
-        changeIsActiveAddForm();
 
-        const geocoder = new window.google.maps.Geocoder();
-        geocoder.geocode({ location: position }, (results, status) => {
-            if (status === 'OK' && results[0]) {
-                setNewMarkerAddress(results[0].formatted_address);
-            } else {
-                setNewMarkerAddress('Адрес не визначено');
-            }
-        });
-    }
-}, [mode, onMarkerAdd]);
+    const onClickMap = useCallback((loc) => {
+        if (mode === MODES.SET_MARKER) {
+            const lat = loc.latLng.lat();
+            const lng = loc.latLng.lng();
+            const position = { lat, lng };
+            setIsNewMarker(position);
+            changeIsActiveAddForm();
+            const geocoder = new window.google.maps.Geocoder();
+            geocoder.geocode({ location: position }, (results, status) => {
+                if (status === 'OK' && results[0]) {
+                    setNewMarkerAddress(results[0].formatted_address);
+                } else {
+                    setNewMarkerAddress('Адрес не визначено');
+                }
+            });
+        }
+    },[mode,changeIsActiveAddForm]);
 
     const onClickMarker=(id)=>{       
-        markers.forEach((element) => 
+        places.forEach((place) => 
             {             
-                if(element.id===id){                  
-                    setIsMarker(element);                    
+                if(place.id===id){                  
+                    setIsPlace(place);                    
                 }
             });
         isActiveAbout===true?setIsActiveAbout(false):setIsActiveAbout(true); 
           
-    };  
+    };     
+    const getAverageOverallRating=(borsch, placeId)=> {
+        const filtered = borsch.filter(item => item.place_id === placeId);
 
-    const changeIsActiveAddForm=()=>{
-        isActiveAddForm===true?setIsActiveAddForm(false):setIsActiveAddForm(true);                
-    };  
-   
+        if (filtered.length === 0) return null;
+
+        const total = filtered.reduce((sum, item) => {
+        return sum + parseFloat(item.overall_rating);
+    }, 0);
+
+  const average = total / filtered.length;
+
+  return average.toFixed(1); 
+}
     
     return(
         <div className={style.container}>
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
-                zoom={12}
+                zoom={17}
                 onLoad={onLoad}
                 onUnmount={onUnmount}
                 options={defoultOptions}
                 onClick={onClickMap}
-            >
-                  
-                {markers.map((pos,index)=>{                   
-                    return (
-                        <div key={index}>
-                           <CurrentLocationMarker position={pos.location} id={pos.id} onClick={onClickMarker}/>                            
-                        </div>
-                    )                    
-                })}  
-                <Marker position={center}/>              
-                {isActiveAbout&&<Modal onClose={onClickMarker}>
-                    <CardAbout marker={marker}/>
-                </Modal>}
-                {isActiveAddForm&&<Modal onClose={changeIsActiveAddForm}>
-                    <button  type='button' onClick={onAddMarker}>Зберегти</button>
-                    <p>📍 Адрес: {newMarkerAddress}</p>
-                </Modal>}                
+            >                  
+            {places.map((pos,index)=>{                   
+                return (
+                    <div key={index}>
+                        <CurrentLocationMarker position={pos.location} id={pos.id} onClick={onClickMarker} grade={getAverageOverallRating(borsch, pos.id)}/>                            
+                    </div>
+                )                    
+            })}  
+                     
+            {isActiveAbout&&<Modal onClose={onClickMarker}>                    
+                <Gallery onClose={onClickMarker} id_place={place.id} place={place}/>
+            </Modal>}
+            {isActiveAddForm&&<Modal onClose={changeIsActiveAddForm}>
+                <button  type='button' onClick={onAddMarker}>Зберегти</button>
+                <p>📍 Адрес: {newMarkerAddress}</p>
+            </Modal>}                
             </GoogleMap>
            
         </div>  

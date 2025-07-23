@@ -1,0 +1,89 @@
+ [
+    {
+        "id_borsch":"12345",
+        "name":"Борщ з пампушками1",
+        "place_id":"50.60060238061545",
+        "rating_salt":"5",
+        "rating_meat":"8",
+        "rating_beet":"5",
+        "rating_density":"10",
+        "rating_aftertaste":"8",
+        "overall_rating":"9",       
+        "price":"≈4.55 ₴", 
+        "weight":"600 g.",
+        "photo_urls":["image1.png","image3.png"]        
+    },
+    {
+        "id_borsch":"12345455",
+        "name":"Борщ з пампушками2",
+        "place_id":"50.60060238061545",
+        "rating_salt":"5",
+        "rating_meat":"8",
+        "rating_beet":"5",
+        "rating_density":"10",
+        "rating_aftertaste":"8",
+        "overall_rating":"9",
+        "price":"≈5.55 ₴", 
+        "weight":"500 g.",
+        "photo_urls":["image2.png","image1.png"]
+        
+    },
+    {
+        "id_borsch":"12345455",
+        "name":"Борщ з пампушками6",
+        "place_id":"50.60060238061545",
+        "rating_salt":"5",
+        "rating_meat":"8",
+        "rating_beet":"5",
+        "rating_density":"10",
+        "rating_aftertaste":"8",
+        "overall_rating":"5",
+        "price":"≈6.55 ₴", 
+        "weight":"500 g.",
+        "photo_urls":["image3.png","image2.png"]
+        
+    },
+    {
+        "id_borsch":"12345456",
+        "name":"Борщ з пампушками3",
+        "place_id":"50.60060238061546",
+        "rating_salt":"5",
+        "rating_meat":"8",
+        "rating_beet":"5",
+        "rating_density":"10",
+        "rating_aftertaste":"8",
+        "overall_rating":"9",
+        "price":"≈5.55 ₴", 
+        "weight":"500 g.",
+        "photo_urls":["image3.png","image3.png"]
+        
+    },
+    {
+        "id_borsch":"12345455",
+        "name":"Борщ з пампушками",
+        "place_id":"50.37289856705871",
+        "rating_salt":"5",
+        "rating_meat":"8",
+        "rating_beet":"5",
+        "rating_density":"10",
+        "rating_aftertaste":"8",
+        "overall_rating":"7",
+        "price":"≈5.55 ₴", 
+        "weight":"500 g.",
+        "photo_urls":["image1.png","image3.png"]        
+    },
+    {
+        "id_borsch":"123454561",
+        "name":"Борщ зелений",
+        "place_id":"50.37289856705871",
+        "rating_salt":"5",
+        "rating_meat":"8",
+        "rating_beet":"5",
+        "rating_density":"10",
+        "rating_aftertaste":"8",
+        "overall_rating":"6",
+        "price":"≈4.55 ₴", 
+        "weight":"500 g.",
+        "photo_urls":["image2.png","image3.png"]        
+    }
+]
