@@ -1,0 +1,50 @@
+.pageHome{
+    display: flex;
+    justify-content: center; 
+    margin:0 auto ;   
+}
+.addButton{
+    position: absolute;
+    top:110px;
+    left: 0;
+    z-index: 2;
+    background-color: rgb(86, 185, 152);   
+    padding: 15px 20px;    
+}
+.btnLogoutWrap{
+    position: absolute;
+    top: 5px;
+    right:  50px;
+    z-index: 100; 
+    display: flex;
+    gap: 20px;  
+}
+.btnLogout{   
+    padding: 10px 30px;   
+}
+
+.btnWrap{
+    position: absolute;
+    z-index: 99;
+    top:20px;
+    display: flex;   
+    background-color: var(--color-bg-main);
+    border-radius: 14px;   
+}
+
+.btn{
+    padding:10px 50px;
+    width: 170px;
+    border-radius: 14px;
+    font-size: 20px;
+    background-color: var(--color-text-active); 
+    color:var( --color-text-btn-active);  
+    list-style: none;    
+    text-align:center;
+    text-decoration: none;    
+}
+
+.btn:hover {
+    background-color:  var(--color-text); 
+    color:var( --color-text-btn);  
+}

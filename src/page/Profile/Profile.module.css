@@ -1,0 +1,78 @@
+.userPage {
+    background-color: var(--color-bg-grey);
+    min-height: 100vh;
+    padding: 16px 16px 24px;
+    text-align: center;
+}
+
+.userButtons {
+    background-color: var(--color-bg-pages);
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+}
+
+.linksContainer {
+    background-color: var(--color-bg-pages);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    margin: 24px 0;
+    padding: 0 16px;
+}
+
+.linkWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+
+    padding: 16px 0;
+    text-align: left;
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid #DDDDDD;
+    /*transform: rotate(0.19deg);*/
+    width: 100%;
+}
+
+.linkGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.arrow {
+    width: 24px;
+    height: 24px;
+}
+
+
+.userHeader {
+    margin-top: 40px;
+    margin-bottom: 24px;
+}
+
+.advertBanner {
+    margin: 24px 0;
+    padding: 10px 16px 0;
+    gap: 10px;
+    /*height: 172px;*/
+    background-color: var(--color-bg-ad);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.advertText {
+    text-align: left;
+    /*width: 165px;*/
+    /*height: 50px;*/
+}
+
+.advertHeader {
+    margin-bottom: 8px;
+}
+

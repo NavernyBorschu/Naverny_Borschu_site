@@ -1,0 +1,42 @@
+:root {   
+    --color-text-main: #878787;
+    --color-text-active:#638758;
+    --color-text-btn:#1A1A1A;
+    --color-text-btn-active:#FFFFFF;
+    --color-bg-main:#F9F9F9;
+    --color-bg-pages:#F8F8F8;
+    --color-bg-grey:#F2F2F2; /* Grey/300 */
+    --color-bg-ad: #F9CFA8;
+
+    --font-family-main: 'Roboto', sans-serif;
+}
+
+body {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+  
+ul {
+    list-style: none;
+}
+  
+h1,
+h2,
+h3,
+ul,
+li,
+p,
+a {
+    margin: 0; 
+    padding: 0; 
+}
+  
+a {
+    outline: 0;
+    text-decoration: none;
+}
+
+
+  
+
