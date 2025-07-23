@@ -1,0 +1,48 @@
+[
+    {"id":"50.60060238061545",    
+    "name":"Kiev,Tsentralna street, 25, Kiev, 02000",
+    "location":{"lat": 50.460001,"lng": 30.583333},
+    "url":"image2.png" ,
+    "price":"4.55$",
+    "weight":"600 gram" ,
+    "saltiness":7,
+    "fleshiness":5,
+    "description":"Ukrainian liquid dish cooked from chopped beets, cabbage with the addition of potatoes, beans, and various seasonings. The collective name of various options of the first course, the common feature of which is probably a sour, sour taste." ,
+    "like":true
+    },
+    {"id":"50.37289856705871",    
+    "name":"Kiev,Pankivska street, 20, Kiev, 02000",
+    "location":{"lat": 50.450001,"lng": 30.723333},
+    "url":"image3.png" ,
+    "price":"5.55$",
+    "weight":"500 gram" ,
+    "saltiness":9,
+    "fleshiness":3,
+    "description":"Ukrainian liquid dish cooked from chopped beets, cabbage with the addition of potatoes, beans, and various seasonings. The collective name of various options of the first course, the common feature of which is probably a sour, sour taste." ,
+    "like":true 
+    },
+    {"id":"50.54303774904596",    
+    "name":"Kiev,Pankivska street, 20, Kiev, 02000",
+    "location":{"lat": 50.45303774904596, "lng": 30.62258226757814},
+    "url":"image4.png" ,
+    "price":"5.55$",
+    "weight":"500 gram" ,
+    "saltiness":5,
+    "fleshiness":9,
+    "description":"Ukrainian liquid dish cooked from chopped beets, cabbage with the addition of potatoes, beans, and various seasonings. The collective name of various options of the first course, the common feature of which is probably a sour, sour taste.",
+    "like":false  
+    },
+    {"id":"50.60060238061545",    
+    "name":"Kiev,Yarovay street, 52, Kiev, 02000",
+    "location":{"lat": 50.50060238061545, "lng": 30.56575365429689},
+    "url":"image1.png" ,
+    "price":"5.35$",
+    "weight":"550 gram" ,
+    "saltiness":7,
+    "fleshiness":5,
+    "description":"Ukrainian liquid dish cooked from chopped beets, cabbage with the addition of potatoes, beans, and various seasonings. The collective name of various options of the first course, the common feature of which is probably a sour, sour taste.",
+    "like":false  
+    }
+]
+
+

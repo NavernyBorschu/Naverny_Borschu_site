@@ -5,7 +5,12 @@
     --color-text-btn-active:#FFFFFF;
     --color-bg-main:#F9F9F9;
     --color-text-grade:#A6A6A6;
-    --color-add-btn:#b9f4a8;    
+    --color-add-btn:#b9f4a8;
+    --color-bg-pages:#F8F8F8;
+    --color-bg-grey:#F2F2F2; /* Grey/300 */
+    --color-bg-ad: #F9CFA8;
+
+    --font-family-main: 'Roboto', sans-serif;
 }
 
 body {
@@ -34,9 +39,11 @@ a {
 a {
     outline: 0;
     text-decoration: none;
-}  
+}
 
 button{
     padding: 0;
 }
+
+
 

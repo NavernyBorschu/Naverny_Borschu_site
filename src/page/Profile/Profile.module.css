@@ -1,40 +1,78 @@
-.clientPage{
-  display: flex;
-  justify-content: center;
+.userPage {
+    background-color: var(--color-bg-grey);
+    min-height: 100vh;
+    padding: 16px 16px 24px;
+    text-align: center;
 }
-.clientCard {
-    width: 500px;
+
+.userButtons {
+    background-color: var(--color-bg-pages);
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+}
+
+.linksContainer {
+    background-color: var(--color-bg-pages);
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    padding: 16px;
-    background-color: #ffffff;
-    font-family: 'Arial', sans-serif;
-    margin-top: 100px;
-  }
-  
-  .clientHeader {
+    display: flex;
+    flex-direction: column;
+    margin: 24px 0;
+    padding: 0 16px;
+}
+
+.linkWrap {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
-  }
-  
-  .clientAvatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin-right: 12px;
-  }
-  
-  .clientInfo {
-    margin: 0;
-    font-size: 25px;
-  }
-  
-  .clientId {
-    margin: 4px 0 0;
-    color: #555;
-  }
-  
-  .clientDetails {
-    margin: 8px 0;
-  }
+    justify-content: space-between;
+    text-decoration: none;
+
+    padding: 16px 0;
+    text-align: left;
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid #DDDDDD;
+    /*transform: rotate(0.19deg);*/
+    width: 100%;
+}
+
+.linkGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.arrow {
+    width: 24px;
+    height: 24px;
+}
+
+
+.userHeader {
+    margin-top: 40px;
+    margin-bottom: 24px;
+}
+
+.advertBanner {
+    margin: 24px 0;
+    padding: 10px 16px 0;
+    gap: 10px;
+    /*height: 172px;*/
+    background-color: var(--color-bg-ad);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.advertText {
+    text-align: left;
+    /*width: 165px;*/
+    /*height: 50px;*/
+}
+
+.advertHeader {
+    margin-bottom: 8px;
+}
+
