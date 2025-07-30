@@ -39,3 +39,13 @@
     line-height: 17px;
     color: var(--color-text-btn);
 }
+
+.fontBtn {
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    color: var(--color-text-btn-active);
+}

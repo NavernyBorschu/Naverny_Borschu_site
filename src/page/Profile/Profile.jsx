@@ -11,6 +11,7 @@ import aboutIcon from '../../assets/images/profile-info-icon.png';
 import helpIcon from '../../assets/images/profile-help-icon.png';
 import policyIcon from '../../assets/images/profile-policy-icon.png';
 import arrowIcon from '../../assets/images/profile-arrow-icon.png';
+import layout from '../../styles/layout.module.css';
 import typography from '../../styles/typography.module.css';
 import style from './Profile.module.css';
 
@@ -37,7 +38,7 @@ export const Profile = () => {
     }
 
     return (
-        <div className={style.userPage}>
+        <div className={layout.wrapper}>
             <h1 className={typography.mobileTitle}>Мій профіль</h1>
             <div className={style.userHeader}>
                 <AvatarUploader />

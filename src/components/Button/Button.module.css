@@ -1,12 +1,18 @@
 .btn {
     background-color: var(--color-bg-pages);
-    height: 34px;
+    display: block;
     border: none;
     border-radius: 14px;
     cursor: pointer;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 172px;
+    padding: 14px 20px;
+    width: 100%;
+}
+
+.disabled {
+    background-color: var(--color-btn-disabled);
+    color: var(--color-text-btn-active);
+    padding: 14px 20px;
+    opacity: 0.4;
 }
 
 .active {

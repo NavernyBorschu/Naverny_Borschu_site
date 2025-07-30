@@ -1,8 +1,4 @@
 .userPage {
-    background-color: var(--color-bg-grey);
-    min-height: 100vh;
-    padding: 16px 16px 24px;
-    text-align: center;
 }
 
 .userButtons {
