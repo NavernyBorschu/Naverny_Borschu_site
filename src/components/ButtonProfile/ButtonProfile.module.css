@@ -1,0 +1,15 @@
+.btn {
+    background-color: var(--color-bg-pages);
+    height: 34px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 172px;
+}
+
+.active {
+    background-color: var(--color-text-active);
+    color: var(--color-text-btn-active);
+}

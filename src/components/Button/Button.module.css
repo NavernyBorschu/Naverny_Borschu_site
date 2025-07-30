@@ -1,0 +1,21 @@
+.btn {
+    background-color: var(--color-bg-pages);
+    display: block;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    padding: 14px 20px;
+    width: 100%;
+}
+
+.disabled {
+    background-color: var(--color-btn-disabled);
+    color: var(--color-text-btn-active);
+    padding: 14px 20px;
+    opacity: 0.4;
+}
+
+.active {
+    background-color: var(--color-text-active);
+    color: var(--color-text-btn-active);
+}
