@@ -1,0 +1,20 @@
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputLabel {
+
+}
+
+.inputField {
+    border-radius: 24px;
+    border: 1px solid var(--color-text-main);
+    padding: 13px 24px;
+    width: 100%;
+
+
+
+}
+

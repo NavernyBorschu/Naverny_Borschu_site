@@ -1,5 +1,4 @@
-
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {MapPage} from "./page/MapPage";
 import {Login} from "./page/Login";
 import { Layout } from "./components/Layout";
@@ -10,7 +9,7 @@ import { AddPage } from "./page/AddPage/AddPage";
 import { ListPage } from "./page/ListPage/ListPage";
 import {BorschPage} from "./page/BorschPage";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
-
+import {PersonalInfo} from "./page/PersonalInfo";
 
 
 export default function App() {  
@@ -23,12 +22,12 @@ export default function App() {
             <Route path="/favorite" element={<LikeBorsch/>}/>  
             <Route path="/reviews" element={<List/>}/> 
             <Route path="/profile" element={<Profile/>}/>
+            <Route path="profile/personal-information" element={<PersonalInfo/>}/>
             <Route path="/add-borsch" element={<PrivateRoute><AddPage/></PrivateRoute>}/> 
-            <Route path="/list" element={<ListPage/>}/> 
-            <Route path="/borsch/:borschId" element={<BorschPage/>}/>                
+            <Route path="/list" element={<ListPage/>}/>
+            <Route path="/borsch/:borschId" element={<BorschPage/>}/>
           </Routes>
       </Layout>
-      
     </BrowserRouter>        
   );
 }
