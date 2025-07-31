@@ -6,7 +6,7 @@
         "rating_salt":"5",
         "rating_meat":"8",
         "rating_beet":"5",
-        "rating_density":"10",
+        "rating_density":"10,0",
         "rating_aftertaste":"8",
         "overall_rating":"9",       
         "price":"≈4.55 ₴", 
@@ -22,7 +22,7 @@
         "rating_beet":"5",
         "rating_density":"10",
         "rating_aftertaste":"8",
-        "overall_rating":"9",
+        "overall_rating":"9,0",
         "price":"≈5.55 ₴", 
         "weight":"500 g.",
         "photo_urls":["image2.png","image1.png"]
@@ -37,7 +37,7 @@
         "rating_beet":"5",
         "rating_density":"10",
         "rating_aftertaste":"8",
-        "overall_rating":"5",
+        "overall_rating":"5,0",
         "price":"≈6.55 ₴", 
         "weight":"500 g.",
         "photo_urls":["image3.png","image2.png"]
@@ -52,7 +52,7 @@
         "rating_beet":"5",
         "rating_density":"10",
         "rating_aftertaste":"8",
-        "overall_rating":"9",
+        "overall_rating":"9,0",
         "price":"≈5.55 ₴", 
         "weight":"500 g.",
         "photo_urls":["image3.png","image3.png"]
@@ -67,7 +67,7 @@
         "rating_beet":"5",
         "rating_density":"10",
         "rating_aftertaste":"8",
-        "overall_rating":"7",
+        "overall_rating":"7,0",
         "price":"≈5.55 ₴", 
         "weight":"500 g.",
         "photo_urls":["image1.png","image3.png"]        
@@ -81,7 +81,7 @@
         "rating_beet":"5",
         "rating_density":"10",
         "rating_aftertaste":"8",
-        "overall_rating":"6",
+        "overall_rating":"6,0",
         "price":"≈4.55 ₴", 
         "weight":"500 g.",
         "photo_urls":["image2.png","image3.png"]        

@@ -39,13 +39,42 @@ export const Map=({center,mode,places,onMarkerAdd})=>{
     const[place,setIsPlace]=useState();
     const mapRef=React.useRef(undefined);   
     const [newMarkerAddress, setNewMarkerAddress] = useState('');
+    const [zoomLevel, setZoomLevel] = useState(17); 
+    const [, forceUpdate] = useState(0); 
+    
+    const saveCornersToLocalStorage = (mapInstance) => {
+    const bounds = mapInstance.getBounds();
+    if (!bounds) return;
 
+    const ne = bounds.getNorthEast(); 
+    const sw = bounds.getSouthWest(); 
 
-    const onLoad = React.useCallback(function callback(map) {
-        mapRef.current=map;
+    const corners = {
+      topLeft: { lat: ne.lat(), lng: sw.lng() },
+      topRight: { lat: ne.lat(), lng: ne.lng() },
+      bottomLeft: { lat: sw.lat(), lng: sw.lng() },
+      bottomRight: { lat: sw.lat(), lng: ne.lng() },
+    };
+
+    localStorage.setItem('mapCorners', JSON.stringify(corners));
+    
+    };
+    
+    const onLoad = useCallback((map) => {
+        mapRef.current = map;       
+        setZoomLevel(map.getZoom());
+        saveCornersToLocalStorage(map);
+        map.addListener('bounds_changed', () => {
+        saveCornersToLocalStorage(map);
+    });
+
+    map.addListener('zoom_changed', () => {
+        setZoomLevel(map.getZoom());
+        forceUpdate((v) => v + 1); 
+    });
     }, []);
     
-    const onUnmount = React.useCallback(function callback(map) {
+    const onUnmount = useCallback((map)=> {
         mapRef.current=undefined;
     }, []); 
 
@@ -54,10 +83,9 @@ export const Map=({center,mode,places,onMarkerAdd})=>{
         changeIsActiveAddForm();           
     };
 
-    const changeIsActiveAddForm=useCallback(()=>{
-        isActiveAddForm===true?setIsActiveAddForm(false):setIsActiveAddForm(true);                
-    },[ isActiveAddForm]);  
-
+    const changeIsActiveAddForm = useCallback(() => {
+        setIsActiveAddForm((prev) => !prev);
+    }, []);
 
     const onClickMap = useCallback((loc) => {
         if (mode === MODES.SET_MARKER) {
@@ -78,15 +106,11 @@ export const Map=({center,mode,places,onMarkerAdd})=>{
     },[mode,changeIsActiveAddForm]);
 
     const onClickMarker=(id)=>{       
-        places.forEach((place) => 
-            {             
-                if(place.id===id){                  
-                    setIsPlace(place);                    
-                }
-            });
-        isActiveAbout===true?setIsActiveAbout(false):setIsActiveAbout(true); 
-          
-    };     
+        const found = places.find((place) => place.id === id);
+        if (found) setIsPlace(found);
+        setIsActiveAbout((prev) => !prev);          
+    }; 
+
     const getAverageOverallRating=(borsch, placeId)=> {
         const filtered = borsch.filter(item => item.place_id === placeId);
 
@@ -99,27 +123,29 @@ export const Map=({center,mode,places,onMarkerAdd})=>{
   const average = total / filtered.length;
 
   return average.toFixed(1); 
-}
+    }
     
     return(
         <div className={style.container}>
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
-                zoom={17}
+                zoom={zoomLevel}
                 onLoad={onLoad}
                 onUnmount={onUnmount}
                 options={defoultOptions}
                 onClick={onClickMap}
             >                  
-            {places.map((pos,index)=>{                   
-                return (
-                    <div key={index}>
-                        <CurrentLocationMarker position={pos.location} id={pos.id} onClick={onClickMarker} grade={getAverageOverallRating(borsch, pos.id)}/>                            
-                    </div>
-                )                    
-            })}  
-                     
+            {places.map((pos) => (
+                <CurrentLocationMarker
+                    key={pos.id}
+                    position={pos.location}
+                    id={pos.id}
+                    onClick={onClickMarker}
+                    grade={getAverageOverallRating(borsch, pos.id)}
+                    zIndexBase={zoomLevel}
+                />
+            ))}                     
             {isActiveAbout&&<Modal onClose={onClickMarker}>                    
                 <Gallery onClose={onClickMarker} id_place={place.id} place={place}/>
             </Modal>}

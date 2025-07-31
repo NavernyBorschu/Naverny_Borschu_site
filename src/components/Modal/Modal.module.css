@@ -10,7 +10,7 @@
 }
 
 .Overlay {
-    z-index: 999;
+    z-index: 9999;
     position: fixed;
     top: 0;
     left: 0;
@@ -25,5 +25,8 @@
     top: 30%;
     left: 50%;   
 }
-
+.ModalFilters{
+    position: absolute;
+    z-index: 1000; 
+}
 

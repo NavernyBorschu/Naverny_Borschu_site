@@ -55,8 +55,7 @@ export const MapPage = ( )=> {
     .catch((defaultCenter)=>{
       setCenter(defaultCenter)
     })
-  },[])  
-  
+  },[])   
   
  const onPlaceSelect=useCallback((coordinates)=>{
     setCenter(coordinates);
@@ -65,7 +64,7 @@ export const MapPage = ( )=> {
   // const handleLogout=()=>{    
   //   googleLogout();
   //   localStorage.clear();
-  //   navigate('/');  
+    // navigate('/');  
   // }
 
   return (        

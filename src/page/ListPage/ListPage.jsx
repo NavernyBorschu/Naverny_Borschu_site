@@ -31,7 +31,10 @@ export const ListPage=()=>{
             {borsch.map((el,index)=>{                   
               return (
                 <div key={index} className={style.card}>
-                  <img src={el.photo_urls[0]} alt={`img-${index}`} className={style.imageStyle}/>
+                  <div  className={style.imageBox}>
+                    <img src={el.photo_urls[0]} alt={`img-${index}`} className={style.imageStyle}/>
+                  </div>
+                  
                   <div className={style.box}>                
                     {/* <IconLike/> */}
                     <OnMap/>

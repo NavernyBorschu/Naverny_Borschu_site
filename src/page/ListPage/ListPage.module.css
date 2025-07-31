@@ -68,6 +68,8 @@
     gap: 12px;
     overflow-y: auto;
     scrollbar-width: none;
+    width: 100%;
+    padding: 0 16px;
 }
 .card{
     position: relative;
@@ -75,8 +77,12 @@
     border-radius: 12px;
     padding: 6px;  
 }
+.imageBox{
+    height: 117px;    
+}
 .imageStyle {
-    width: 100%;   
+    width: 100%; 
+    height: 100%;  
     border-radius: 12px;    
     object-fit: cover
 }

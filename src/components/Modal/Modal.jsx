@@ -1,4 +1,5 @@
 import { Component } from "react";
+import ReactDOM from 'react-dom';
 import styles from './Modal.module.css';
 
 
@@ -23,17 +24,20 @@ export class Modal extends Component  {
     };
 
     render() {
-        const {children} = this.props;
-        return ( 
+        const {children,version} = this.props;
+        return ReactDOM.createPortal( 
             <>
                 <div className={styles.Backdrop}/>     
                 <div className={styles.Overlay} onClick={this.handleClose}>
-                    <div className={styles.Modal}>                        
+                    {!version && <div className={styles.Modal}>                        
                         <div>{children}</div>
-                    </div>
+                    </div>}
+                    {version && <div className={styles.ModalFilters}>                        
+                        <div>{children}</div>
+                    </div>}
                 </div>      
-            </>                      
-        )
+            </> ,document.body                         
+        );
     }    
 }
 

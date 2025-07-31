@@ -8,7 +8,9 @@ import { LikeBorsch } from "./page/LikeBorsch/LikeBorsch";
 import { List } from "./page/List";
 import { AddPage } from "./page/AddPage/AddPage";
 import { ListPage } from "./page/ListPage/ListPage";
+import {BorschPage} from "./page/BorschPage";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+
 
 
 export default function App() {  
@@ -22,9 +24,11 @@ export default function App() {
             <Route path="/reviews" element={<List/>}/> 
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/add-borsch" element={<PrivateRoute><AddPage/></PrivateRoute>}/> 
-            <Route path="/list" element={<ListPage/>}/>               
+            <Route path="/list" element={<ListPage/>}/> 
+            <Route path="/borsch/:borschId" element={<BorschPage/>}/>                
           </Routes>
       </Layout>
+      
     </BrowserRouter>        
   );
 }
