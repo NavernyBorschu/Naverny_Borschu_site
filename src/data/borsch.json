@@ -8,10 +8,11 @@
         "rating_beet":"5",
         "rating_density":"10,0",
         "rating_aftertaste":"8",
-        "overall_rating":"9",       
+        "overall_rating":"9", 
+        "rating_serving":"9",      
         "price":"≈4.55 ₴", 
         "weight":"600 g.",
-        "photo_urls":["image1.png","image3.png"]        
+        "photo_urls":["image1.png","image3.png","image2.png"]        
     },
     {
         "id_borsch":"12345455",
@@ -23,6 +24,7 @@
         "rating_density":"10",
         "rating_aftertaste":"8",
         "overall_rating":"9,0",
+        "rating_serving":"9",
         "price":"≈5.55 ₴", 
         "weight":"500 g.",
         "photo_urls":["image2.png","image1.png"]
@@ -37,6 +39,7 @@
         "rating_beet":"5",
         "rating_density":"10",
         "rating_aftertaste":"8",
+        "rating_serving":"10",
         "overall_rating":"5,0",
         "price":"≈6.55 ₴", 
         "weight":"500 g.",
@@ -53,6 +56,7 @@
         "rating_density":"10",
         "rating_aftertaste":"8",
         "overall_rating":"9,0",
+        "rating_serving":"7",
         "price":"≈5.55 ₴", 
         "weight":"500 g.",
         "photo_urls":["image3.png","image3.png"]
@@ -68,6 +72,7 @@
         "rating_density":"10",
         "rating_aftertaste":"8",
         "overall_rating":"7,0",
+        "rating_serving":"5",
         "price":"≈5.55 ₴", 
         "weight":"500 g.",
         "photo_urls":["image1.png","image3.png"]        
@@ -82,8 +87,24 @@
         "rating_density":"10",
         "rating_aftertaste":"8",
         "overall_rating":"6,0",
+        "rating_serving":"10",
         "price":"≈4.55 ₴", 
         "weight":"500 g.",
         "photo_urls":["image2.png","image3.png"]        
+    },
+    {
+        "id_borsch":"12345890",
+        "name":"Борщ з мідіями",
+        "place_id":"46.399488",
+        "rating_salt":"10",
+        "rating_meat":"8",
+        "rating_beet":"7",
+        "rating_density":"9,0",
+        "rating_aftertaste":"8",
+        "overall_rating":"9", 
+        "rating_serving":"9",      
+        "price":"≈9.55 ₴", 
+        "weight":"600 g.",
+        "photo_urls":["image3.png","image2.png","image2.png"]        
     }
 ]

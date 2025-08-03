@@ -1,6 +1,7 @@
 import { useJsApiLoader } from '@react-google-maps/api';
-import { useCallback, useEffect, useState } from 'react';
-import { getBrowserLocation } from '../../utils/geo';
+import { useCallback,  useState } from 'react';
+// import {  useEffect} from 'react';
+// import { getBrowserLocation } from '../../utils/geo';
 import {Link} from "react-router-dom";
 import { Autocomplete } from '../../components/Autocomplete';
 import { Map } from '../../components/Map';
@@ -21,7 +22,10 @@ const defaultCenter = {
 
 
 export const MapPage = ( )=> {  
-  const [center,setCenter] = useState(defaultCenter);  
+  const [center, setCenter] = useState(() => {
+  const savedLocation = localStorage.getItem('user_location');
+  return savedLocation ? JSON.parse(savedLocation) : defaultCenter;
+}); 
   const [places,setPlaces] = useState(data);   
   
   const mode = Number(localStorage.getItem('mode')) || MODES.MOVE; 
@@ -48,14 +52,14 @@ export const MapPage = ( )=> {
     }]);      
   },[places])  
 
-  useEffect(()=>{
-    getBrowserLocation().then((curLoc)=>{
-      setCenter(curLoc)
-    })
-    .catch((defaultCenter)=>{
-      setCenter(defaultCenter)
-    })
-  },[])   
+  // useEffect(()=>{
+  //   getBrowserLocation().then((curLoc)=>{
+  //     setCenter(curLoc)
+  //   })
+  //   .catch((defaultCenter)=>{
+  //     setCenter(defaultCenter)
+  //   })
+  // },[])   
   
  const onPlaceSelect=useCallback((coordinates)=>{
     setCenter(coordinates);

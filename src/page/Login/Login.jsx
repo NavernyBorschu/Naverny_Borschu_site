@@ -27,8 +27,7 @@ export const Login=()=>{
         shape = "circle"
                    
       />
-      </div>
-      
+      </div>      
     </div>    
   )   
 }

@@ -1,0 +1,25 @@
+[
+    {
+        "user_id":"user123457",
+        "name":"Marta",
+        "surname":"Valerie",
+        "email":"user12345@gmail.com",
+        "photo_url":"avatar.png"
+    },
+    {
+        "user_id":"user123456",
+        "name":"Irina",
+        "surname":"Petrivna",
+        "email":"user123hjh5@gmail.com",
+        "photo_url":"avatar.png"
+    },
+    {
+        "user_id":"user123458",
+        "name":"Ivan",
+        "surname":"Vyco",
+        "email":"qwqe123hjh5@gmail.com",
+        "photo_url":"avatar.png"
+    }
+]
+
+

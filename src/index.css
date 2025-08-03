@@ -23,6 +23,9 @@
     --font-family-main: 'Roboto', sans-serif;
 }
 
+main{
+    overflow-x:hidden;   
+}
 body {
     text-decoration: none;
     margin: 0;
@@ -54,6 +57,5 @@ a {
 button {
     padding: 0;
 }
-
 
 

@@ -54,3 +54,37 @@
 .button:hover .icon {
   fill: var(--color-text-active); 
 }
+
+.geoMessage {
+  position: absolute;
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.success {
+  background-color: var(--color-bg-main);
+  border: 1px solid var(--color-input-active);
+  color:var(--color-btn-disabled);
+}
+
+.error {
+  background-color: var(--color-text-btn-active);
+  border: 1px solid var(--color-bg-ad);
+  color: var(--color-filter-btn);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: inherit;
+  padding: 0;
+}

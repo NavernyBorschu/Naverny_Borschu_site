@@ -4,7 +4,7 @@ import { ReactComponent as IconDelete } from './close.svg';
 import typePlace from '../../data/typePlaces.json';
 import style from "./CardFilters.module.css";
 
-const meatOptions = ['Без м\'яса', 'Курка', 'Свинина', 'Телятина', 'Качка'];
+const meatOptions = ['Без м\'яса', 'Курка', 'Свинина', 'Телятина', 'Качка','Інше'];
 
 export const CardFilters=({onClose})=>{    
     const [selectedTypes, setSelectedTypes] = useState([]);
@@ -53,24 +53,12 @@ export const CardFilters=({onClose})=>{
     const handleMaxChange = (e) => {
         const value = Math.max(Number(e.target.value), minPrice + 50);
         setMaxPrice(value);
-    };
-
-    
+    };    
 
     const handleMeatSelect = (meat) => {
         setSelectedMeat(meat);
     };
-    const getPercent = (value) => ((value - 50) / (5000 - 50)) * 100;
-
-    const rangeTrackStyle = {
-    background: `linear-gradient(
-        to right,
-        var(--color-text-main) ${getPercent(minPrice)}%,
-        var(--color-text-active) ${getPercent(minPrice)}%,
-        var(--color-text-active) ${getPercent(maxPrice)}%,
-        var(--color-text-main) ${getPercent(maxPrice)}%
-    )`
-    };
+    
 
     return(
         <div className={style.cardFilters}>
@@ -125,26 +113,37 @@ export const CardFilters=({onClose})=>{
                             </div>
                         </div>
                         <div className={style.sliderWrapper}>
-                            <input
+                            <div className={style.track}>
+                                <div
+                                className={style.trackActive}
+                                style={{
+                                    left: `${((minPrice - 50) / (5000 - 50)) * 100}%`,
+                                    width: `${((maxPrice - minPrice) / (5000 - 50)) * 100}%`
+                                }}
+                                />
+                            </div>                           
+                            <div className={style.rangeWrapper}>
+                                <input
                                 type="range"
                                 min="50"
                                 max="5000"
                                 value={minPrice}
                                 onChange={handleMinChange}
-                                className={style.rangeInput}
-                                style={rangeTrackStyle}
-                            />
-
-                            <input
+                                className={style.range}
+                                />
+                            </div> 
+                            <div className={style.rangeWrapper}>
+                                <input
                                 type="range"
                                 min="50"
                                 max="5000"
                                 value={maxPrice}
                                 onChange={handleMaxChange}
-                                className={style.rangeInput}
-                            />
+                                className={style.range}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    </div>                    
                     <div className={style.boxBtnSubmit}>
                         <button onClick={handleApplyFilters}                        className={style.btnSubmit}
                         >

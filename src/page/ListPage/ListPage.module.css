@@ -28,11 +28,7 @@
     text-decoration: none;    
 }
 
-/* .btn:hover {
-    background-color:  var(--color-text); 
-    color:var( --color-text-active);
-    cursor: pointer;  
-} */
+
 
 .btn_inl{
     padding:6px;

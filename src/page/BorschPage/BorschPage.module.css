@@ -1,11 +1,13 @@
 .BorschPage{   
-    position: relative;    
+    position: relative; 
+    
 }
 .wrap{
     display: flex;
     justify-content: center;
     flex-direction: column;
     padding: 16px;
+    overflow-y: auto;
 }
 .btnClose{
     position: absolute;
@@ -22,7 +24,7 @@
     margin: 5px 0;
 }
 .imageBox{
-    height: 215px;    
+    height: 215px;        
 }
 .imageStyle {
     width: 100%; 
@@ -30,11 +32,98 @@
     border-radius: 12px;    
     object-fit: cover
 }
+.card{
+    position: relative;
+}
+.box {
+  position: absolute;
+  right: 30px;
+  top: 120px;  
+  z-index: 3;
+}
 .flex{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: var(--color-text-main);    
 }
 .grade{
     color:var(--color-text-btn)
+}
+.gradesFlex{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.boxBtn{
+    margin-top: 10px;
+}
+
+.btn{
+    background-color: var(--color-btn-disabled);
+    color:var( --color-text-btn-active); 
+    display: block;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    padding: 14px 20px;
+    width: 100%;   
+    font-size: 14px;     
+    list-style: none;    
+    text-align:center;
+    text-decoration: none;    
+}
+.comentsBox{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 10px;
+}
+.avatarBox{
+    display: flex;   
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.photoBox{
+    height: 44px;
+    width: 44px;
+   
+}
+.photoStyle {
+    width: 100%; 
+    height: 100%; 
+    border-radius: 50%;    
+    object-fit: cover
+}
+.textBox{
+    display: flex;
+    justify-content: space-between;
+}
+.textDate{
+    color: var(--color-text-main);
+}
+
+.paginationControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.paginationControls button {
+    width: 164px;
+    padding: 18px 55px;
+    background-color:var(--color-input-active);
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+}
+
+.paginationControls button:disabled {
+  opacity: 0.5;
+  cursor: default;
 }

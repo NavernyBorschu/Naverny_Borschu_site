@@ -1,0 +1,45 @@
+.gallery {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.imageWrapper { 
+  height: 128px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;  
+}
+
+
+.dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dot:hover {
+  background-color: white;
+}
+
+.active {
+  background-color: white;
+}

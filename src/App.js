@@ -10,6 +10,7 @@ import { ListPage } from "./page/ListPage/ListPage";
 import {BorschPage} from "./page/BorschPage";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import {PersonalInfo} from "./page/PersonalInfo";
+import { EvaluationsPage } from "./page/EvaluationsPage";
 
 
 export default function App() {  
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/add-borsch" element={<PrivateRoute><AddPage/></PrivateRoute>}/> 
             <Route path="/list" element={<ListPage/>}/>
             <Route path="/borsch/:borschId" element={<BorschPage/>}/>
+            <Route path="/borsch/:borschId/evaluations" element={<EvaluationsPage/>}/>
           </Routes>
       </Layout>
     </BrowserRouter>        
