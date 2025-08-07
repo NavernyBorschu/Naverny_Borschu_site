@@ -21,12 +21,21 @@
 }
 
 .Modal {
-    position: absolute;     
+    position: absolute;
     top: 30%;
-    left: 50%;   
+    left: 50%;
 }
+
 .ModalFilters{
     position: absolute;
     z-index: 1000; 
+}
+
+.ModalNotification {   /*integrate into logic*/
+    position: fixed; /* instead of absolute */
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
 }
 

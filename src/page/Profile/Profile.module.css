@@ -72,3 +72,44 @@
     margin-bottom: 8px;
 }
 
+.modalContent {
+    background-color: var(--color-bg-pages);
+    height: 518px;
+    width: 100vw;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding-top: 64px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.modalLogo {
+    display: block;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 16px;
+}
+
+.modalTitle {
+    margin-bottom: 16px;
+}
+
+.modalParagraph {
+    margin-bottom: 24px;
+}
+
+.modalCloseBtn {
+    background-color: inherit;
+    display: block;
+    border: 1px solid var(--color-btn-red);
+    border-radius: 14px;
+    color: var(--color-text-btn);
+    cursor: pointer;
+    margin-top: 16px;
+    padding: 14px 20px;
+    width: 100%;
+}
+
+
+
+

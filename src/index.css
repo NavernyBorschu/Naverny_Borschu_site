@@ -19,6 +19,8 @@
     --color-bg-ad: #F9CFA8;
     --color-input-active: #89B87B; /*Green/700 */
     --color-filter-btn:#DD9755;
+    --color-modal-black: #000000;
+    --color-btn-red: #B8092C; /*Red/700*/
 
     --font-family-main: 'Roboto', sans-serif;
 }
