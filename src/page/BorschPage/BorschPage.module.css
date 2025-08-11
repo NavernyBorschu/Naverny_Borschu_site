@@ -12,6 +12,9 @@
 .btnClose{
     position: absolute;
     right: 10px;
+    background-color: var(--color-bg-main); 
+    margin: 0; 
+    border: none;  
 }
 .title{
     margin: 40px 0 25px 0;
@@ -23,24 +26,20 @@
     color: var(--color-text-main);
     margin: 5px 0;
 }
-.imageBox{
-    height: 215px;        
-}
-.imageStyle {
-    width: 100%; 
-    height: 100%;  
-    border-radius: 12px;    
-    object-fit: cover
-}
+
 .card{
     position: relative;
 }
-.box {
-  position: absolute;
-  right: 30px;
-  top: 120px;  
-  z-index: 3;
+
+.box{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    display: flex;
+    gap:8px;
+    z-index: 3;
 }
+
 .flex{
     display: flex;
     justify-content: space-between;
@@ -82,9 +81,10 @@
     margin-top: 10px;
 }
 .avatarBox{
-    display: flex;   
+    display: flex; 
+    gap: 8px;  
     width: 100%;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin-bottom: 16px;
 }
 .photoBox{
@@ -98,9 +98,13 @@
     border-radius: 50%;    
     object-fit: cover
 }
+.textWrapp{
+   width: 100%;
+}
 .textBox{
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 .textDate{
     color: var(--color-text-main);
@@ -124,6 +128,6 @@
 }
 
 .paginationControls button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: default;
 }

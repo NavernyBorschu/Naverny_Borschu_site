@@ -4,7 +4,7 @@ import { ReactComponent as IconStarEmpty } from './lsicon_soup-outline.svg';
 export const RatingIconsSvg = ({
   overall_rating = 0,
   max = 10,
-  size = 24,
+  size = 18,
   FullIcon = IconStarFull,
   EmptyIcon = IconStarEmpty,
 }) => {

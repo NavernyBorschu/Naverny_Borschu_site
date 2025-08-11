@@ -39,6 +39,14 @@
     line-height: 17px;
     color: var(--color-text-btn);
 }
+.mobileCaption{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 12px;
+    color: var(--color-text-main);
+}
 
 .fontBtn {
     font-family: var(--font-family-main);
@@ -48,4 +56,20 @@
     line-height: 22px;
     letter-spacing: -0.408px;
     color: var(--color-text-btn-active);
+}
+.mobileH2{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 12px;
+    color: var(--color-text-btn);
+}
+.mobileH3{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 12px;
+    color: var(--color-text-btn);
 }

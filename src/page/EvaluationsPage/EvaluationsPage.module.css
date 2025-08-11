@@ -1,0 +1,53 @@
+.wrapp{
+  position: relative;
+  padding: 16px;
+}
+.back{
+  position: absolute;
+  top:20px;
+}
+.contentImg{
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.2);  
+  padding: 8px;  
+  border-radius:  0 0 12px 12px;
+  position: absolute;
+  width: 92%;
+  top:170px;
+}
+.contentImg p{
+  color: var(--color-text-btn-active);
+}
+.text{
+  margin-top: 4px;
+  font-size: 10px;
+}
+
+.title{
+  text-align: center;
+  margin-top: 16px;
+}
+
+.commentBlock {
+  margin: 20px 0;
+}
+.commentBlock label{
+  display: none;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 80px;
+  resize: vertical;
+  padding: 16px;
+  font-size: 16px;
+  background-color: var(--color-bg-grey);
+  border: 1px solid  var(--color-bg-grey);
+  border-radius: 8px;
+}
+
+.textarea::placeholder{
+  color: var(--color-text-main);
+}
+

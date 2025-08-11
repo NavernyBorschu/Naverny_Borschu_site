@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as IconDelete } from './close.svg';
-import { ReactComponent as IconLikeInl } from './like_inl.svg';
+import { ReactComponent as IconLike } from './like.svg';
+import { ReactComponent as IconDitail } from './ditail.svg';
 import { RatingIconsSvg } from "../RatingIconsSvg";
 import { FotoBorschGallary } from "../../components/FotoBorschGallary";
+import { ButtonVertion } from "../../components/ButtonVersion";
 import borsch from '../../data/borsch.json';
 import style from './Gallery.module.css';
+import typography from '../../styles/typography.module.css';
 
 export const Gallery = ({ onClose, id_place, place }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -49,32 +52,34 @@ export const Gallery = ({ onClose, id_place, place }) => {
               style={cardStyle(isActive)}
               onClick={() => setActiveIndex(index)}
             >
-              <div className={style.box}>
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className={style.closeButton}
-                >
-                  <IconDelete className={style.icon} aria-label={'close'} id='close' />
-                </button>
-                <IconLikeInl />
-              </div>
-              <FotoBorschGallary images={borsch.photo_urls} />
-              <p className={style.borschName}>{borsch.name}</p>
-              <div className={style.flex}>
-                <p>{borsch.price}</p>
-                <p>{borsch.weight}</p>
-              </div>
+                <div className={style.box}>                
+                  <ButtonVertion
+                    type="button"
+                    onClick={console.log("Тут буду функція яка змінює ключ лайку")}
+                    icon={IconLike}
+                  />
+                  <ButtonVertion
+                    type="button"
+                    onClick={onClose}
+                    icon={IconDelete}
+                  />               
+                </div>
+                <FotoBorschGallary images={borsch.photo_urls}  height={"128px"}/>
+                <div className={style.boxInfo}>   
+                  <p className={style.borschName}>{borsch.name}</p>
+                  <div className={style.flex}>
+                  <p className={typography.mobileCaption}>{borsch.price}</p>
+                  <p className={typography.mobileCaption}>{borsch.weight}</p>                  
+                </div>
+              </div>             
               <RatingIconsSvg overall_rating={borsch.overall_rating} />
               <div className={style.flex}>
-                <p>{place.name}</p>
-                <button
+                <p className={style.placeName}>{place.name}</p>
+                <ButtonVertion
                   type="button"
                   onClick={() => onClickCard(borsch.id_borsch)}
-                  className={style.closeButton}
-                >
-                  ...
-                </button>
+                  icon={IconDitail}
+                />                
               </div>
             </div>
           );

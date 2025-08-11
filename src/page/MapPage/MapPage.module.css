@@ -20,6 +20,8 @@
     width: 170px;
     border-radius: 14px;
     font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;
     background-color: var(--color-text-active); 
     color:var( --color-text-btn-active);  
     list-style: none;    
@@ -27,18 +29,16 @@
     text-decoration: none;    
 }
 
-/* .btn:hover {
-    background-color:  var(--color-text); 
-    color:var( --color-text-active);
-    cursor: pointer;  
-} */
+
 
 .btn_inl{
     padding:6px;
     width: 170px;
     border-radius: 14px;
     font-size: 14px;
-    background-color: var(--color-text-btn-active); 
+    font-weight: 400;
+    line-height: 120%;
+    background-color: var(--color-bg-main);
     color:var( --color-text);  
     list-style: none;    
     text-align:center;
@@ -46,15 +46,16 @@
 }
 
 .btn_inl:hover {
-    cursor: pointer;
-    color:var(--color-text-active);  
+    cursor: pointer;    
 }
 .borsch{
     position: absolute;
     z-index: 99;
     top:140px;   
     border-radius: 14px;
-    font-size: 14px;    
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;    
     color:var( --color-text-btn); 
     background-color: var(--color-text-btn-active);
     padding: 10px;

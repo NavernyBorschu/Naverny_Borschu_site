@@ -9,27 +9,52 @@
  
 .header{   
     z-index: 999;    
-    padding: 10px 0; 
-    /* margin-top: -40px; */
+    padding: 3px 23px 34px 23px;   
     background-color:var(--color-bg-main);
-    display: flex;   
-    justify-content: center;    
+    color: var(--color-text-layout);    
+    border-top: 2px solid var(--color-header-border);    
 }
 
 .navContainer{    
     display: flex;
     justify-content: space-between;    
     list-style: none; 
-    min-width: 100vw;           
+    max-width: 100vw; 
 }
 
-.link,.addBorsch{
-    display: flex;
-    flex-direction: column; 
-    align-items: center;  
-    color:var(--color-text-main);
-    font-size: 15px;
-    text-decoration: none;     
+.link {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: var(--color-text-layout);
+  font-size: 10px;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.iconHover { 
+    display: none;
+    opacity: 0; 
+}
+
+
+.link:hover .iconDefault { 
+    display: none; 
+    opacity: 0; 
+}
+.link:hover .iconHover  { 
+    display: inline-block;
+    opacity: 1; 
+    /* transform: scale(1.05);  */
+}
+.link:hover .text { 
+    color: var(--color-text-active); 
 }
 .addBorsch{
     background-color: var(--color-add-btn);
@@ -40,11 +65,23 @@
     padding: 10px;
     margin-top: -12px;
 }
-.link:hover,.addBorsch:hover{
-    color:var(--color-text-active);
+.addBorsch:hover{
+    background-color: var(--color-add-btn-active);
+}
+.active .iconDefault {
+  display: none;
+  opacity: 0;
 }
 
-@media (min-width: 768px) and (max-width: 1440px) {
+.active .iconHover {
+  display: inline-block;
+  opacity: 1;
+}
+
+.active .text {
+  color: var(--color-text-active);
+}
+/* @media (min-width: 768px) and (max-width: 1440px) {
     .navContainer{       
         min-width: 768px;  
     }
@@ -62,4 +99,4 @@
         gap: 10px;    
         font-size: 30px;     
     }
-}
+} */

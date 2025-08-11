@@ -1,59 +1,129 @@
 .filterWrap{
-    position: absolute;
-    z-index: 99;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 16px;
-    background-color:var(--color-text-btn-active);    
+  position: absolute;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  background-color:var(--color-bg-main);    
 }
-.inputWrap{
-    position: relative;
+.inputWrap {
+  position: relative;
 }
-.input{   
-    border: 1px solid var(--color-text-main);
-    border-radius: 14px;
-    font-size: 14px; 
-    padding: 12px; 
-    width: 240px;  
+
+.searchButton {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: block;
 }
-.input::placeholder{
-    padding-left: 40px;
+
+.icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  pointer-events: none; 
 }
-.input:hover, .input:focus{
-    border: 1px solid var(--color-text-active);
+
+
+.iconDefault { opacity: 1; }
+.iconActive  { opacity: 0; }
+
+.inputWrap:focus-within .iconDefault {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
 }
-.searchButton{
-   position: absolute;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    z-index: 99; 
-    left: 10px; 
-    top:8px;  
+.inputWrap:focus-within .iconActive {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
-.searchButton:hover .icon, .searchButton:focus .icon{    
-    fill: var(--color-text-active); 
+
+
+.input {
+  border: 1px solid var(--color-header-border);
+  background-color: var(--color-bg-main);
+  border-radius: 24px;
+  padding: 8px 12px 8px 48px; 
+  width: 243px;
+  height: 40px;
+  outline: none;
+  transition: border-color 0.2s ease;
 }
-.button{
-    border: 1px solid var(--color-text-main);
-    border-radius: 14px;
-    padding: 8px;
-    
+
+
+.inputWrap:focus-within .input {
+  border-color: var(--color-text-active);
 }
-.button :global(svg) {
-  color: var(--color-text-btn); 
-  transition: color 0.2s ease;
+.inputWrap:hover .input {
+  border-color: var(--color-text-active);
 }
-.button:hover,.button:focus{
-    border: 1px solid var(--color-text-active);
-       
+
+.input::placeholder {
+  color: var(--color-input-search);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 120%;
 }
-.button:hover .icon {
-  fill: var(--color-text-active); 
+
+
+.buttonFilter,.btnGeo{
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-input-search);
+  border-radius: 24px;
+  padding: 8px;    
 }
+
+.btnFilter, .btnGeo{
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-bg-main);
+  border: 1px solid var(--color-header-border);
+  border-radius: 14px;
+  padding: 8px;
+  display: flex;   
+  justify-content: center; 
+  align-items: center;
+}
+
+.iconGeo, .iconFilter {
+  width: 24px;
+  height: 24px;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.iconGeoHover, .iconFilterHover { 
+  display: none;
+  opacity: 0; 
+}
+
+.btnFilter:hover .iconFilterDefault,.btnGeo:hover .iconGeoDefault { 
+  display: none; 
+  opacity: 0; 
+}
+
+.btnFilter:hover .iconFilterHover, .btnGeo:hover .iconGeoHover  { 
+  display: inline-block;
+  opacity: 1; 
+  /* transform: scale(1.05);  */
+}
+
+
+
 
 .geoMessage {
   position: absolute;

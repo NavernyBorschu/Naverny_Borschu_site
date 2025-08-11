@@ -30,7 +30,8 @@ export const CardFilters=({onClose})=>{
         priceFrom: minPrice,
         priceTo: maxPrice,
         }); 
-         console.log(appliedFilters);        
+         console.log(appliedFilters);  
+            //    додати логіку відправки фільтрів на сервер
         onClose();
         // navigate('');        
     };

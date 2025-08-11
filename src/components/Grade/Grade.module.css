@@ -1,40 +1,26 @@
 .container{
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
 }
 .wrap {
   display: flex;
-  margin-top: 50px;  
+  margin-top: 20px;  
   align-items: center;
   gap: 1.2rem;
 }
 
 .label {
   width: 100%;
-  font-size: 0.8rem;
+  font-size:1rem;
   color: var(--color-text-main);
 }
 
 .sliderWrapper {
   position: relative;
-  width: 220px;  
+  width: 100%;  
 }
 
-.thumbIcon {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none; /* чтобы не мешала клику по input */
-  z-index: 2;
-  background-color: var(--color-bg-main);
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-}
+
 
  .input {
   -webkit-appearance: none;
@@ -58,7 +44,7 @@
 
 .input::-moz-range-thumb {
   width: 24px;
-  height: 24px;
+  height: 34px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -77,7 +63,7 @@
 }
 
 .tick {
-  width: 17px;
+  width: 25px;
   height: 7px;
   background-color:var(--color-text-grade);
   border-radius: 4px;
@@ -90,7 +76,7 @@
 .text {
   display: flex;
   justify-content: space-between;
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   color: var(--color-text-main);
   width: 100%;
 }

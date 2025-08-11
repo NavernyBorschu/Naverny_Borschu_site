@@ -6,6 +6,7 @@ import {Modal} from '../Modal/Modal';
 import {Gallery} from '../Gallery/Gallary';
 import borsch from '../../data/borsch.json';
 import style from './Map.module.css';
+import { AddBorsch } from '../AddBorsch/AddBorsch';
 
 const containerStyle = {
     width: '100%',
@@ -96,7 +97,7 @@ export const Map=({center,mode,places,onMarkerAdd})=>{
             changeIsActiveAddForm();
             const geocoder = new window.google.maps.Geocoder();
             geocoder.geocode({ location: position }, (results, status) => {
-                if (status === 'OK' && results[0]) {
+                if (status === 'OK' && results[0]) { 
                     setNewMarkerAddress(results[0].formatted_address);
                 } else {
                     setNewMarkerAddress('Адрес не визначено');
@@ -150,11 +151,9 @@ export const Map=({center,mode,places,onMarkerAdd})=>{
                 <Gallery onClose={onClickMarker} id_place={place.id} place={place}/>
             </Modal>}
             {isActiveAddForm&&<Modal onClose={changeIsActiveAddForm}>
-                <button  type='button' onClick={onAddMarker}>Зберегти</button>
-                <p>📍 Адрес: {newMarkerAddress}</p>
+                <AddBorsch onClick={onAddMarker} address={newMarkerAddress} onClose={changeIsActiveAddForm}/>                
             </Modal>}                
-            </GoogleMap>
-           
+            </GoogleMap>           
         </div>  
     )  
 
