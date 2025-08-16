@@ -20,7 +20,7 @@ export const Login=()=>{
           // window.location.reload();          
         } } 
         onError = { ( )  =>  { 
-          console . log ( 'Вхід не вдалий' ) ; 
+          // console . log ( 'Вхід не вдалий' ) ; 
         } }
         auto_select        
         theme = "outline"

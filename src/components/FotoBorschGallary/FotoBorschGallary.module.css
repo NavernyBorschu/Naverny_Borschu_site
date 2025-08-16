@@ -4,11 +4,6 @@
   max-width: 600px;
   margin: auto;
 }
-
-.imageWrapper { 
-  height: 128px;
-}
-
 .image {
   width: 100%;
   height: 100%;

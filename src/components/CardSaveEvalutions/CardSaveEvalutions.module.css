@@ -1,0 +1,74 @@
+.container{
+    position: relative;
+}
+
+.card{
+    position: absolute;
+    top: -0;
+    right: -50vw;
+    padding: 16px;
+    background-color: var(--color-bg-main);
+    border-radius: 14px 14px 0  0 ;
+    width: 100vw;
+    height: 70vh;
+}
+.boxClose{
+    display: flex;
+    justify-content: right;
+}
+.boxContext{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    gap: 24px;
+    margin-top: 40px;
+}
+.link {
+    display: inline-block;
+    background-color: var(--color-bg-main);      
+    border-radius: 14px;    
+    padding: 14px 20px;
+    width: 100%;   
+    color: var(--color-text-btn);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 22px;
+    border: 1px solid var(--color-akcent-btn); 
+}
+.link:hover{   
+   cursor: pointer;
+}
+
+.title{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;    
+    color: var(--color-text-btn);
+}
+
+.linkInl{
+    display: block;
+    background-color: var(--color-btn-disabled);
+    color: var(--color-text-btn-active);   
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    padding: 14px 20px;
+    width: 100%;
+}
+.spin-once {
+  animation: spin 1s linear 1; 
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

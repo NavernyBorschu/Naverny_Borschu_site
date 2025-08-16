@@ -2,10 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@mdi/js": "^7.4.47",
-    "@mdi/light-js": "^0.2.63",
-    "@mdi/react": "^1.6.1",
+  "dependencies": {    
     "@react-google-maps/api": "^2.20.6",
     "@react-oauth/google": "^0.12.1",
     "@tanstack/react-router": "^1.115.3",

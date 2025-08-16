@@ -12,7 +12,7 @@ import borsch from '../../data/borsch.json';
 import style from './MapPage.module.css';
 
 
-
+// додати запит на сервер
 const API_KEY=process.env.REACT_APP_API_KEY_MAP;
 const libraries=['places'];
 const defaultCenter = {
@@ -28,7 +28,7 @@ export const MapPage = ( )=> {
 }); 
   const [places,setPlaces] = useState(data);   
   
-  const mode = Number(localStorage.getItem('mode')) || MODES.MOVE; 
+  const mode = Number(localStorage.getItem('mode')) || MODES.SET_MARKER; 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: API_KEY,
@@ -86,8 +86,7 @@ export const MapPage = ( )=> {
         </div>
         <div className={style.borsch}>(зареєстровано {borsch.length} борщів)</div>
       </>
-     } 
-          
+     }           
       {isLoaded 
       ?<Map 
           center={center} 

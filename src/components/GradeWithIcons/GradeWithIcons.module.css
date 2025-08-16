@@ -1,0 +1,97 @@
+
+.wrap {  
+  margin-top: 20px;  
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.label {
+  width: 100%;
+  font-size:1rem;
+  color: var(--color-text-main);
+}
+
+.sliderWrapper {
+  position: relative;
+  width: 100%;  
+}
+
+
+
+ .input {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 20px;
+  background: none;
+  position: relative;
+  z-index: 1;
+}
+
+
+.input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.input::-moz-range-thumb {
+  width: 24px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.track {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 8px;
+  transform: translateY(-50%);
+  pointer-events: none;   
+  z-index: 0;
+}
+
+.tick {
+  width: 25px;
+  height: 7px;
+  background-color:var(--color-text-grade);
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.filled {
+  background-color:var(--color-text-active);
+}
+.text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--color-text-main);
+  width: 100%;
+}
+.labelCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.iconLabels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8px;
+  padding: 0 4px;
+}

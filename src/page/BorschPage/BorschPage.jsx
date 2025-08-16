@@ -9,18 +9,20 @@ import { ReactComponent as IconAftertaste } from './aftertaste.svg';
 import { ReactComponent as IconServing } from './serving.svg';
 import { ReactComponent as IconArrowLeft } from './arrow_left.svg';
 import { ReactComponent as IconArrowRight } from './arrow_right.svg';
-import { ReactComponent as IconLikeInl } from './like_inl.svg';
+import { ReactComponent as IconLike } from './like.svg';
 import { ReactComponent as IconLink } from './link.svg';
+import { ButtonVertion } from "../../components/ButtonVersion";
 import { RatingIconsSvg } from "../../components/RatingIconsSvg";
 import { ProgressLine } from "../../components/ProgressLine/ProgressLine";
-// import { FotoBorschGallary } from "../../components/FotoBorschGallary";
+import { FotoBorschGallary } from "../../components/FotoBorschGallary";
 import borsch from '../../data/borsch.json';
 import data from '../../data/places.json';
 import comments from '../../data/comments.json';
 import users from '../../data/users.json';
 import style from './BorschPage.module.css';
+import typography from '../../styles/typography.module.css';
 
-
+// додати запит на сервер
 
 export const BorschPage=()=>{
     const { borschId } = useParams();
@@ -29,7 +31,7 @@ export const BorschPage=()=>{
     const borschOne = borsch.find(item => String(item.id_borsch) === String(borschId));
     const place = data.find(item=>String(item.id) === String(borschOne.place_id)); 
     const borschComents =   comments.filter(item => String(item.id_borsch) === String(borschId));
-   
+  
     const mergeCommentsWithUsers=(comments, users) =>{
         return comments.map(comment => {
             const user = users.find(u => u.user_id === comment.user_id);
@@ -43,6 +45,7 @@ export const BorschPage=()=>{
         });
     }        
     const result = mergeCommentsWithUsers(borschComents, users);
+
 
     const paginatedComments = result.slice(
     currentPage * commentsPerPage,
@@ -66,15 +69,21 @@ export const BorschPage=()=>{
         </Link>
         <div className={style.wrap}>
             <h2 className={style.title}>{place.name}</h2>
-            <div lassName={style.card}>
+            <div className={style.card}>
                 <div className={style.box}>
-                    <IconLink/>                
-                    <IconLikeInl/>
+                    <ButtonVertion
+                        type="button"
+                        onClick={console.log("передає лінк")}
+                        icon={IconLink}
+                    />
+                    <ButtonVertion
+                        type="button"
+                        onClick={console.log("Тут буду функція яка змінює ключ лайку")}
+                        icon={IconLike}
+                    />
                 </div>
-                {/* <FotoBorschGallary images={borschOne.photo_urls} /> */}
-                <div  className={style.imageBox}>
-                    <img src={`/${borschOne.photo_urls[0]}`} alt={'img_borsch'} className={style.imageStyle}/>
-                </div>
+                
+                {borschOne && <FotoBorschGallary images={borschOne.photo_urls} height={"215px"}/>}                
                 <h3 className={style.nameBorsch}>{borschOne.name}</h3>
                 <p className={style.adress}>{place.adress}</p>
                 <div className={style.flex}>
@@ -84,8 +93,8 @@ export const BorschPage=()=>{
                 <h4>Оцінки та відгуки</h4>
                 <div className={style.flex}>
                     <h2 className={style.grade}>{borschOne.overall_rating}</h2>
-                    <RatingIconsSvg overall_rating={borschOne.overall_rating}/>
-                    <p>{borschComents.length} Reviews</p>
+                    <RatingIconsSvg overall_rating={borschOne.overall_rating} size={18}/>
+                    <p className={typography.mobileCaption}>{borschComents.length} Reviews</p>
                 </div>
                 <div className={style.gradesFlex}>
                     <ProgressLine title={'Мʼясовитість'} value={borschOne.rating_meat} icon={IconMeat}/>
@@ -102,20 +111,20 @@ export const BorschPage=()=>{
                    { paginatedComments.map((item, index) => (
                         <div key={index}>
                             <div className={style.avatarBox}>
-                            <div className={style.photoBox}>
-                                <img
-                                src={`/${item.photo}`}
-                                alt={`${item.name}`}
-                                className={style.photoStyle}
-                                />
-                            </div>
-                            <div>
-                                <div className={style.textBox}>
-                                <h3>{item.name}</h3>
-                                <p className={style.textDate}>{item.created_at}</p>
+                                <div className={style.photoBox}>
+                                    <img
+                                    src={`/${item.photo}`}
+                                    alt={`${item.name}`}
+                                    className={style.photoStyle}
+                                    />
                                 </div>
-                                <RatingIconsSvg overall_rating={item.overall_rating} />
-                            </div>
+                                <div className={style.textWrapp}>
+                                    <div className={style.textBox}>
+                                        <h3>{item.name}</h3>
+                                        <p className={style.textDate}>{item.created_at}</p>
+                                    </div>
+                                    <RatingIconsSvg overall_rating={item.overall_rating} size={15}/>
+                                </div>
                             </div>
                             <p>{item.messege}</p>
                         </div>
