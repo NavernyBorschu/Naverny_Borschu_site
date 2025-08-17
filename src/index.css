@@ -10,20 +10,22 @@
     --color-text-layout:#A0A0A0; /*Grey/800 */
     --color-header-border:#DDDDDD;/*Grey/500 */
     --color-input-search:#BEB9B2;/*Grey/700 */
-    --color-text-active: #638758;/*Green/900 */
     --color-text-btn: #1A1A1A;
     --color-text-btn-active: #FFFFFF;
     --color-bg-main: #F8F8F8;
+    --color-bg-pages: #F8F8F8;
+    --color-bg-grey: #F2F2F2; /* Grey/300 */
     --color-text-grade: #A6A6A6;
     --color-add-btn: #BAE9AC;/*Green/400 */
     --color-add-btn-active: #ABDD9C;/*Green/500 */
     --color-btn-disabled: #76A069;
-    --color-bg-pages: #F8F8F8;
-    --color-bg-grey: #F2F2F2; /* Grey/300 */
-    --color-bg-ad: #F9CFA8;
     --color-input-active: #89B87B; /*Green/700 */
-    --color-filter-btn:#DD9755;
-    --color-akcent-btn:#B8092C;/*Red/700 */
+    --color-btn-hover: #76A069; /*Green/800 */
+    --color-text-active: #638758;/*Green/900 */
+    --color-bg-ad: #F9CFA8;
+    --color-filter-btn: #DD9755;
+    --color-akcent-btn: #B8092C; /*Red/700 */
+    --color-akcent-hover: #A00322; /*Red/800*/
     --color-modal-black: #000000;
 
     --font-family-main: 'Roboto', sans-serif;

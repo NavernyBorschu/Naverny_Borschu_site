@@ -13,6 +13,10 @@ import {PersonalInfo} from "./page/PersonalInfo";
 import {EvaluationsPage} from "./page/EvaluationsPage";
 import {UserPasswordPage} from "./page/UserPasswordPage";
 import {PasswordChangePage} from "./page/PasswordChangePage";
+import {HelpPage} from "./page/HelpPage/HelpPage";
+import {AppGuide} from "./page/AppGuide/AppGuide";
+import {FAQ} from "./page/FAQ";
+import {AddedBorschesPage} from "./page/AddedBorschesPage";
 
 
 export default function App() {
@@ -24,14 +28,19 @@ export default function App() {
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/favorite" element={<LikeBorsch/>}/>
                     <Route path="/reviews" element={<List/>}/>
-                    <Route path="/profile" element={<Profile/>}/>
-                    <Route path="/profile/personal-information" element={<PersonalInfo/>}/>
-                    <Route path="/profile/password" element={<UserPasswordPage/>}/>
-                    <Route path="/profile/password-change" element={<PasswordChangePage/>}/>
                     <Route path="/add-borsch" element={<PrivateRoute><AddPage/></PrivateRoute>}/>
                     <Route path="/list" element={<ListPage/>}/>
                     <Route path="/borsch/:borschId" element={<BorschPage/>}/>
                     <Route path="/borsch/:borschId/evaluations" element={<EvaluationsPage/>}/>
+
+                    <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/profile/personal-information" element={<PersonalInfo/>}/>
+                    <Route path="/profile/added-borsches" element={<AddedBorschesPage/>}/>
+                    <Route path="/profile/password" element={<UserPasswordPage/>}/>
+                    <Route path="/profile/password-change" element={<PasswordChangePage/>}/>
+                    <Route path="/help" element={<HelpPage />} />
+                    <Route path="/faq" element={<FAQ />} />
+                    <Route path="/app-guide" element={<AppGuide />} />
                 </Routes>
             </Layout>
         </BrowserRouter>

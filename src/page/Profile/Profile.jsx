@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {ButtonProfile} from '../../components/ButtonProfile';
-import PlateAvatar from '../../assets/images/plate-avatar.png';
+import {ModalLogout} from "../../components/ModalLogout";
+import Logo from '../../assets/images/logo.svg';
 import advertIcon from '../../assets/images/profile-advert-img.png';
 import personalInfoIcon from '../../assets/images/profile-personal-icon.png';
 import addedBorshchIcon from '../../assets/images/profile-added-borshch-icon.png';
@@ -14,8 +15,6 @@ import arrowIcon from '../../assets/images/profile-arrow-icon.png';
 import layout from '../../styles/layout.module.css';
 import typography from '../../styles/typography.module.css';
 import style from './Profile.module.css';
-import {Modal} from "../../components/Modal";
-import {Button} from "../../components/Button";
 
 export const Profile = () => {
     const [activeButton, setActiveButton] = useState('profile'); // 'settings'
@@ -23,30 +22,27 @@ export const Profile = () => {
 
     const linksForProfileBtn = [
         {path: '/profile/personal-information', label: 'Особиста інформація', icon: personalInfoIcon},
-        {path: '/profile/added-borshch', label: 'Додані борщі', icon: addedBorshchIcon},
+        {path: '/profile/added-borsches', label: 'Додані борщі', icon: addedBorshchIcon},
         {path: '/profile/password', label: 'Пароль', icon: passwordIcon},
         {label: 'Вийти з акаунту', icon: logoutIcon, type: 'button'},
     ];
 
     const linksForSettingsBtn = [
-        {path: '/profile/about', label: 'Про додаток', icon: aboutIcon},
-        {path: '/profile/help', label: 'Help', icon: helpIcon},
+        {path: '/about', label: 'Про додаток', icon: aboutIcon},
+        {path: '/help', label: 'Help', icon: helpIcon},
         {path: '/profile/policy', label: 'Політика конфіденційності', icon: policyIcon},
     ]
 
     const activeLinks = activeButton === 'profile' ? linksForProfileBtn : linksForSettingsBtn;
 
-    const handleOpenModal = () => {
-        setShowModal(true)
-    }
-
+    const handleOpenModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
 
     return (
         <div className={layout.wrapper}>
             <h1 className={typography.mobileTitle}>Мій профіль</h1>
             <div className={style.userHeader}>
-                <img src={PlateAvatar} alt='User avatar'/>
+                <img src={Logo} alt='User avatar'/>
                 <div>
                     <h2 className={typography.mobileTitleSmall}>Ім'я</h2>
                 </div>
@@ -89,23 +85,13 @@ export const Profile = () => {
                                 <img src={icon} alt={label}/>
                                 <span className={typography.mobileBody}>{label}</span>
                             </div>
-                            <img src={arrowIcon} alt="Arrow"/>
+                            <img src={arrowIcon} alt="Arrow" className={style.arrow}/>
                         </Link>
                         )
                 )}
             </div>
 
-            {showModal && (
-                <Modal onClose={handleCloseModal}>
-                    <div className={style.modalContent}>
-                        <img className={style.modalLogo} src={PlateAvatar} alt="Logo"/>
-                        <h2 className={`${typography.modalTitle} ${style.modalTitle}`}>Вийти з акаунту</h2>
-                        <p className={`${style.modalParagraph} ${style.modalParagraph}`}>Все збережено! Повертайся Навертати Борщі разом з нами </p>
-                        <Button type='submit' name='Вийти' onClick={handleCloseModal}/>
-                        <button className={`${typography.fontBtn} ${style.modalCloseBtn}`} onClick={handleCloseModal}>Продовжити Навертати Борщі</button>
-                    </div>
-                </Modal>
-            )}
+            {showModal && <ModalLogout onClose={handleCloseModal}/>}
         </div>
     );
 }

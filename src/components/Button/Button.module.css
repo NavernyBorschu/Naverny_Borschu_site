@@ -19,3 +19,7 @@
     background-color: var(--color-text-active);
     color: var(--color-text-btn-active);
 }
+
+.active:hover {
+    background-color: var(--color-btn-hover);
+}

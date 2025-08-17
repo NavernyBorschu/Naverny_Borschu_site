@@ -1,0 +1,34 @@
+.linksContainer {
+    background-color: var(--color-bg-pages);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    margin: 24px 0;
+    padding: 0 16px;
+}
+
+.linkWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+
+    padding: 16px 0;
+    text-align: left;
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid #DDDDDD;
+    /*transform: rotate(0.19deg);*/
+    width: 100%;
+}
+
+.linkGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.arrow {
+    width: 24px;
+    height: 24px;
+}
