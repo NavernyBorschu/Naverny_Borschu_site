@@ -1,3 +1,4 @@
+@use "./styles/mixin_font.scss" as *;
 
 *,
 *::before,
@@ -9,7 +10,7 @@
     --color-text-btn: #1A1A1A;
     --color-text-btn-active: #FFFFFF;
     --color-bg-main: #F8F8F8;
-    // --color-bg-pages: #F8F8F8;
+    //--color-bg-pages: #F8F8F8;
     --color-bg-grey: #F2F2F2; /* Grey/300 */
     --color-header-border:#DDDDDD;/*Grey/500 */
     --color-grey-400:#E9E9E9;/*Grey/400 */

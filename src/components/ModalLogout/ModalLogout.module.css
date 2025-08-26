@@ -3,7 +3,7 @@
     position: absolute;
     top: -0;
     right: -50vw;
-    background-color: var(--color-bg-pages);
+    background-color: var(--color-bg-main);
     height: 70vh;  /*518px*/
     border-radius: 14px 14px 0  0 ;
     padding-top: 64px;

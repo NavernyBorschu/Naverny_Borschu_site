@@ -13,7 +13,6 @@ import {PersonalInfo} from "./page/PersonalInfo";
 import { EvaluationsPage } from "./page/EvaluationsPage";
 import { SelectPlacePage } from "./page/SelectPlacePage";
 import { SelectPlacePageFinish } from "./page/SelectPlacePageFinish";
-import {EvaluationsPage} from "./page/EvaluationsPage";
 import {UserPasswordPage} from "./page/UserPasswordPage";
 import {PasswordChangePage} from "./page/PasswordChangePage";
 import {HelpPage} from "./page/HelpPage/HelpPage";
@@ -34,8 +33,6 @@ export default function App() {
 
             <Route path="/favorite" element={<LikeBorsch/>}/>
             <Route path="/reviews" element={<List/>}/>
-            <Route path="/profile" element={<Profile/>}/>
-            <Route path="profile/personal-information" element={<PersonalInfo/>}/>
             <Route path="/add-borsch" element={<AddPage/>}/>
             <Route path="/add-borsch/select-place" element={<SelectPlacePage/>}/>
             <Route path="/add-borsch/select-place/:borschId" element={<SelectPlacePageFinish/>}/>
