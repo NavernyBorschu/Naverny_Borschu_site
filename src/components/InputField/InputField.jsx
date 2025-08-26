@@ -1,5 +1,6 @@
-import style from './InputField.module.css'; // adjust path
-import typography from '../../styles/typography.module.css'; // adjust path
+import {ReactComponent as IconPen} from '../../assets/icons/pen_grey.svg';
+import style from './InputField.module.css';
+import typography from '../../styles/typography.module.css';
 
 export const InputField = ({
                                label,
@@ -14,15 +15,19 @@ export const InputField = ({
             <label htmlFor={id} className={`${typography.mobileLabel} ${style.inputLabel}`}>
                 {label}
             </label>
-            <input
-                type={type}
-                id={id}
-                className={style.inputField}
-                placeholder={placeholder}
-                value={value}
-                onChange={onChange}
-                disabled={disabled}
-            />
+
+            <div className={style.inputWrapper}>
+                <input
+                    type={type}
+                    id={id}
+                    className={`${style.inputField} ${value ? style.inputFieldActive : ''}`}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                    disabled={disabled}
+                />
+                <IconPen className={`${style.icon} ${value ? style.iconActive : ''}`} />
+            </div>
         </div>
     );
 };

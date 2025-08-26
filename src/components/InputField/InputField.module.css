@@ -15,11 +15,37 @@
     z-index: 1;
 }
 
+.inputWrapper {
+    margin-bottom: 24px;
+    position: relative;
+    width: 100%;
+}
+
 .inputField {
     background-color: inherit;
     border-radius: 24px;
     border: 1px solid var(--color-text-main);
-    padding: 13px 24px;
+    padding: 13px 40px 13px 24px;
     width: 100%;
-    margin-bottom: 24px;
+}
+
+.inputField:focus,
+.inputField:hover,
+.inputFieldActive {
+    border-color: var(--color-input-active);
+}
+
+.icon {
+    position: absolute;
+    right: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 19px;
+    height: 18px;
+    color: var(--color-text-main);
+    transition: fill 0.2s ease-in-out;
+}
+
+.iconActive {
+    color: var(--color-text-btn);
 }

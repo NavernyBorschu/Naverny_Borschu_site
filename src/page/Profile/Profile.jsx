@@ -23,7 +23,7 @@ export const Profile = () => {
     const linksForProfileBtn = [
         {path: '/profile/personal-information', label: 'Особиста інформація', icon: personalInfoIcon},
         {path: '/profile/added-borsches', label: 'Додані борщі', icon: addedBorshchIcon},
-        {path: '/profile/password', label: 'Пароль', icon: passwordIcon},
+        {path: '/profile/change-password', label: 'Пароль', icon: passwordIcon},
         {label: 'Вийти з акаунту', icon: logoutIcon, type: 'button'},
     ];
 

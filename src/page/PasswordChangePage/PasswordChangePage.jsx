@@ -35,7 +35,7 @@ export const PasswordChangePage = () => {
 
     return (
         <div className={layout.wrapper}>
-            <h2 className={`${typography.mobileTitle} ${style.title}`}>Зміна пароль</h2>
+            <h2 className={`${typography.mobileTitle} ${style.title}`}>Зміна пароля</h2>
 
             <InputField
                 label='Поточний пароль' id='currentPassword' type='password' placeholder='Поточний пароль'

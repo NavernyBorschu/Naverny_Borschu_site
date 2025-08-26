@@ -36,8 +36,8 @@ export default function App() {
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/profile/personal-information" element={<PersonalInfo/>}/>
                     <Route path="/profile/added-borsches" element={<AddedBorschesPage/>}/>
-                    <Route path="/profile/password" element={<UserPasswordPage/>}/>
-                    <Route path="/profile/password-change" element={<PasswordChangePage/>}/>
+                    {/*<Route path="/profile/password" element={<UserPasswordPage/>}/>*/}
+                    <Route path="/profile/change-password" element={<PasswordChangePage/>}/>
                     <Route path="/help" element={<HelpPage />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/app-guide" element={<AppGuide />} />
