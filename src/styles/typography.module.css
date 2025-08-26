@@ -73,3 +73,34 @@
     line-height: 12px;
     color: var(--color-text-btn);
 }
+
+.mobileLabel {
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 25px;
+    letter-spacing: 0.01em;
+    color: #1A1A1A;
+}
+
+.modalTitle {
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    color: var(--color-modal-black);
+}
+
+.modalParagraph {
+    /* mobile/caption */
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--color-modal-black);
+}

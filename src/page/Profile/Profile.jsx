@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {AvatarUploader} from '../../components/AvatarUploader';
 import {ButtonProfile} from '../../components/ButtonProfile';
+import {ModalLogout} from "../../components/ModalLogout";
+import Logo from '../../assets/images/logo.svg';
 import advertIcon from '../../assets/images/profile-advert-img.png';
 import personalInfoIcon from '../../assets/images/profile-personal-icon.png';
 import addedBorshchIcon from '../../assets/images/profile-added-borshch-icon.png';
@@ -17,33 +18,33 @@ import style from './Profile.module.css';
 
 export const Profile = () => {
     const [activeButton, setActiveButton] = useState('profile'); // 'settings'
+    const [showModal, setShowModal] = useState(false);
 
     const linksForProfileBtn = [
         {path: '/profile/personal-information', label: 'Особиста інформація', icon: personalInfoIcon},
-        {path: '/profile/added-borshch', label: 'Додані борщі', icon: addedBorshchIcon},
-        {path: '/profile/password', label: 'Пароль', icon: passwordIcon},
+        {path: '/profile/added-borsches', label: 'Додані борщі', icon: addedBorshchIcon},
+        {path: '/profile/change-password', label: 'Пароль', icon: passwordIcon},
         {label: 'Вийти з акаунту', icon: logoutIcon, type: 'button'},
     ];
 
     const linksForSettingsBtn = [
-        {path: '/profile/about', label: 'Про додаток', icon: aboutIcon},
-        {path: '/profile/help', label: 'Help', icon: helpIcon},
+        {path: '/about', label: 'Про додаток', icon: aboutIcon},
+        {path: '/help', label: 'Help', icon: helpIcon},
         {path: '/profile/policy', label: 'Політика конфіденційності', icon: policyIcon},
     ]
 
     const activeLinks = activeButton === 'profile' ? linksForProfileBtn : linksForSettingsBtn;
 
-    const handleLogoutClick = () => {
-        console.log('Logout button clicked');
-    }
+    const handleOpenModal = () => setShowModal(true);
+    const handleCloseModal = () => setShowModal(false);
 
     return (
         <div className={layout.wrapper}>
             <h1 className={typography.mobileTitle}>Мій профіль</h1>
             <div className={style.userHeader}>
-                <AvatarUploader />
+                <img src={Logo} alt='User avatar'/>
                 <div>
-                    <h2 className={typography.mobileTitleSmall}>Ім'я Прізвище</h2>
+                    <h2 className={typography.mobileTitleSmall}>Ім'я</h2>
                 </div>
             </div>
 
@@ -72,7 +73,7 @@ export const Profile = () => {
             <div className={style.linksContainer}>
                 {activeLinks.map(({path, label, icon, type }) =>
                     type === 'button' ? (
-                        <button key={label} onClick={handleLogoutClick} className={style.linkWrap}>
+                        <button key={label} onClick={handleOpenModal} className={style.linkWrap}>
                             <div className={style.linkGroup}>
                                 <img src={logoutIcon} alt="Logout"/>
                                 <span className={typography.mobileBody}>Вийти з акаунту</span>
@@ -84,11 +85,13 @@ export const Profile = () => {
                                 <img src={icon} alt={label}/>
                                 <span className={typography.mobileBody}>{label}</span>
                             </div>
-                            <img src={arrowIcon} alt="Arrow"/>
+                            <img src={arrowIcon} alt="Arrow" className={style.arrow}/>
                         </Link>
                         )
                 )}
             </div>
+
+            {showModal && <ModalLogout onClose={handleCloseModal}/>}
         </div>
     );
 }

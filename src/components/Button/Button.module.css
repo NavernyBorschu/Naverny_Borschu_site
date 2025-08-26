@@ -1,5 +1,5 @@
 .btn {
-    background-color: var(--color-bg-pages);
+    background-color: var(--color-bg-main);
     display: block;
     border: none;
     border-radius: 14px;
@@ -18,4 +18,8 @@
 .active {
     background-color: var(--color-text-active);
     color: var(--color-text-btn-active);
+}
+
+.active:hover {
+    background-color: var(--color-btn-hover);
 }
