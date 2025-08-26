@@ -1,3 +1,4 @@
+@use "../../styles/mixin_font.scss" as *;
 .BorschPage{   
     position: relative; 
     
@@ -10,27 +11,20 @@
     overflow-y: auto;
 }
 .btnClose{
-    position: absolute;
+    position: absolute;   
     right: 10px;
-    background-color: var(--color-bg-main); 
-    margin: 0; 
-    border: none;  
-}
-.title{
-    margin: 40px 0 25px 0;
-}
-.nameBorsch{
-    margin-top: 16px;
-}
-.adress{
-    color: var(--color-text-main);
-    margin: 5px 0;
+    top: 10px;    
 }
 
+.title{
+    @include mobileH2;
+    color: var(--color-text-btn);
+    text-align: center;
+    margin: 40px 0 25px 0;
+}
 .card{
     position: relative;
 }
-
 .box{
     position: absolute;
     top:10px;
@@ -40,15 +34,33 @@
     z-index: 3;
 }
 
+.nameBorsch{
+    @include mobileH4;
+    margin-top: 16px;
+    color: var(--color-text-btn);
+}
+.adress{
+    @include caption;
+    color: var(--color-text-main);
+    margin-bottom: 16px;
+}
 .flex{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--color-text-main);    
+    color: var(--color-text-main); 
+    @include caption;   
 }
+
 .grade{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 12px; 
     color:var(--color-text-btn)
 }
+
 .gradesFlex{
     display: flex;
     flex-direction: column;
@@ -61,19 +73,21 @@
 }
 
 .btn{
-    background-color: var(--color-btn-disabled);
-    color:var( --color-text-btn-active); 
     display: block;
-    border: none;
-    border-radius: 14px;
-    cursor: pointer;
-    padding: 14px 20px;
-    width: 100%;   
-    font-size: 14px;     
     list-style: none;    
     text-align:center;
-    text-decoration: none;    
+    text-decoration: none; 
+    width: 100%; 
+    padding: 14px 20px;
+    margin: 10px 0;
+    @include button;  
+    background-color: var(--color-btn-disabled);
+    color:var( --color-text-btn-active);    
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;      
 }
+
 .comentsBox{
     display: flex;
     flex-direction: column;
@@ -82,9 +96,8 @@
 }
 .avatarBox{
     display: flex; 
-    gap: 8px;  
-    width: 100%;
-    /* justify-content: space-between; */
+    gap: 16px;  
+    width: 100%;    
     margin-bottom: 16px;
 }
 .photoBox{
@@ -99,14 +112,23 @@
     object-fit: cover
 }
 .textWrapp{
-   width: 100%;
+    display: flex;
+    flex-direction: column;    
+    gap: 4px;
+    width: 100%;
 }
 .textBox{
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
+.textAvatar{
+   @include mobileH4; 
+   color: var(--color-text-btn);
+   margin: 0;
+}
 .textDate{
+    @include caption;
     color: var(--color-text-main);
 }
 

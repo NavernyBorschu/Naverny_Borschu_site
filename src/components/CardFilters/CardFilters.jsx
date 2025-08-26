@@ -2,9 +2,9 @@ import { useState} from 'react';
 // import { useNavigate } from 'react-router-dom';
 import { ReactComponent as IconDelete } from './close.svg';
 import typePlace from '../../data/typePlaces.json';
-import style from "./CardFilters.module.css";
+import style from "./CardFilters.module.scss";
 
-const meatOptions = ['Без м\'яса', 'Курка', 'Свинина', 'Телятина', 'Качка','Інше'];
+const meatOptions = ['Без м\'яса', 'Курка', 'Свинина', 'Яловичина', 'Качка','Інше'];
 
 export const CardFilters=({onClose})=>{    
     const [selectedTypes, setSelectedTypes] = useState([]);
@@ -38,7 +38,7 @@ export const CardFilters=({onClose})=>{
    
   const handleReset = (e) => {
     e.preventDefault();
-    setSelectedTypes('');
+    setSelectedTypes([]);
     setSelectedMeat('');
     setMinPrice(50)
     setMaxPrice(5000);
@@ -68,19 +68,17 @@ export const CardFilters=({onClose})=>{
             </button>
             <h2 className={style.title}>Фільтри</h2>
             <div className={style.boxForm}>                
-                <form >
+                <form action="" onSubmit={(e) => { e.preventDefault(); handleApplyFilters(); }}>
                     <div>
                        <h3 className={style.typeTitle}>Тип закладу</h3>
                        <div className={style.radioBox}>
                         {typePlace.map((i) => (
-                            <label className={style.radioItem} >
-                                <input
-                                    key={i}
+                            <label className={style.radioItem}  key={i.id || i.type}>
+                                <input                                    
                                     type="checkbox"
                                     value={i.type}
                                     checked={selectedTypes.includes(i.type)}
-                                    onChange={() => handleTypeToggle(i.type)}/>
-                                
+                                    onChange={() => handleTypeToggle(i.type)}/>                                
                                 {i.type}
                             </label>
                         ))} 
@@ -146,7 +144,7 @@ export const CardFilters=({onClose})=>{
                         </div>
                     </div>                    
                     <div className={style.boxBtnSubmit}>
-                        <button onClick={handleApplyFilters}                        className={style.btnSubmit}
+                        <button  type="submit" className={style.btnSubmit}
                         >
                         Застосувати
                         </button>

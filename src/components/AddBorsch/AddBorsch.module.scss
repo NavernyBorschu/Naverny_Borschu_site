@@ -1,0 +1,75 @@
+@use "../../styles/mixin_font.scss" as *;
+.container{
+    position: relative;
+}
+
+.card{
+    position: absolute;
+    top: 16vh;
+    right: -50vw;
+    padding: 16px;
+    background-color: var(--color-bg-main);
+    border-radius: 14px 14px 0  0 ;
+    width: 100vw;
+    height: 50vh;
+}
+
+.boxClose{
+    display: flex;
+    justify-content: right;
+}
+
+.boxContext{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    gap: 24px;
+   
+}
+.boxAddress{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    gap: 10px;
+    padding: 16px;
+    
+}
+
+.name{
+    @include caption;
+    color:var(--color-text-btn);
+}
+.street{
+    @include caption;
+    color:var(--color-text-main);
+}
+.box_time{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.time{
+    @include caption;
+    color:var(--color-text-active);
+}
+.close{
+    @include caption;
+    color:var(--color-text-btn);
+}
+.photos {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+
+}
+
+.photo {
+  width: 150px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}

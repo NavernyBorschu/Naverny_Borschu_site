@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import style from "./GradeWithIcons.module.css";
+import style from "./GradeWithIcons.module.scss";
 
 export const GradeWithIcons = ({
   title = "Оцінка",

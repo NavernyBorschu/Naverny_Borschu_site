@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import style from "./Grade.module.css";
+import style from "./Grade.module.scss";
 
 export const Grade = ({ 
   icon: Icon, 

@@ -1,17 +1,14 @@
 .container{
-    position:absolute;
-    border-radius: 14px;
-    width: 90%;
-    height: 40px;
-    z-index: 999;
-    margin-top: 20px;
-   
+  border-radius: 14px;
+  width: 80%;
+  height: 40px;
+  z-index: 999;   
 }
 .input{
-   border: 1px solid var(--color-header-border);
+  border: 1px solid var(--color-header-border);
   background-color: var(--color-bg-main);
-  border-radius: 24px;
-  padding: 8px 12px 8px 48px; 
+  border-radius: 14px;
+  padding: 8px 16px; 
   width: 100%;
   height: 40px;
   outline: none;
@@ -32,10 +29,20 @@
   line-height: 120%;
 }
 .select{
-    position: absolute;
-    top: 40px;
-    padding-left: 50px;
-    width: 100%;
-    background-color: var( --color-bg-main);
-    z-index: 99;
+  position: absolute;
+  top: 40px;   
+  width: 75%;
+  background-color: var( --color-bg-main);
+  z-index: 99;
+  border-radius: 24px;
+  padding: 10px 20px;
+  text-align: left;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.select li{
+  border-bottom: 1px solid var(--color-input-search);
+  padding-bottom: 3px;
 }
