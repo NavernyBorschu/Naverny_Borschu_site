@@ -13,19 +13,19 @@ export const Login=()=>{
       <Logo/>
       <div className={style.btnGoogle}>
         < GoogleLogin         
-        onSuccess = { ()  =>  {       
+          onSuccess = { (credentialResponse)  =>  {   
+          console.log('Успіх!', credentialResponse);    
           localStorage.setItem('mode', MODES.SET_MARKER);
           localStorage.setItem('auth', true);                   
           navigate('/add-borsch');
-          // window.location.reload();          
+          window.location.reload();          
         } } 
         onError = { ( )  =>  { 
-          // console . log ( 'Вхід не вдалий' ) ; 
+          console.log ( 'Вхід не вдалий' ) ; 
         } }
         auto_select        
         theme = "outline"
-        shape = "circle"
-                   
+        shape = "circle"                   
       />
       </div>      
     </div>    

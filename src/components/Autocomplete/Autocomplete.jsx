@@ -60,7 +60,7 @@ export const Autocomplete =({isLoaded,onSelect})=>{
             value={value}
             onChange={handleInput}
             disabled={!ready}
-            placeholder="В якому місті бажаеш навернути борщу?"
+            placeholder="В якому місті додаш борщчику?"
             />
             {status === "OK" && <ul className={style.select}>{renderSuggestions()}</ul>}
         </div>

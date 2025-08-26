@@ -1,0 +1,53 @@
+@mixin mobileH2{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 12px;    
+}
+
+@mixin mobileH3{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 12px;    
+}
+@mixin mobileH4{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 14px;    
+}
+
+@mixin body{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 14px;     
+}
+
+@mixin button{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;    
+}
+@mixin footnote{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 12px;    
+}
+
+@mixin caption{
+    font-family: var(--font-family-main);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 12px;    
+}

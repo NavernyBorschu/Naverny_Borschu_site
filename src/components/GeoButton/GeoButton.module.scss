@@ -1,0 +1,102 @@
+@use "../../styles/mixin_font.scss" as *;
+
+.buttonFilter,.btnGeo{
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-input-search);
+  border-radius: 24px;
+  padding: 8px;    
+}
+
+.btnFilter, .btnGeo{
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-bg-main);
+  border: 1px solid var(--color-header-border);
+  border-radius: 14px;
+  padding: 8px;
+  display: flex;   
+  justify-content: center; 
+  align-items: center;
+}
+
+.iconGeo, .iconFilter {
+  width: 24px;
+  height: 24px;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.iconGeoHover, .iconFilterHover { 
+  display: none;
+  opacity: 0; 
+}
+
+.btnFilter:hover .iconFilterDefault,.btnGeo:hover .iconGeoDefault { 
+  display: none; 
+  opacity: 0; 
+}
+
+.btnFilter:hover .iconFilterHover, .btnGeo:hover .iconGeoHover  { 
+  display: inline-block;
+  opacity: 1;  
+}
+
+.modalContent{
+  width: 140%;
+  margin-left: -70%;
+  background-color: var(--color-bg-grey);
+  padding: 20px 0;
+  border-radius: 14px;
+}
+
+
+.title{
+  @include mobileH4;
+  color: var(--color-text-btn);
+  text-align: center;
+  padding: 0 10px;
+}
+.subtitle{
+  @include caption;
+  color: var(--color-text-btn);
+  text-align: center;
+  padding: 0 10px;
+}
+
+.modalButtons{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.modalBtn{
+  border: none;
+  background-color: var(--color-bg-grey);
+  width: 100%;
+  color: var(--color-brown-900);
+  @include button;
+  padding: 12px;
+  border-top: 1px solid var(--color-input-search);
+}
+.geoMessage {
+  position: relative;
+  text-align:center;  
+  background-color: var(--color-bg-grey);
+  color: var(--color-text-btn);
+ 
+  padding: 20px; 
+  width: 140%;
+  margin-left: -70%;  
+  border-radius: 14px; 
+}
+.btnClose{
+  position: absolute;
+  top: 10px; 
+  right: 10px; 
+}
+
+.error_title{
+  @include mobileH4;
+}
+.error_sub_title{
+  @include caption;
+}

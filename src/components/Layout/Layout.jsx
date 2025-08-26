@@ -9,7 +9,7 @@ import { ReactComponent as IconCommentActive } from './commentActive.svg';
 import { ReactComponent as IconAcount } from './acount.svg';
 import { ReactComponent as IconAcountActive } from './acountActive.svg';
 import { MODES } from '../../components/Map/Map';
-import style from "./Layout.module.css";
+import style from "./Layout.module.scss";
 
 export const Layout = ({ children }) => {
   return (

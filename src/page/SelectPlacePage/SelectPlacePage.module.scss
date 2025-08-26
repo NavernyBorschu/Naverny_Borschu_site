@@ -1,0 +1,41 @@
+@use "../../styles/mixin_font.scss" as *;
+.containerPage{
+  padding: 16px;  
+  background-color: var(--color-bg-main);
+  height: 100vh;  
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 15px; 
+  margin-bottom: 34px; 
+}
+
+.card {
+  position: relative;
+  border: 1px solid var(--color-text-main);
+  border-radius: 24px;
+  padding: 13px 24px;
+  margin-bottom: 20px;
+  background:var(--color-bg-main);
+}
+
+.label {
+  position: absolute;
+  @include footnote;
+  top: -8px;
+  left: 15px; 
+  color:var( --color-text-btn);
+  background:var(--color-bg-main);
+}
+
+.value {
+  @include button;
+  color:var( --color-text-btn);
+  text-transform: capitalize;
+}
+
+.btn{
+  margin-top: 32px;
+}

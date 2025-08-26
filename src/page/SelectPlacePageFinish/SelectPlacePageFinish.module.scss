@@ -1,0 +1,109 @@
+@use "../../styles/mixin_font.scss" as *;
+.containerPage{
+  padding: 16px;  
+  background-color: var(--color-bg-main);
+  height: 100vh;
+}
+.title{
+  margin: 10px 0;
+  @include body;
+  color: var(--color-text-btn);
+  text-transform: capitalize;
+}
+.wrapp{
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  @include caption;
+  text-transform: capitalize;
+}
+
+.uploadBox{
+  padding: 24px 32px;
+  margin-top: 32px;
+  border-radius: 16px;
+  border: 2px dashed var(--color-text-main);
+  text-align: center;  
+}
+
+.uploadBtn{
+  background-color: var(--color-red-900);
+  color: var(--color-text-btn-active);
+  padding: 15px 42px;
+  border-radius: 14px;
+  border: none;
+  @include button;
+}
+
+.previewBox{
+  border: 2px dashed var(--color-text-main);
+  border-radius: 16px;
+  padding: 10px;
+  height: 250px;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.previewImg{
+  height: 60px;
+}
+.typeTitle{
+  @include mobileH4;
+  color: var(--color-text-btn);
+  margin: 30px 0;
+}
+.meatOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;  
+  padding-bottom: 20px;
+}
+
+.meatButton {
+  padding: 6px 8px;
+  border: 2px solid var(--color-filter-btn);
+  background-color:var(--color-text-btn-active);
+  color:var(--color-text-btn);
+  border-radius: 24px;
+  cursor: pointer;
+  @include caption;
+  color: var(--color-text-btn);
+  transition: all 0.2s ease;
+}
+
+.meatButton:hover {
+  opacity: 0.85;
+}
+
+.activeMeatButton {
+  background-color: var(--color-filter-btn);
+  color:var(--color-text-btn);
+  border-color: var(--color-filter-btn);
+}
+.inputsBox{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 34px 0;
+}
+
+.input {  
+  border: 1px solid var(--color-text-main);
+  border-radius: 24px;
+  padding: 13px 24px;
+  margin-bottom: 20px;
+  background:var(--color-bg-main);
+  width: 100%; 
+}
+.label{
+  position: relative;
+}
+.text {
+  position: absolute;
+  @include footnote;
+  top: -8px;
+  left: 15px; 
+  color:var( --color-text-btn);
+  background:var(--color-bg-main);
+}

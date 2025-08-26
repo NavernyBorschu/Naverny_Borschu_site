@@ -1,3 +1,4 @@
+@use "../../styles/mixin_font.scss" as *;
 .container{
   display: flex;
   flex-direction: column;  
@@ -10,9 +11,9 @@
 }
 
 .label {
-  width: 100%;
-  font-size:1rem;
-  color: var(--color-text-main);
+  width: 100%;  
+  @include footnote;
+  color: var(--color-text-btn);
 }
 
 .sliderWrapper {
@@ -76,7 +77,7 @@
 .text {
   display: flex;
   justify-content: space-between;
-  font-size: 0.8rem;
-  color: var(--color-text-main);
+  @include caption;
+  color: var(--color-text-btn);
   width: 100%;
 }

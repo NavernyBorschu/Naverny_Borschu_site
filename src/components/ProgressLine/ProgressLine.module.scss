@@ -1,16 +1,17 @@
+@use "../../styles/mixin_font.scss" as *;
 .wrapper {
   width: 100%; 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
+  gap: 10px;
   font-family: sans-serif;
   box-sizing: border-box; 
+  margin-top: 16px
 }
 
 .title {
-  font-size: 14px;
-  font-weight: 500;
+  @include footnote;  
   color: var(--color-text-btn);
 }
 
@@ -37,8 +38,8 @@
 
 .track {
   flex-grow: 1;
-  height: 8px;
-  background-color:var(--color-bg-grey);
+  height: 8px; 
+  background-color:var(--color-grey-400);
   border-radius: 2px;
   overflow: hidden;
   position: relative;
@@ -52,7 +53,7 @@
 }
 
 .value {
-  font-size: 13px;
-  color: var(--color-text-main);
+  @include caption;  
+  color: var(--color-text-grade);
   flex-shrink: 0;
 }

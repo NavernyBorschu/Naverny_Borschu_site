@@ -1,15 +1,14 @@
 import { useJsApiLoader } from '@react-google-maps/api';
 import { useCallback,  useState } from 'react';
-// import {  useEffect} from 'react';
-// import { getBrowserLocation } from '../../utils/geo';
 import {Link} from "react-router-dom";
 import { Autocomplete } from '../../components/Autocomplete';
 import { Map } from '../../components/Map';
 import { Filters } from '../../components/Filters/Filters';
+import { GeoButton } from "../../components/GeoButton";
 import { MODES } from '../../components/Map/Map';
 import data from '../../data/places.json';
 import borsch from '../../data/borsch.json';
-import style from './MapPage.module.css';
+import style from './MapPage.module.scss';
 
 
 // додати запит на сервер
@@ -28,7 +27,7 @@ export const MapPage = ( )=> {
 }); 
   const [places,setPlaces] = useState(data);   
   
-  const mode = Number(localStorage.getItem('mode')) || MODES.SET_MARKER; 
+  const mode = Number(localStorage.getItem('mode')) || MODES.MOVE; 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: API_KEY,
@@ -50,33 +49,22 @@ export const MapPage = ( )=> {
         ],
         grade:"9.0"
     }]);      
-  },[places])  
-
-  // useEffect(()=>{
-  //   getBrowserLocation().then((curLoc)=>{
-  //     setCenter(curLoc)
-  //   })
-  //   .catch((defaultCenter)=>{
-  //     setCenter(defaultCenter)
-  //   })
-  // },[])   
+  },[places]) 
   
  const onPlaceSelect=useCallback((coordinates)=>{
     setCenter(coordinates);
   },[])
-
-  // const handleLogout=()=>{    
-  //   googleLogout();
-  //   localStorage.clear();
-    // navigate('/');  
-  // }
+ 
 
   return (        
     <div className={style.pageHome}>      
-       {/* {mode===MODES.SET_MARKER && <div className={style.btnLogoutWrap}>                   
-          <button onClick={handleLogout} className={style.btnLogout}>Logout</button>
-        </div>} */}
-      {mode===MODES.SET_MARKER && <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect}/>}
+      {mode===MODES.SET_MARKER && 
+      < div className={style.boxGeo}>
+        <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect}/>
+        <GeoButton />
+      </div>
+      
+      }
       {mode===MODES.MOVE &&   
       <> 
         <Filters/>  

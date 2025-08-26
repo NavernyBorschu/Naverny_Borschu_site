@@ -17,7 +17,7 @@ import {CardSaveEvalutions} from "../../components/CardSaveEvalutions";
 import {Modal} from '../../components/Modal';
 import borsch from '../../data/borsch.json';
 import data from '../../data/places.json';
-import style from './EvaluationsPage.module.css';
+import style from './EvaluationsPage.module.scss';
 
 // додати запит на сервер
 const GradesArray = [
@@ -82,8 +82,7 @@ export const EvaluationsPage = () => {
     });
    const borschOne = borsch.find(item => String(item.id_borsch) === String(borschId));
    const place = data.find(item=>String(item.id) === String(borschOne.place_id));
-  const isFormValid =
-    Object.values(grades).every((val) => val !== null) && comment.trim() !== "";
+  const isFormValid = Object.values(grades).every((val) => val !== null);
 
   const handleGradeChange = (key, value) => {
     setGrades((prev) => ({ ...prev, [key]: value }));
@@ -108,13 +107,13 @@ export const EvaluationsPage = () => {
       <FotoBorschGallary images={borschOne.photo_urls} height={"215px"}/>
       <Link className={style.back} to={`/borsch/${borschId}`}><IconBack/></Link>
       <div className={style.contentImg}>
-        <div>
-          <p>{borschOne.name}</p>
-          <p className={style.text}>{place.name}</p>
+        <div className={style.nameBox1}>
+          <p className={style.textName}>{borschOne.name}</p>
+          <p className={style.textName}>{place.name}</p>
         </div>
-        <div>
-          <p>{borschOne.price}</p>
-          <p className={style.text}>{borschOne.weight}</p>          
+        <div className={style.nameBox2}>
+          <p className={style.textName}>{borschOne.price}</p>
+          <p className={style.textName}>{borschOne.weight}</p>          
         </div>
       </div>
       <h3 className={style.title}>Оціни смак борщу</h3>     
@@ -150,7 +149,7 @@ export const EvaluationsPage = () => {
       /> 
       {isActive&&
       <Modal onClose={onCloseForm}>                    
-          <CardSaveEvalutions onClose={onCloseForm} onSubmit={handleSubmitForm} disabled={!isFormValid} isSent={isSent}/>
+        <CardSaveEvalutions onClose={onCloseForm} onSubmit={handleSubmitForm} disabled={!isFormValid} isSent={isSent}/>
       </Modal>}     
     </div>
   );

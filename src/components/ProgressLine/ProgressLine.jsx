@@ -1,4 +1,4 @@
-import styles from "./ProgressLine.module.css";
+import styles from "./ProgressLine.module.scss";
 
 export const ProgressLine = ({ title, icon: Icon, value }) => {
   const maxValue = 10;

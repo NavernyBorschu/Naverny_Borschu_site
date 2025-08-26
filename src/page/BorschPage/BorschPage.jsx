@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Link,useParams } from "react-router-dom";
+import {Link,useParams,useNavigate } from "react-router-dom";
 import { ReactComponent as IconDelete } from './close.svg';
 import { ReactComponent as IconMeat } from './meat.svg';
 import { ReactComponent as IconBeetroot } from './beetroot.svg';
@@ -19,11 +19,20 @@ import borsch from '../../data/borsch.json';
 import data from '../../data/places.json';
 import comments from '../../data/comments.json';
 import users from '../../data/users.json';
-import style from './BorschPage.module.css';
+import style from './BorschPage.module.scss';
 import typography from '../../styles/typography.module.css';
 
 // додати запит на сервер
-
+const fallbackCopy = (text) => {
+  const tempInput = document.createElement("input");
+  tempInput.value = text;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
+  console.log("Скопійовано через fallback:", text);
+  // alert вызываем только из handleCopyAndShare
+};
 export const BorschPage=()=>{
     const { borschId } = useParams();
     const [currentPage, setCurrentPage] = useState(0);
@@ -31,7 +40,8 @@ export const BorschPage=()=>{
     const borschOne = borsch.find(item => String(item.id_borsch) === String(borschId));
     const place = data.find(item=>String(item.id) === String(borschOne.place_id)); 
     const borschComents =   comments.filter(item => String(item.id_borsch) === String(borschId));
-  
+    const navigate = useNavigate();
+
     const mergeCommentsWithUsers=(comments, users) =>{
         return comments.map(comment => {
             const user = users.find(u => u.user_id === comment.user_id);
@@ -61,38 +71,77 @@ export const BorschPage=()=>{
     const handlePrev = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 0));
     };   
-    
+    const clickClose = () => {
+        navigate("/");
+    }
+
+    const handleCopyAndShare = (id_borsch) => {
+  const url = `${window.location.origin}/borsch/${id_borsch}`;
+
+  // Проверяем Web Share API
+  if (navigator.share) {
+    navigator.share({
+      title: 'Перегляньте цей борщ',
+      text: 'Дивись ось цю сторінку борща:',
+      url: url,
+    })
+    .then(() => console.log("Поділитися успішно"))
+    .catch((err) => {
+      console.error("Помилка при шерингу:", err);
+      // Если шеринга нет, копируем ссылку в буфер один раз
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          alert("Посилання скопійоване в буфер. Поділитись можна вручну.");
+        });
+      } else {
+        fallbackCopy(url);
+      }
+    });
+  } else {
+    // Если Web Share API нет — копируем один раз и alert
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => {
+        alert("Посилання скопійоване в буфер. Поділитись можна вручну.");
+      });
+    } else {
+      fallbackCopy(url);
+    }
+  }
+  };
   return( 
     <div className={style.BorschPage}>
-        <Link to="/" className={style.btnClose}>                               
-            <IconDelete  aria-label={'close'} id='close'/>        
-        </Link>
+        <div className={style.btnClose}>
+            <ButtonVertion            
+                type="button"
+                onClick={clickClose}
+                icon={IconDelete}
+            />
+        </div>        
         <div className={style.wrap}>
             <h2 className={style.title}>{place.name}</h2>
             <div className={style.card}>
                 <div className={style.box}>
                     <ButtonVertion
                         type="button"
-                        onClick={console.log("передає лінк")}
+                        onClick={() => handleCopyAndShare(borschId)}
                         icon={IconLink}
                     />
                     <ButtonVertion
                         type="button"
-                        onClick={console.log("Тут буду функція яка змінює ключ лайку")}
+                        onClick={()=>console.log("Тут буде функція яка змінює ключ лайку")}
                         icon={IconLike}
                     />
-                </div>
-                
+                </div>                
                 {borschOne && <FotoBorschGallary images={borschOne.photo_urls} height={"215px"}/>}                
-                <h3 className={style.nameBorsch}>{borschOne.name}</h3>
+                <h4 className={style.nameBorsch}>{borschOne.name}</h4>
                 <p className={style.adress}>{place.adress}</p>
                 <div className={style.flex}>
                     <p>{borschOne.weight}</p>
                     <p>{borschOne.price}</p>
                 </div>
-                <h4>Оцінки та відгуки</h4>
+                <h4 className={style.nameBorsch}>Оцінки та відгуки</h4>
                 <div className={style.flex}>
-                    <h2 className={style.grade}>{borschOne.overall_rating}</h2>
+                    <p className={style.grade}>{borschOne.overall_rating}</p>
                     <RatingIconsSvg overall_rating={borschOne.overall_rating} size={18}/>
                     <p className={typography.mobileCaption}>{borschComents.length} Reviews</p>
                 </div>
@@ -120,7 +169,7 @@ export const BorschPage=()=>{
                                 </div>
                                 <div className={style.textWrapp}>
                                     <div className={style.textBox}>
-                                        <h3>{item.name}</h3>
+                                        <h4 className={style.textAvatar}>{item.name}</h4>
                                         <p className={style.textDate}>{item.created_at}</p>
                                     </div>
                                     <RatingIconsSvg overall_rating={item.overall_rating} size={15}/>

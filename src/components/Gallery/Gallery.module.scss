@@ -1,3 +1,4 @@
+@use "../../styles/mixin_font.scss" as *;
 .container {
   width: 100vw;
   overflow: visible;
@@ -26,7 +27,7 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
   border-radius: 12px;
   overflow: hidden;
-  background:var( --color-text-btn-active);
+  background:var(  --color-bg-main);
   margin: 0;
 }
 
@@ -60,17 +61,15 @@
   color: var(--color-text-main);
 }
 .borschName{
-  font-family: var(--font-family-main);
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 14px;
+  @include footnote;
+  font-family: var(--font-family-main); 
   color: var(--color-text-btn);
 }
+.weightPrice{
+  @include caption;
+  color: var(--color-text-main);
+}
 .placeName{
-  font-family: var(--font-family-main);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 13px;
+  @include caption;
   color: var(--color-text-btn);
 }

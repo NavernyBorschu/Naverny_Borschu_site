@@ -1,0 +1,10 @@
+.btn{
+    display: flex;
+    align-items: center;    
+    border-radius: 14px;
+    border: none;
+    background-color: var( --color-bg-main);
+}
+.btn:hover{
+    cursor: pointer;
+}

@@ -1,4 +1,4 @@
-
+@use "../../styles//mixin_font.scss" as *;
 .page{
     display: flex;
     justify-content: center; 
@@ -10,7 +10,10 @@
     overflow: hidden;
     padding: 18px 0;
 }
-
+.title{
+    @include mobileH2;
+    color: var(--color-text-btn);
+}
 .wrappBorsch{
     margin-top: 24px;
     display: flex;
@@ -34,11 +37,16 @@
     margin:10px 0;   
 }
 .borschName{
-    font-size: 14px;
-    font-weight: 500;
+    @include footnote;
+    color: var(--color-text-btn);
 }
 .borschPrice{
+    @include caption;
     color: var(--color-text-main);
+}
+.namePlace{
+    @include caption;
+    color: var(--color-text-btn);
 }
 
 .box{

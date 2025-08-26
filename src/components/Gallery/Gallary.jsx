@@ -7,8 +7,8 @@ import { RatingIconsSvg } from "../RatingIconsSvg";
 import { FotoBorschGallary } from "../../components/FotoBorschGallary";
 import { ButtonVertion } from "../../components/ButtonVersion";
 import borsch from '../../data/borsch.json';
-import style from './Gallery.module.css';
-import typography from '../../styles/typography.module.css';
+import style from './Gallery.module.scss';
+
 
 export const Gallery = ({ onClose, id_place, place }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -30,7 +30,7 @@ export const Gallery = ({ onClose, id_place, place }) => {
     boxShadow: "0 6px 16px rgba(0, 0, 0, 0.3)",
     borderRadius: "12px",
     overflow: "hidden",
-    background: "#fff",
+    background: "#F8F8F8",
   });
 
   const onClickCard = (borschId) => {
@@ -55,7 +55,7 @@ export const Gallery = ({ onClose, id_place, place }) => {
                 <div className={style.box}>                
                   <ButtonVertion
                     type="button"
-                    onClick={console.log("Тут буду функція яка змінює ключ лайку")}
+                    onClick={()=>console.log("Тут буду функція яка змінює ключ лайку")}
                     icon={IconLike}
                   />
                   <ButtonVertion
@@ -68,8 +68,8 @@ export const Gallery = ({ onClose, id_place, place }) => {
                 <div className={style.boxInfo}>   
                   <p className={style.borschName}>{borsch.name}</p>
                   <div className={style.flex}>
-                  <p className={typography.mobileCaption}>{borsch.price}</p>
-                  <p className={typography.mobileCaption}>{borsch.weight}</p>                  
+                  <p className={style.weightPrice}>{borsch.price}</p>
+                  <p className={style.weightPrice}>{borsch.weight}</p>                  
                 </div>
               </div>             
               <RatingIconsSvg overall_rating={borsch.overall_rating} />

@@ -1,92 +1,128 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { ButtonVertion } from "../../components/ButtonVersion";
 import { ReactComponent as IconClose } from "./close.svg";
-// import typography from '../../styles/typography.module.css';
-import style from './AddBorsch.module.css';
+import style from './AddBorsch.module.scss';
 
-const COUNTRY_HINTS = [
-  "ukraine","україна","uk","usa","united states","poland","france","germany","spain","italy","russia"
-];
-const POSTAL_RE = /^\d{2,}(-\d+)?$/;
-const HOUSE_RE = /^\d[\dA-Za-zА-Яа-я\\-]*$/; 
-const STREET_TOKEN_RE = /\b(street|st\.?|ave|avenue|blvd|boulevard|road|rd\.?|lane|ln\.?|square|sq\.?|prospekt|проспект|vul|vulytsia|вул|maidan|майдан|gate|gates|plaza|place|str|drive|dr)\b/i;
+const API_KEY = process.env.REACT_APP_API_KEY_MAP;
 
-export const parseAddress=(address)=>{
-  if (!address || typeof address !== "string") return { place: "", street: "", city: "" };  
-  const parts0 = address.split(",").map(s => s.trim()).filter(Boolean);
-  const parts = [...parts0];  
-  while (parts.length > 0) {
-    const last = parts[parts.length - 1].toLowerCase();
-    if (POSTAL_RE.test(last) || COUNTRY_HINTS.includes(last)) {
-      parts.pop();
-    } else break;
-  }
+// Формируем ссылку на фото (Places API v1)
+const getPhotoUrl = (photo, maxWidth = 600) =>
+  photo?.name
+    ? `https://places.googleapis.com/v1/${photo.name}/media?key=${API_KEY}&maxWidthPx=${maxWidth}`
+    : "";
 
-  if (parts.length === 0) return { place: "", street: "", city: "" };
- 
-  const city = parts.pop() || "";
-  
-  const before = parts; 
+export const AddBorsch = ({ onClose, placeData, place }) => {
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [closeTime, setCloseTime] = useState("");
+  const [close, setClose] = useState("");
+  const [open, setOpen] = useState("");
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  if (before.length === 0) return { place: "", street: "", city };
-  
-  const houseIndex = before.findIndex(p => HOUSE_RE.test(p));
 
-  if (houseIndex > 0) {    
-    const street = before.slice(houseIndex - 1).join(", ");
-    const place = before.slice(0, houseIndex - 1).join(", ");
-    return { place: place || "", street: street || "", city: city || "" };
-  }
+  useEffect(() => {
+    if (place?.hours) {
+      setClose(place.hours.openNow ? "Відчинено" : "Зачинено");
+      setOpen(place.hours.openNow ? "Закриється" : "Відкриється");
+    }
+    if (place?.hours?.nextCloseTime) {
+      const date = new Date(place.hours.nextCloseTime);
+      const time = date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false });
+      setCloseTime(time);
+    }
+    if (place?.hours?.nextOpenTime) {
+      const date = new Date(place.hours.nextOpenTime);
+      const time = date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false });
+      setCloseTime(time);
+    }
+  }, [place]);
 
-  const streetTokenIndex = before.findIndex(p => STREET_TOKEN_RE.test(p));
-  if (streetTokenIndex >= 0) {
-    const street = before.slice(streetTokenIndex).join(", ");
-    const place = before.slice(0, streetTokenIndex).join(", ");
-    return { place: place || "", street: street || "", city: city || "" };
-  }
+  useEffect(() => {
+    if (!placeData) return;
 
-  if (before.length === 1) {    
-    return { place: "", street: before[0], city };
-  }
+    setLoading(true);
+    const timer = setTimeout(() => {
+      const parts = placeData.split(",").map(p => p.trim());
+      setStreet(parts.slice(0, 2).join(", "));
+      setCity(parts[2] || "");
+      setLoading(false);
+    }, 0);
 
-  return {
-    place: before[0] || "",
-    street: before.slice(1).join(", ") || "",
-    city
+    return () => clearTimeout(timer);
+  }, [placeData]);
+
+  const handleClose = () => {
+    setStreet("");
+    setCity("");
+    setLoading(true);
+    onClose();
   };
-}
-export const AddBorsch = ({onClick, onClose, address}) => {
-    const [place, setPlace] = useState("");
-    const [street, setStreet] = useState("");
-    const [city, setCity] = useState("");
-// В цьому компоненты додати логыку выдправки нового борщу на сервер
-    useEffect(() => {
-        const parsed = parseAddress(address || "");
-        setPlace(parsed.place);
-        setStreet(parsed.street);
-        setCity(parsed.city);
-    }, [address]);
 
-    return (
-        <div className={style.container}>
-            <div className={style.card}>
-                <div className={style.boxClose}>
-                    <ButtonVertion type="button" onClick={onClose} icon={IconClose} />
-                </div>
-                <div className={style.boxContext}>
-                    <div className={style.boxAddress}>
-                        <p><b>Place:</b> {place}</p>
-                        <p><b>Street:</b> {street}</p>
-                        <p><b>City:</b> {city}</p>
-                    </div>
-                    <Button
-                        type="button"
-                        name="Вибрати заклад"
-                        onClick={onClick}
-                    />
-                </div>                
-            </div>                       
+  const handleSelect = () => {
+    navigate("/add-borsch/select-place", {
+      state: {
+        street,
+        city,
+        place
+      },
+    });
+  };
+
+  const photos = Array.isArray(place?.photos) ? place.photos.slice(0, 2) : [];
+
+  return (
+    <div className={style.container}>
+      <div className={style.card}>
+        <div className={style.boxClose}>
+          <ButtonVertion type="button" onClick={handleClose} icon={IconClose} />
         </div>
-    );
+
+        <div className={style.boxContext}>
+          {loading ? (
+            <p>Завантаження даних...</p>
+          ) : (
+            <div className={style.boxAddress}>
+              <p className={style.name}>{place?.name}</p>
+              <p className={style.street}>{place?.type}</p>
+              <p className={style.street}>{street}</p>
+              <p className={style.street}>{city}</p>
+
+              <div className={style.box_time}>
+                <p className={style.time}>{close}</p>
+                {closeTime && <span className={style.close}>{open} о {closeTime}</span>}
+              </div>
+
+
+              {photos.length > 0 && (
+                <div className={style.photos}>
+                  {photos.map((ph, idx) => {
+                    const src = getPhotoUrl(ph, 800); 
+                    return (
+                      <img
+                        key={ph.name || idx}
+                        src={src}
+                        alt={`Фото ${place?.name || "закладу"} ${idx + 1}`}
+                        className={style.photo}
+                        loading="lazy"
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+
+          <Button
+            type="button"
+            name="Вибрати заклад"
+            onClick={handleSelect}
+            disabled={loading}
+          />
+        </div>
+      </div>
+    </div>
+  );
 };

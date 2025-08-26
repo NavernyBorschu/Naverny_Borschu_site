@@ -14,7 +14,7 @@ export const CurrentLocationMarker = ({ position, onClick, id, grade, zIndexBase
         text: labelText,
         color: "black",
         fontSize: "16px",
-        fontWeight: "bold",
+        fontWeight: "400",
       }}
       position={position}
       icon={{
