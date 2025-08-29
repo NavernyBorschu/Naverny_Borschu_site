@@ -3,55 +3,57 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 :root {
-    --color-text-btn: #1A1A1A;
-    --color-text-btn-active: #FFFFFF;
-    --color-bg-main: #F8F8F8;
-    //--color-bg-pages: #F8F8F8;
-    --color-bg-grey: #F2F2F2; /* Grey/300 */
-    --color-header-border:#DDDDDD;/*Grey/500 */
-    --color-grey-400:#E9E9E9;/*Grey/400 */
-    --color-text-grade: #A6A6A6;
-    --color-input-search:#BEB9B2;/*Grey/700 */
-    --color-text-layout:#A0A0A0; /*Grey/800 */
-    --color-text-main: #878787; /*Grey/900 */
-    --color-add-btn: #BAE9AC;/*Green/400 */
-    --color-add-btn-active: #ABDD9C;/*Green/500 */
-    --color-btn-disabled: #76A069;
-    --color-input-active: #89B87B; /*Green/700 */
+  --color-text-btn: #1A1A1A;
+  --color-text-btn-active: #FFFFFF;
+  --color-bg-main: #F8F8F8;
+  //--color-bg-pages: #F8F8F8;
+  --color-bg-grey: #F2F2F2; /* Grey/300 */
+  --color-header-border: #DDDDDD; /*Grey/500 */
+  --color-grey-400: #E9E9E9; /*Grey/400 */
+  --color-text-grade: #A6A6A6;
+  --color-input-search: #BEB9B2; /*Grey/700 */
+  --color-text-layout: #A0A0A0; /*Grey/800 */
+  --color-text-main: #878787; /*Grey/900 */
+  --color-add-btn: #BAE9AC; /*Green/400 */
+  --color-add-btn-active: #ABDD9C; /*Green/500 */
+  --color-btn-disabled: #76A069;
+  --color-input-active: #89B87B; /*Green/700 */
   --color-btn-hover: #76A069; /*Green/800 */
-    --color-text-active: #638758;/*Green/900 */
+  --color-text-active: #638758; /*Green/900 */
+  --color-btn-link: #4F7942;
 
 
-    --color-bg-ad: #F9CFA8;
-    --color-filter-btn:#DD9755;
-    --color-akcent-btn:#B8092C;/*Red/700 */
+  --color-bg-ad: #F9CFA8;
+  --color-filter-btn: #DD9755;
+  --color-akcent-btn: #B8092C; /*Red/700 */
   --color-akcent-hover: #A00322; /*Red/800*/
-    --color-red-900:#87001B;/*Red/900 */
-    --color-brown-900:#875323;
+  --color-red-900: #87001B; /*Red/900 */
+  --color-brown-900: #875323;
   --color-modal-black: #000000;
 
-    --font-family-main: 'Roboto', sans-serif;
+  --font-family-main: 'Roboto', sans-serif;
 }
 
-main{
-    overflow-x:hidden;   
+main {
+  overflow-x: hidden;
 }
+
 body {
-    @include body;
-    background-color: var(--color-bg-grey);
-    text-decoration: none;
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
+  @include body;
+  background-color: var(--color-bg-grey);
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 h1,
@@ -61,17 +63,17 @@ ul,
 li,
 p,
 a {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    outline: 0;
-    text-decoration: none;
+  outline: 0;
+  text-decoration: none;
 }
 
 button {
-    padding: 0;
+  padding: 0;
 }
 
 

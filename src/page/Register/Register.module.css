@@ -1,0 +1,52 @@
+.title {
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.linkRedirect {
+    margin-top: 157px;
+    margin-bottom: 37px;
+}
+
+.checkboxWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+    position: relative;
+}
+
+.hiddenCheckbox {
+    display: none;
+}
+
+.customCheckbox {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #4D4D4D;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkboxSign {
+    position: absolute;
+    top: 0;
+    left: 4px;
+    /*background-color: var(--color-bg-main);*/
+    border-bottom: 3px solid var(--color-btn-link);
+    border-left: 3px solid var(--color-btn-link);
+    width: 16px;
+    height: 8px;
+    transform: rotate(-48deg);
+    z-index: 1;
+
+
+}
+
+.link {
+    color: var(--color-brown-900);
+    text-decoration: underline;
+}
