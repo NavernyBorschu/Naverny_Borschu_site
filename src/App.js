@@ -19,6 +19,7 @@ import {HelpPage} from "./page/HelpPage/HelpPage";
 import {AppGuide} from "./page/AppGuide/AppGuide";
 import {FAQ} from "./page/FAQ";
 import {AddedBorschesPage} from "./page/AddedBorschesPage";
+import {Register} from "./page/Register";
 
 
 export default function App() {  
@@ -27,6 +28,7 @@ export default function App() {
       <Layout>              
           <Routes>
             <Route path="/" element={<MapPage/>}/>
+            <Route path="/register" element={<Register/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/borsch/:borschId" element={<BorschPage/>}/>
             <Route path="/list" element={<ListPage/>}/>
