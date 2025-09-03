@@ -1,0 +1,63 @@
+
+.modalContent {
+    position: absolute;
+    top: -0;
+    right: -50vw;
+    background-color: var(--color-bg-main);
+    height: 70vh;  /*518px*/
+    border-radius: 14px 14px 0  0 ;
+    padding-top: 64px;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-align: center;
+    width: 100vw;
+}
+
+.modalLogo {
+    display: block;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 16px;
+}
+
+.modalTitle {
+    margin-bottom: 16px;
+}
+
+.modalParagraph {
+    margin-bottom: 24px;
+}
+
+.modalCloseBtn {
+    background-color: inherit;
+    display: block;
+    border: 1px solid var(--color-akcent-btn);
+    border-radius: 14px;
+    color: var(--color-text-btn);
+    cursor: pointer;
+    margin-top: 16px;
+    padding: 14px 20px;
+    /*transition: border-color 0.2s ease-in-out;*/
+    width: 100%;
+}
+
+.modalCloseBtn:hover {
+    border-color: var(--color-akcent-hover);
+}
+
+.modalCloseBtn:hover{
+    cursor: pointer;
+}
+
+.spin-once {
+    animation: spin 1s linear 1;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

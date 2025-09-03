@@ -5,7 +5,7 @@ import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import typography from '../../styles/typography.module.css';
 import style from './ModalLogout.module.css';
 
-export const ModalLogout = ({onClose}) => {
+export const ModalLogout = ({onClose, onLogout}) => {
     const [spin, setSpin] = useState(false);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export const ModalLogout = ({onClose}) => {
                 <p className={`${typography.modalParagraph} ${style.modalParagraph}`}>
                     Все збережено! Повертайся Навертати Борщі разом з нами
                 </p>
-                <Button type="submit" name="Вийти" onClick={onClose}/>
+                <Button type="submit" name="Вийти" onClick={onLogout}/>
                 <button
                     className={`${typography.fontBtn} ${style.modalCloseBtn}`}
                     onClick={onClose}

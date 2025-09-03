@@ -1,10 +1,17 @@
 import userPhotoUploadIcon from "../../assets/images/profile-user-photo-upload.png";
 import style from './AvatarUploader.module.css';
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
-export const AvatarUploader = () => {
-    const [avatar, setAvatar] = useState(userPhotoUploadIcon);
+export const AvatarUploader = ({initialAvatar}) => {
+    const [avatar, setAvatar] = useState(initialAvatar || userPhotoUploadIcon);
     const inputRef = useRef(null);
+
+    // ✅ Sync if parent updates the avatar
+    useEffect(() => {
+        if (initialAvatar) {
+            setAvatar(initialAvatar);
+        }
+    }, [initialAvatar]);
 
     const handleClick = () => {
         inputRef.current.click();
@@ -16,6 +23,14 @@ export const AvatarUploader = () => {
             const reader = new FileReader();
             reader.onload = (event) => {
                 setAvatar(event.target.result);
+
+                // ✅ Save uploaded avatar to localStorage userProfile
+                const storedUser = JSON.parse(localStorage.getItem("userProfile")) || {};
+                localStorage.setItem(
+                    "userProfile",
+                    JSON.stringify({...storedUser, picture: event.target.result})
+                );
+
             }
             reader.readAsDataURL(file);
         }
