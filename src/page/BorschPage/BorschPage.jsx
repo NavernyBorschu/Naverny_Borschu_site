@@ -15,9 +15,9 @@ import { ButtonVertion } from "../../components/ButtonVersion";
 import { RatingIconsSvg } from "../../components/RatingIconsSvg";
 import { ProgressLine } from "../../components/ProgressLine/ProgressLine";
 import { FotoBorschGallary } from "../../components/FotoBorschGallary";
-import borsch from '../../data/borsch.json';
-import data from '../../data/places.json';
-import comments from '../../data/comments.json';
+import { useBorsch } from '../../context/BorschContext';
+import { usePlaces } from '../../context/PlacesContext';
+import { useComments } from '../../context/CommentsContext';
 import users from '../../data/users.json';
 import style from './BorschPage.module.scss';
 import typography from '../../styles/typography.module.css';
@@ -37,22 +37,64 @@ export const BorschPage=()=>{
     const { borschId } = useParams();
     const [currentPage, setCurrentPage] = useState(0);
     const commentsPerPage = 2;
-    const borschOne = borsch.find(item => String(item.id_borsch) === String(borschId));
-    const place = data.find(item=>String(item.id) === String(borschOne.place_id)); 
-    const borschComents =   comments.filter(item => String(item.id_borsch) === String(borschId));
+    
+    // Используем контекст вместо прямых импортов JSON
+    const { getBorschById } = useBorsch();
+    const { getPlaceById } = usePlaces();
+    const { getCommentsByBorschId } = useComments();
+    
+    const borschOne = getBorschById(borschId);
+    const place = borschOne ? getPlaceById(borschOne.place_id) : null; 
+    const borschComents = getCommentsByBorschId(borschId);
     const navigate = useNavigate();
+    
+    // Проверяем, что данные загружены
+    if (!borschOne || !place) {
+      return (
+        <div className={style.container}>
+          <p>Завантаження даних...</p>
+        </div>
+      );
+    }
 
     const mergeCommentsWithUsers=(comments, users) =>{
-        return comments.map(comment => {
-            const user = users.find(u => u.user_id === comment.user_id);
-            return {
-            name: user ? `${user.name} ${user.surname}` : "Невідомо",
-            photo: user?.photo_url || "",
-            overall_rating: comment.overall_rating,
-            created_at: comment.created_at,
-            messege: comment.messege
-            };
-        });
+        return comments
+            .filter(comment => comment.messege && comment.messege.trim()) // Фильтруем комментарии с пустым текстом
+            .map((comment, index) => {
+                const user = users.find(u => u.user_id === comment.user_id);
+                
+                // Если пользователь найден в users.json - используем его данные
+                if (user) {
+                    return {
+                        name: `${user.name} ${user.surname}`,
+                        photo: user.photo_url || "avatar.png",
+                        overall_rating: comment.overall_rating,
+                        created_at: comment.created_at,
+                        messege: comment.messege
+                    };
+                }
+                
+                // Если это временный пользователь (новый комментарий) - генерируем временное имя
+                // В будущем здесь будет реальное имя пользователя из системы авторизации
+                if (comment.user_id && comment.user_id.startsWith('temp_user_')) {
+                    return {
+                        name: `Користувач ${index + 1}`,
+                        photo: "avatar.png", // Используем стандартную аватарку
+                        overall_rating: comment.overall_rating,
+                        created_at: comment.created_at,
+                        messege: comment.messege
+                    };
+                }
+                
+                // Fallback для неизвестных пользователей
+                return {
+                    name: "Невідомо",
+                    photo: "avatar.png",
+                    overall_rating: comment.overall_rating,
+                    created_at: comment.created_at,
+                    messege: comment.messege
+                };
+            });
     }        
     const result = mergeCommentsWithUsers(borschComents, users);
 

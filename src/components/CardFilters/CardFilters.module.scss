@@ -154,6 +154,8 @@
   height: 30px;
   background: none;
   position: relative;
+  /* prevent browser gestures interfering with dragging */
+  touch-action: none;
 }
 
 .range::-webkit-slider-thumb {

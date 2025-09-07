@@ -1,8 +1,9 @@
  [
     {
-        "id_borsch":"12345",
+        "id_borsch":"1",
         "name":"Борщ з пампушками1",
         "place_id":"50.60060238061545",
+        "type_meat":"Курка",
         "rating_salt":"5",
         "rating_meat":"8",
         "rating_beet":"5",
@@ -15,9 +16,10 @@
         "photo_urls":["image1.png","image3.png","image2.png"]        
     },
     {
-        "id_borsch":"12345455",
+        "id_borsch":"2",
         "name":"Борщ з пампушками2",
         "place_id":"50.60060238061545",
+        "type_meat":"Курка",
         "rating_salt":"5",
         "rating_meat":"8",
         "rating_beet":"5",
@@ -31,9 +33,10 @@
         
     },
     {
-        "id_borsch":"12345455",
+        "id_borsch":"3",
         "name":"Борщ з пампушками6",
         "place_id":"50.60060238061545",
+        "type_meat":"Свинина",
         "rating_salt":"5",
         "rating_meat":"8",
         "rating_beet":"5",
@@ -47,9 +50,10 @@
         
     },
     {
-        "id_borsch":"12345456",
+        "id_borsch":"4",
         "name":"Борщ з пампушками3",
         "place_id":"50.60060238061546",
+        "type_meat":"Свинина",
         "rating_salt":"5",
         "rating_meat":"8",
         "rating_beet":"5",
@@ -63,9 +67,10 @@
         
     },
     {
-        "id_borsch":"12345455",
+        "id_borsch":"5",
         "name":"Борщ з пампушками",
         "place_id":"50.37289856705871",
+        "type_meat":"Свинина",
         "rating_salt":"5",
         "rating_meat":"8",
         "rating_beet":"5",
@@ -78,9 +83,10 @@
         "photo_urls":["image1.png","image3.png","image1.png"]        
     },
     {
-        "id_borsch":"123454561",
+        "id_borsch":"6",
         "name":"Борщ зелений",
         "place_id":"50.37289856705871",
+        "type_meat":"Яловичина",
         "rating_salt":"5",
         "rating_meat":"8",
         "rating_beet":"5",
@@ -93,8 +99,9 @@
         "photo_urls":["image2.png","image3.png"]        
     },
     {
-        "id_borsch":"12345890",
+        "id_borsch":"7",
         "name":"Борщ з мідіями",
+        "type_meat":"Інше",
         "place_id":"46.399488",
         "rating_salt":"10",
         "rating_meat":"8",
@@ -103,7 +110,7 @@
         "rating_aftertaste":"8",
         "overall_rating":"9", 
         "rating_serving":"9",      
-        "price":"≈9.55 ₴", 
+        "price":"≈505 ₴", 
         "weight":"600 g.",
         "photo_urls":["image3.png","image2.png","image1.png"]        
     }

@@ -73,7 +73,7 @@ export const SelectPlacePage = () => {
       <div className={style.container}>
         <div className={style.card}>
           <span className={style.label}>Назва закладу</span>
-          <p className={style.value}>{place.type} {place.name}</p>
+          <p className={style.value}>{place.name}</p>
         </div>
         <div className={style.card}>
           <span className={style.label}>Місто</span>

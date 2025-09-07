@@ -1,5 +1,5 @@
-import { useState,useCallback } from "react";
-import { useParams,Link } from "react-router-dom";
+import { useState, useCallback, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { Grade } from "../../components/Grade";
 import { GradeWithIcons } from "../../components/GradeWithIcons";
 import { ReactComponent as IconMeat } from './meat.svg';
@@ -15,11 +15,11 @@ import { FotoBorschGallary } from "../../components/FotoBorschGallary";
 import { Button } from "../../components/Button";
 import {CardSaveEvalutions} from "../../components/CardSaveEvalutions";
 import {Modal} from '../../components/Modal';
-import borsch from '../../data/borsch.json';
-import data from '../../data/places.json';
+import { useBorsch } from '../../context/BorschContext';
+import { usePlaces } from '../../context/PlacesContext';
+import { useComments } from '../../context/CommentsContext';
 import style from './EvaluationsPage.module.scss';
 
-// додати запит на сервер
 const GradesArray = [
   {
     key: "meat",
@@ -66,41 +66,115 @@ const GradesArray = [
 ];
 
 export const EvaluationsPage = () => {
-    const [isActive,setIsActive] =useState(false);
-    const [isSent,setIsSent] =useState(false);
+    const [isActive, setIsActive] = useState(false);
+    const [isSent, setIsSent] = useState(false);
     const { borschId } = useParams();
-    
     const [comment, setComment] = useState("");
     const [grades, setGrades] = useState({
-    meat: null,
-    beetroot: null,
-    density: null,
-    salt: null,
-    aftertaste: null,
-    serving: null,
-    overall: null,
+      meat: null,
+      beetroot: null,
+      density: null,
+      salt: null,
+      aftertaste: null,
+      serving: null,
+      overall: null,
     });
-   const borschOne = borsch.find(item => String(item.id_borsch) === String(borschId));
-   const place = data.find(item=>String(item.id) === String(borschOne.place_id));
-  const isFormValid = Object.values(grades).every((val) => val !== null);
-
-  const handleGradeChange = (key, value) => {
-    setGrades((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const handleSubmitForm = (e) => {
-    e.preventDefault();
-    setIsSent((prev) => !prev);
-    if (!isFormValid) return;
-    const data = { ...grades, comment };
     
-    // todo відправка на сервер
-    console.log("Відправлено:", data);    
-  };
+    // Используем контекст вместо прямых импортов JSON
+    const { getBorschById } = useBorsch();
+    const { getPlaceById } = usePlaces();
+    const { addComment } = useComments();
+    
+    const borschOne = getBorschById(borschId);
+    const place = borschOne ? getPlaceById(borschOne.place_id) : null;
+    
+    // Проверяем, что ВСЕ обязательные оценки заполнены (кроме комментария)
+    const isFormValid = grades.meat !== null && grades.beetroot !== null && 
+                        grades.density !== null && grades.salt !== null && 
+                        grades.aftertaste !== null && grades.serving !== null && 
+                        grades.overall !== null;
+    
+    // Инициализируем оценки как null - пользователь должен их заполнить сам
+    useEffect(() => {
+      if (borschOne) {
+        // console.log('📥 Инициализируем оценки для борща:', borschOne);
+        // console.log('🎯 Все оценки начинаются как null - пользователь должен их заполнить');
+        // НЕ загружаем существующие оценки - пользователь должен поставить свои
+      }
+    }, [borschOne]);
+    
+    const handleGradeChange = (key, value) => {
+      // console.log(`📊 Изменение оценки для ${key}: ${value}`);
+      setGrades((prev) => {
+        const newGrades = { ...prev, [key]: value };
+        // console.log('🔄 Новые оценки:', newGrades);
+        // console.log('✅ Все оценки заполнены:', Object.values(newGrades).every((val) => val !== null));
+        return newGrades;
+      });
+    };
+
+        const handleSubmitForm = (e) => {
+      e.preventDefault();
+      // console.log('📝 Проверяем валидность формы...');
+      // console.log('📊 Текущие оценки:', grades);
+      // console.log('✅ Форма валидна:', isFormValid);
+      // console.log('💬 Текст комментария:', comment);
+      // console.log('🍲 Данные борща:', borschOne);
+      
+      setIsSent((prev) => !prev);
+      if (!isFormValid) {
+        // console.log('❌ Форма не валидна, прерываем отправку');
+        return;
+      }
+      
+      // Преобразуем ключи оценок в формат, который ожидает контекст
+      const ratingUpdates = {
+        rating_meat: grades.meat,
+        rating_beet: grades.beetroot,
+        rating_density: grades.density,
+        rating_salt: grades.salt,
+        rating_aftertaste: grades.aftertaste,
+        rating_serving: grades.serving
+      };
+      
+      // console.log("🔄 Преобразованные оценки:", ratingUpdates);
+      
+      // Сохраняем комментарий с оценками через контекст комментариев
+      if (borschOne) {
+        const newComment = {
+          id_borsch: borschId,
+          messege: comment,
+          ...ratingUpdates,
+          overall_rating: grades.overall?.toString() || "5.0"
+        };
+        
+        // console.log("📤 Отправляем комментарий в контекст:", newComment);
+        // console.log("📊 Оценки для отправки:", ratingUpdates);
+        // console.log("🍲 ID борща:", borschId);
+        
+                 addComment(newComment);
+        //  console.log("✅ Комментарий с оценками сохранен:", newComment);
+      } else {
+        console.log("❌ Данные борща не найдены");
+      }
+      
+      // console.log("Данные для отправки:", { ...grades, comment });
+    };
 
     const onCloseForm = useCallback(() => {
-        setIsActive((prev) => !prev);
+      setIsActive((prev) => !prev);
     }, []);
+    
+    // Проверяем, что данные загружены
+    if (!borschOne || !place) {
+      return (
+        <div className={style.wrapp}>
+          <p>Завантаження даних...</p>
+        </div>
+      );
+    }
+
+
 
   return (
     <div className={style.wrapp} key={"evaluations_page"}>
@@ -146,7 +220,8 @@ export const EvaluationsPage = () => {
         name="Зберегти"
         onClick={onCloseForm}
         disabled={!isFormValid}
-      /> 
+      />
+     
       {isActive&&
       <Modal onClose={onCloseForm}>                    
         <CardSaveEvalutions onClose={onCloseForm} onSubmit={handleSubmitForm} disabled={!isFormValid} isSent={isSent}/>
