@@ -6,13 +6,14 @@ import { ReactComponent as IconDitail } from './ditail.svg';
 import { RatingIconsSvg } from "../RatingIconsSvg";
 import { FotoBorschGallary } from "../../components/FotoBorschGallary";
 import { ButtonVertion } from "../../components/ButtonVersion";
-import borsch from '../../data/borsch.json';
+import { useBorsch } from '../../context/BorschContext';
 import style from './Gallery.module.scss';
 
 
 export const Gallery = ({ onClose, id_place, place }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const arrayBorsch = borsch.filter(i => i.place_id === id_place);
+  const { getBorschByPlaceId } = useBorsch();
+  const arrayBorsch = getBorschByPlaceId(id_place);
   const navigate = useNavigate();
 
   const cardStyle = (isActive) => ({

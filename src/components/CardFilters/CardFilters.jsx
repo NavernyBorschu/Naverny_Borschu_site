@@ -1,48 +1,139 @@
-import { useState} from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { ReactComponent as IconDelete } from './close.svg';
 import typePlace from '../../data/typePlaces.json';
 import style from "./CardFilters.module.scss";
+import { useFilters } from '../../context/FiltersContext';
 
-const meatOptions = ['Без м\'яса', 'Курка', 'Свинина', 'Яловичина', 'Качка','Інше'];
+const meatOptions = ['Без м\'яса', 'Курка', 'Свинина', 'Яловичина','Інше'];
 
 export const CardFilters=({onClose})=>{    
-    const [selectedTypes, setSelectedTypes] = useState([]);
-    const [selectedMeat, setSelectedMeat] = useState('');
-    const [minPrice, setMinPrice] = useState(50);
-    const [maxPrice, setMaxPrice] = useState(5000);  
-    const [appliedFilters, setAppliedFilters] = useState(null);
-    // const navigate = useNavigate();
+    const { 
+        filters, 
+        togglePlaceType, 
+        updateMeatType, 
+        updatePriceRange, 
+        resetFilters: resetContextFilters 
+    } = useFilters();
+    
+    const [selectedTypes, setSelectedTypes] = useState(filters.selectedTypes);
+    const [selectedMeat, setSelectedMeat] = useState(filters.selectedMeat);
+    const [minPrice, setMinPrice] = useState(filters.minPrice);
+    const [maxPrice, setMaxPrice] = useState(filters.maxPrice);  
+    const [draggingThumb, setDraggingThumb] = useState(null);
+
+    const rangeMin = 50;
+    const rangeMax = 5000;
+    const minGap = 50;
+    const total = rangeMax - rangeMin;
+    const wrapperRef = useRef(null);
+
+    const valueFromClientX = useCallback((clientX) => {
+        const el = wrapperRef.current;
+        if (!el) return null;
+        const rect = el.getBoundingClientRect();
+        const x = Math.min(Math.max(clientX - rect.left, 0), rect.width);
+        const percent = x / rect.width;
+        const value = Math.round(rangeMin + percent * total);
+        return Math.min(Math.max(value, rangeMin), rangeMax);
+    }, [total]);
+
+    const chooseNearestThumb = useCallback((clientX) => {
+        const v = valueFromClientX(clientX);
+        if (v === null) return null;
+        const dMin = Math.abs(v - minPrice);
+        const dMax = Math.abs(v - maxPrice);
+        return dMin <= dMax ? 'min' : 'max';
+    }, [minPrice, maxPrice, valueFromClientX]);
+
+    const updateValueForThumb = useCallback((thumb, clientX) => {
+        const v = valueFromClientX(clientX);
+        if (v === null) return;
+        if (thumb === 'min') {
+            const next = Math.min(v, maxPrice - minGap);
+            setMinPrice(Math.max(next, rangeMin));
+        } else if (thumb === 'max') {
+            const next = Math.max(v, minPrice + minGap);
+            setMaxPrice(Math.min(next, rangeMax));
+        }
+    }, [minPrice, maxPrice, rangeMin, rangeMax, minGap, valueFromClientX]);
+
+    useEffect(() => {
+        if (!draggingThumb) return;
+        const handleMove = (e) => {
+            if (e.touches && e.touches.length > 0) {
+                updateValueForThumb(draggingThumb, e.touches[0].clientX);
+            } else {
+                updateValueForThumb(draggingThumb, e.clientX);
+            }
+        };
+        const handleUp = () => setDraggingThumb(null);
+        window.addEventListener('mousemove', handleMove);
+        window.addEventListener('mouseup', handleUp);
+        window.addEventListener('touchmove', handleMove, { passive: false });
+        window.addEventListener('touchend', handleUp);
+        return () => {
+            window.removeEventListener('mousemove', handleMove);
+            window.removeEventListener('mouseup', handleUp);
+            window.removeEventListener('touchmove', handleMove);
+            window.removeEventListener('touchend', handleUp);
+        };
+    }, [draggingThumb, updateValueForThumb]);
+    const [appliedFilters, setAppliedFilters] = useState(null);    
+    
     const handleTypeToggle = (type) => {
-        setSelectedTypes((prev) =>
-            prev.includes(type)
-            ? prev.filter((t) => t !== type)  
-            : [...prev, type]                
-        );
+        setSelectedTypes((prev) => {
+            const newTypes = prev.includes(type)
+                ? prev.filter((t) => t !== type)  
+                : [...prev, type];
+            return newTypes;
+        });
     };
 
 
     const handleApplyFilters = (e) => {
-        // e.preventDefault();
+        // Обновляем контекст фильтров
+        updatePriceRange(minPrice, maxPrice);
+        
+        // Обновляем типы заведений
+        selectedTypes.forEach(type => {
+            if (!filters.selectedTypes.includes(type)) {
+                togglePlaceType(type);
+            }
+        });
+        
+        // Удаляем невыбранные типы
+        filters.selectedTypes.forEach(type => {
+            if (!selectedTypes.includes(type)) {
+                togglePlaceType(type);
+            }
+        });
+        
+        // Обновляем тип мяса
+        if (selectedMeat !== filters.selectedMeat) {
+            updateMeatType(selectedMeat);
+        }
+        
         setAppliedFilters({
-        type: selectedTypes,
-        meat: selectedMeat,
-        priceFrom: minPrice,
-        priceTo: maxPrice,
+            type: selectedTypes,
+            meat: selectedMeat,
+            priceFrom: minPrice,
+            priceTo: maxPrice,
         }); 
-         console.log(appliedFilters);  
-            //    додати логіку відправки фільтрів на сервер
+        
+        console.log('Применены фильтры:', appliedFilters);  
         onClose();
-        // navigate('');        
     };
    
   const handleReset = (e) => {
     e.preventDefault();
     setSelectedTypes([]);
     setSelectedMeat('');
-    setMinPrice(50)
+    setMinPrice(50);
     setMaxPrice(5000);
-    setAppliedFilters(null);    
+    setAppliedFilters(null);
+    
+    // Сбрасываем фильтры в контексте
+    resetContextFilters();
   };
 
 
@@ -59,6 +150,14 @@ export const CardFilters=({onClose})=>{
     const handleMeatSelect = (meat) => {
         setSelectedMeat(meat);
     };
+    
+    // Синхронизируем локальное состояние с контекстом при изменении
+    useEffect(() => {
+        setSelectedTypes(filters.selectedTypes);
+        setSelectedMeat(filters.selectedMeat);
+        setMinPrice(filters.minPrice);
+        setMaxPrice(filters.maxPrice);
+    }, [filters]);
     
 
     return(
@@ -111,7 +210,23 @@ export const CardFilters=({onClose})=>{
                                 <span>{maxPrice} ₴</span>
                             </div>
                         </div>
-                        <div className={style.sliderWrapper}>
+                        <div
+                          className={style.sliderWrapper}
+                          ref={wrapperRef}
+                          onMouseDown={(e) => {
+                            const chosen = chooseNearestThumb(e.clientX);
+                            if (!chosen) return;
+                            setDraggingThumb(chosen);
+                            updateValueForThumb(chosen, e.clientX);
+                          }}
+                          onTouchStart={(e) => {
+                            if (!e.touches || e.touches.length === 0) return;
+                            const chosen = chooseNearestThumb(e.touches[0].clientX);
+                            if (!chosen) return;
+                            setDraggingThumb(chosen);
+                            updateValueForThumb(chosen, e.touches[0].clientX);
+                          }}
+                        >
                             <div className={style.track}>
                                 <div
                                 className={style.trackActive}
@@ -129,6 +244,7 @@ export const CardFilters=({onClose})=>{
                                 value={minPrice}
                                 onChange={handleMinChange}
                                 className={style.range}
+                                style={{ pointerEvents: 'none' }}
                                 />
                             </div> 
                             <div className={style.rangeWrapper}>
@@ -139,6 +255,7 @@ export const CardFilters=({onClose})=>{
                                 value={maxPrice}
                                 onChange={handleMaxChange}
                                 className={style.range}
+                                style={{ pointerEvents: 'none' }}
                                 />
                             </div>
                         </div>

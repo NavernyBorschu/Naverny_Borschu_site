@@ -4,7 +4,7 @@ import { defaultTheme } from "./Theme";
 import { CurrentLocationMarker } from "../CurrentLocationMarker/CurrentLocationMarker";
 import { Modal } from "../Modal/Modal";
 import { Gallery } from "../Gallery/Gallary";
-import borsch from "../../data/borsch.json";
+import { useBorsch } from "../../context/BorschContext";
 import style from "./Map.module.css";
 import { AddBorsch } from "../AddBorsch/AddBorsch";
 
@@ -40,6 +40,8 @@ export const Map = ({ center, mode, places, onMarkerAdd }) => {
   const [place, setIsPlace] = useState();
   const mapRef = React.useRef(undefined);
   const [newMarkerData, setNewMarkerData] = useState(null);
+  
+  const { getAveragePlaceRating } = useBorsch();
   
   const [zoomLevel, setZoomLevel] = useState(17);
   const [, forceUpdate] = useState(0);
@@ -210,11 +212,8 @@ export const Map = ({ center, mode, places, onMarkerAdd }) => {
     setIsActiveAbout((prev) => !prev);
   };
 
-  const getAverageOverallRating = (borsch, placeId) => {
-    const filtered = borsch.filter((item) => item.place_id === placeId);
-    if (filtered.length === 0) return null;
-    const total = filtered.reduce((sum, item) => sum + parseFloat(item.overall_rating), 0);
-    return (total / filtered.length).toFixed(1);
+  const getAverageOverallRating = (placeId) => {
+    return getAveragePlaceRating(placeId);
   };
 
   return (
@@ -234,7 +233,7 @@ export const Map = ({ center, mode, places, onMarkerAdd }) => {
             position={pos.location}
             id={pos.id}
             onClick={onClickMarker}
-            grade={getAverageOverallRating(borsch, pos.id)}
+                         grade={getAverageOverallRating(pos.id)}
             zIndexBase={zoomLevel}
           />
         ))}

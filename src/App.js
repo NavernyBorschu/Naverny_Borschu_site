@@ -13,18 +13,22 @@ import {PersonalInfo} from "./page/PersonalInfo";
 import { EvaluationsPage } from "./page/EvaluationsPage";
 import { SelectPlacePage } from "./page/SelectPlacePage";
 import { SelectPlacePageFinish } from "./page/SelectPlacePageFinish";
-import {UserPasswordPage} from "./page/UserPasswordPage";
+// import {UserPasswordPage} from "./page/UserPasswordPage";
 import {PasswordChangePage} from "./page/PasswordChangePage";
 import {HelpPage} from "./page/HelpPage/HelpPage";
 import {AppGuide} from "./page/AppGuide/AppGuide";
 import {FAQ} from "./page/FAQ";
 import {AddedBorschesPage} from "./page/AddedBorschesPage";
 import {Register} from "./page/Register";
+import { AppProvider } from "./context/AppProvider";
+
 
 
 export default function App() {  
+  
   return (
-    <BrowserRouter  basename="/">
+    <AppProvider>
+      <BrowserRouter  basename="/">
       <Layout>              
           <Routes>
             <Route path="/" element={<MapPage/>}/>
@@ -59,7 +63,8 @@ export default function App() {
             <Route path="/borsch/:borschId/evaluations" element={<PrivateRoute><EvaluationsPage/></PrivateRoute>}/> */}
           </Routes>
       </Layout>
-    </BrowserRouter>        
+    </BrowserRouter> 
+    </AppProvider>        
   );
 }
 

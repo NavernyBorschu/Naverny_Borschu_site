@@ -5,7 +5,7 @@ import { ReactComponent as IconMapPin } from './map-pin.svg';
 import { Button } from "../../components/Button";
 import style from "./SelectPlacePageFinish.module.scss";
 
-const meatOptions = ['Без м\'яса', 'Курка', 'Свинина', 'Яловичина', 'Качка', 'Інше'];
+const meatOptions = ['Без м\'яса', 'Курка', 'Свинина', 'Яловичина', 'Інше'];
 
 export const SelectPlacePageFinish = () => {
   const { borschId } = useParams();
@@ -70,7 +70,7 @@ export const SelectPlacePageFinish = () => {
   return (
     <div className={style.containerPage}>
       <BtnNavigate />
-      <h4 className={style.title}>{place.type} {place.name}</h4>
+      <h4 className={style.title}>{place.name}</h4>
       <div className={style.wrapp}>
         <IconMapPin />
         <p>{street}, місто {city}</p>
@@ -92,9 +92,7 @@ export const SelectPlacePageFinish = () => {
             style={{ display: "none" }}
             onChange={handleFileChange}
           />
-        </div>
-
-       
+        </div>       
         {newBorsch.photo_urls.length > 0 && (
           <div className={style.previewBox}>
             {newBorsch.photo_urls.map((src, idx) => (

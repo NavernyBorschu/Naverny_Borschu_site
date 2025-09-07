@@ -65,6 +65,32 @@
   transition: border-color 0.2s ease;
 }
 
+.clearButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-input-search);
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+  background-color: var(--color-header-border);
+  color: var(--color-text);
+}
+
 
 .inputWrap:focus-within .input {
   border-color: var(--color-text-active);
