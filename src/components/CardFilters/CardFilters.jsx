@@ -9,6 +9,9 @@ const meatOptions = ['Без м\'яса', 'Курка', 'Свинина', 'Ял�
 export const CardFilters=({onClose})=>{    
     const { 
         filters, 
+        // updateSearchQuery, 
+        // clearSearchQuery, 
+        // activateSearch,
         togglePlaceType, 
         updateMeatType, 
         updatePriceRange, 
@@ -79,6 +82,7 @@ export const CardFilters=({onClose})=>{
         };
     }, [draggingThumb, updateValueForThumb]);
     const [appliedFilters, setAppliedFilters] = useState(null);    
+    console.log(appliedFilters,);
     
     const handleTypeToggle = (type) => {
         setSelectedTypes((prev) => {
@@ -123,6 +127,15 @@ export const CardFilters=({onClose})=>{
         console.log('Применены фильтры:', appliedFilters);  
         onClose();
     };
+//     const handleSearch = () => {
+//     if (selectedTypes.trim()) {
+//       updateSearchQuery(selectedTypes.trim());
+//       activateSearch();
+//     } else {
+//       // Если поиск пустой, деактивируем поиск и показываем все места
+//       clearSearchQuery();
+//     }
+//   };
    
   const handleReset = (e) => {
     e.preventDefault();
@@ -167,7 +180,7 @@ export const CardFilters=({onClose})=>{
             </button>
             <h2 className={style.title}>Фільтри</h2>
             <div className={style.boxForm}>                
-                <form action="" onSubmit={(e) => { e.preventDefault(); handleApplyFilters(); }}>
+                <form action="" onSubmit={ handleApplyFilters}>
                     <div>
                        <h3 className={style.typeTitle}>Тип закладу</h3>
                        <div className={style.radioBox}>
@@ -271,7 +284,7 @@ export const CardFilters=({onClose})=>{
                         >
                         Скинути фільтри
                         </button>
-                    </div>                                 
+                    </div>                                
                 </form>
             </div>                      
         </div>

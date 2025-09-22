@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import arrowIcon from "../../assets/images/profile-arrow-icon.png";
-import layout from "../../styles/layout.module.css";
+import layout from "../../styles/layout.module.scss";
 import typography from "../../styles/typography.module.css";
 import style from "./HelpPage.module.css";
 

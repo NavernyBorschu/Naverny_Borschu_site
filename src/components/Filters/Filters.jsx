@@ -1,4 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
+import {Link} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { ReactComponent as IconSearch } from './search.svg';
 import { ReactComponent as IconSearchGray } from './searchGray.svg';
 import { ReactComponent as IconFilter } from './filter.svg';
@@ -7,11 +9,13 @@ import { GeoButton } from "../GeoButton/GeoButton";
 import { Modal } from '../Modal/Modal';
 import { CardFilters } from '../CardFilters/CardFilters';
 import { useFilters } from '../../context/FiltersContext';
+import {Logo} from '../Logo';
 import style from "./Filters.module.scss";
 
 
 export const Filters = () => {
   const [isActiveFilter, setIsActiveFilter] = useState(false);
+  const location = useLocation(); 
   const { 
     filters, 
     updateSearchQuery, 
@@ -46,7 +50,7 @@ export const Filters = () => {
 
   const handleClearSearch = () => {
     setSearchValue('');
-    clearSearchQuery();
+    clearSearchQuery();    
   };
 
   const handleKeyPress = (e) => {
@@ -57,25 +61,27 @@ export const Filters = () => {
 
   return (
     <div className={style.filterWrap}>
-      <div className={style.inputWrap}>
-        <button
-          type="button"
-          className={style.searchButton}
-          onClick={handleSearch}
-          aria-label="search"
-        >
-          <IconSearch className={`${style.icon} ${style.iconDefault}`} />
-          <IconSearchGray className={`${style.icon} ${style.iconActive}`} />
-        </button>
-        <input
-          className={style.input}
-          type="text"
-          id="search"
-          placeholder="Введіть назву закладу"
-          value={searchValue}
-          onChange={handleSearchChange}
-          onKeyPress={handleKeyPress}
-        />
+      <div className={style.desctop}><Logo/></div>      
+      <div className={style.flex}>        
+        <div className={style.inputWrap}>
+          <button
+            type="button"
+            className={style.searchButton}
+            onClick={handleSearch}
+            aria-label="search"
+          >
+            <IconSearch className={`${style.icon} ${style.iconDefault}`} />
+            <IconSearchGray className={`${style.icon} ${style.iconActive}`} />
+          </button>
+          <input
+            className={style.input}
+            type="text"
+            id="search"
+            placeholder="Введіть назву закладу"
+            value={searchValue}
+            onChange={handleSearchChange}
+            onKeyPress={handleKeyPress}
+          />
         {searchValue && (
           <button
             type="button"
@@ -86,19 +92,26 @@ export const Filters = () => {
             ×
           </button>
         )}
-      </div>
-      <button
-        type="button"
-        className={style.btnFilter}
-        onClick={changeIsActiveFilter}
-        id="filter"
-        aria-label={hasActiveFilters() ? 'Активні фільтри' : 'Фільтри'}
-      >
-        <IconFilter className={`${style.iconFilter} ${style.iconFilterDefault}`} />
-        <IconFilterActive className={`${style.iconFilter} ${style.iconFilterHover}`} />
-        {hasActiveFilters() && <span className={style.activeIndicator}></span>}
-      </button>
-      <GeoButton />
+        </div>  
+        <div  className={style.desctop}>
+          <Link to="/register"  className={style.btnReg}>Зареєструватись</Link> 
+        </div> 
+        <GeoButton />              
+      </div> 
+      {location.pathname === "/" && 
+      
+        <button
+          type="button"
+          className={style.btnFilter}
+          onClick={changeIsActiveFilter}
+          id="filter"
+          aria-label={hasActiveFilters() ? 'Активні фільтри' : 'Фільтри'}
+        >
+          <span className={style.btnFilterText}>Фільтри</span>
+          <IconFilter className={`${style.iconFilter} ${style.iconFilterDefault}`} />
+          <IconFilterActive className={`${style.iconFilter} ${style.iconFilterHover}`} />
+          {hasActiveFilters() && <span className={style.activeIndicator}></span>}
+        </button>}   
       {isActiveFilter && (
         <Modal onClose={changeIsActiveFilter} version={"filters"}>
           <CardFilters onClose={changeIsActiveFilter} />

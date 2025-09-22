@@ -21,10 +21,19 @@
         "id":"50.37289856705871",
         "name":"Крафт",
         "adress":"Pankivska street, 20",
-        "location":{"lat": 50.450001,"lng": 30.533333},
+        "location":{"lat": 50.460001,"lng": 30.533333},
         "country":"Україна",
         "city":"Київ",
         "type":"кафе"                    
+    },
+    {   
+        "id":"50.37289856705872",
+        "name":"Крафт",
+        "adress":"Pankivska street, 20",
+        "location":{"lat": 50.450001,"lng": 30.533333},
+        "country":"Україна",
+        "city":"Київ",
+        "type":"ресторан"                    
     },
     {   
         "id":"46.399488",

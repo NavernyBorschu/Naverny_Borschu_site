@@ -22,7 +22,7 @@ import users from '../../data/users.json';
 import style from './BorschPage.module.scss';
 import typography from '../../styles/typography.module.css';
 
-// додати запит на сервер
+
 const fallbackCopy = (text) => {
   const tempInput = document.createElement("input");
   tempInput.value = text;
@@ -30,29 +30,36 @@ const fallbackCopy = (text) => {
   tempInput.select();
   document.execCommand("copy");
   document.body.removeChild(tempInput);
-  console.log("Скопійовано через fallback:", text);
-  // alert вызываем только из handleCopyAndShare
+  console.log("Скопійовано через fallback:", text); 
 };
-export const BorschPage=()=>{
-    const { borschId } = useParams();
-    const [currentPage, setCurrentPage] = useState(0);
-    const commentsPerPage = 2;
-    
-    // Используем контекст вместо прямых импортов JSON
+export const BorschPage=({ borschId: propId })=>{
+  const [currentPage, setCurrentPage] = useState(0); const commentsPerPage = 2;
+    const params = useParams();
+    const  id = propId || params?.borschId;
+    const navigate = useNavigate();
+
     const { getBorschById } = useBorsch();
     const { getPlaceById } = usePlaces();
     const { getCommentsByBorschId } = useComments();
-    
-    const borschOne = getBorschById(borschId);
-    const place = borschOne ? getPlaceById(borschOne.place_id) : null; 
-    const borschComents = getCommentsByBorschId(borschId);
-    const navigate = useNavigate();
-    
-    // Проверяем, что данные загружены
+     // Если id нет — сразу возврат
+      if (!id) {
+        return (
+          <div style={{ padding: 20 }}>
+            <p>Не передано ID борща</p>
+          </div>
+        );
+      }
+
+    // Загружаем данные
+    const borschOne = getBorschById(id);
+    const place = borschOne ? getPlaceById(borschOne.place_id) : null;
+    const borschComents = getCommentsByBorschId(id);
+
+    // 🟡 Показываем скелетон, если данные ещё не пришли
     if (!borschOne || !place) {
       return (
-        <div className={style.container}>
-          <p>Завантаження даних...</p>
+        <div className={style.BorschPage}>
+          <p>Завантаження борща...</p>
         </div>
       );
     }
@@ -165,7 +172,7 @@ export const BorschPage=()=>{
                 <div className={style.box}>
                     <ButtonVertion
                         type="button"
-                        onClick={() => handleCopyAndShare(borschId)}
+                        onClick={() => handleCopyAndShare(id)}
                         icon={IconLink}
                     />
                     <ButtonVertion
@@ -196,7 +203,7 @@ export const BorschPage=()=>{
                     <ProgressLine title={'Подача'} value={borschOne.rating_serving} icon={IconServing}/>
                 </div> 
                 <div className={style.boxBtn}>
-                    <Link to={`/borsch/${borschId}/evaluations`} className={style.btn}>Оцінити</Link>
+                    <Link to={`/borsch/${id}/evaluations`} className={style.btn}>Оцінити</Link>
                 </div>
                 <div className={style.comentsBox}>
                    { paginatedComments.map((item, index) => (

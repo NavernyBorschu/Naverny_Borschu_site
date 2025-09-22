@@ -24,43 +24,31 @@ import { AppProvider } from "./context/AppProvider";
 
 
 
-export default function App() {  
-  
+export default function App() {   
   return (
     <AppProvider>
       <BrowserRouter  basename="/">
       <Layout>              
-          <Routes>
-            <Route path="/" element={<MapPage/>}/>
-            <Route path="/register" element={<Register/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/borsch/:borschId" element={<BorschPage/>}/>
-            <Route path="/list" element={<ListPage/>}/>
-
-            <Route path="/favorite" element={<LikeBorsch/>}/>
-            <Route path="/reviews" element={<List/>}/>
-            <Route path="/add-borsch" element={<AddPage/>}/>
-            <Route path="/add-borsch/select-place" element={<SelectPlacePage/>}/>
-            <Route path="/add-borsch/select-place/:borschId" element={<SelectPlacePageFinish/>}/>
-            <Route path="/borsch/:borschId/evaluations" element={<EvaluationsPage/>}/>
-
-              <Route path="/profile" element={<Profile/>}/>
-              <Route path="/profile/personal-information" element={<PersonalInfo/>}/>
-              <Route path="/profile/added-borsches" element={<AddedBorschesPage/>}/>
-              {/*<Route path="/profile/password" element={<UserPasswordPage/>}/>*/}
-              <Route path="/profile/change-password" element={<PasswordChangePage/>}/>
-              <Route path="/help" element={<HelpPage />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/app-guide" element={<AppGuide />} />
-
-            {/* <Route path="/favorite" element={<PrivateRoute><LikeBorsch/></PrivateRoute>}/>
-            <Route path="/reviews" element={<PrivateRoute><List/></PrivateRoute>}/>
-            <Route path="/profile" element={<PrivateRoute><Profile/></PrivateRoute>}/>
-            <Route path="profile/personal-information" element={<PrivateRoute><PersonalInfo/></PrivateRoute>}/>
-            <Route path="/add-borsch" element={<PrivateRoute><AddPage/></PrivateRoute>}/>
-            <Route path="/add-borsch/select-place" element={<PrivateRoute><SelectPlacePage/></PrivateRoute>}/>
-            <Route path="/add-borsch/select-place/:borschId" element={<PrivateRoute><SelectPlacePageFinish/></PrivateRoute>}/>
-            <Route path="/borsch/:borschId/evaluations" element={<PrivateRoute><EvaluationsPage/></PrivateRoute>}/> */}
+          <Routes>          
+            <Route path="/" element={<MapPage />} />
+            <Route path="/list" element={<ListPage />} />           
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/borsch/:borschId" element={<BorschPage />} />
+            <Route path="/favorite" element={<LikeBorsch />} />
+            <Route path="/reviews" element={<List />} />
+            <Route path="/add-borsch" element={<AddPage />} />
+            <Route path="/add-borsch/select-place" element={<SelectPlacePage />} />
+            <Route path="/add-borsch/select-place/:borschId" element={<SelectPlacePageFinish />} />
+            <Route path="/borsch/:borschId/evaluations" element={<EvaluationsPage />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/personal-information" element={<PersonalInfo />} />
+            <Route path="/profile/added-borsches" element={<AddedBorschesPage />} />
+            <Route path="/profile/change-password" element={<PasswordChangePage />} />
+            <Route path="/help" element={<HelpPage />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/app-guide" element={<AppGuide />} />
+            {/*<Route path="/profile/password" element={<UserPasswordPage/>}/>*/}            
           </Routes>
       </Layout>
     </BrowserRouter> 

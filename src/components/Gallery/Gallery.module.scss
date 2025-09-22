@@ -1,4 +1,5 @@
 @use "../../styles/mixin_font.scss" as *;
+@use "../../styles/mixin_adaptiv.scss" as *;
 .container {
   width: 100vw;
   overflow: visible;
@@ -11,6 +12,10 @@
   align-items: center;
   position: relative;
   margin-left: -90px;
+   @include respond(desktop) {
+    margin-left: 200px;
+    top:50px;
+  }   
 }
 
 .card {
@@ -72,4 +77,15 @@
 .placeName{
   @include caption;
   color: var(--color-text-btn);
+}
+
+.btnAbout{
+  @include caption;
+  color: var(--color-text-btn);
+  border: none;
+  background-color: var(--color-bg-main);
+}
+.btnAbout:hover{
+  cursor: pointer;
+  opacity: 0.8;
 }

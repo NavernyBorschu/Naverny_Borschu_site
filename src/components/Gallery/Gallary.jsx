@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as IconDelete } from './close.svg';
 import { ReactComponent as IconLike } from './like.svg';
-import { ReactComponent as IconDitail } from './ditail.svg';
 import { RatingIconsSvg } from "../RatingIconsSvg";
 import { FotoBorschGallary } from "../../components/FotoBorschGallary";
 import { ButtonVertion } from "../../components/ButtonVersion";
@@ -76,11 +75,11 @@ export const Gallery = ({ onClose, id_place, place }) => {
               <RatingIconsSvg overall_rating={borsch.overall_rating} />
               <div className={style.flex}>
                 <p className={style.placeName}>{place.name}</p>
-                <ButtonVertion
+                <button
+                  className={style.btnAbout}
                   type="button"
                   onClick={() => onClickCard(borsch.id_borsch)}
-                  icon={IconDitail}
-                />                
+                >Про борщик</button>                
               </div>
             </div>
           );

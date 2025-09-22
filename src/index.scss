@@ -1,5 +1,4 @@
 @use "./styles/mixin_font.scss" as *;
-
 *,
 *::before,
 *::after {
@@ -38,9 +37,13 @@
   --font-family-main: 'Roboto', sans-serif;
 }
 
-main {
+main,html {
   overflow-x: hidden;
+  // overflow-y: hidden;
+  height: 100%;
 }
+
+
 
 body {
   @include body;
@@ -49,7 +52,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100vh; 
 }
 
 ul {
@@ -75,5 +78,3 @@ a {
 button {
   padding: 0;
 }
-
-

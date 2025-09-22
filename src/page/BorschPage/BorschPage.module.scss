@@ -1,19 +1,31 @@
 @use "../../styles/mixin_font.scss" as *;
+@use "../../styles/mixin_adaptiv.scss" as *;
 .BorschPage{   
-    position: relative; 
-    
+    position: relative;   
+    @include respond(desktop) {         
+        margin-top: 110px;        
+        padding: 0 18px;        
+    }    
 }
+
 .wrap{
     display: flex;
     justify-content: center;
     flex-direction: column;
     padding: 16px;
-    overflow-y: auto;
+    @include respond(desktop) {       
+        width: 100%;        
+    }       
 }
+
 .btnClose{
     position: absolute;   
     right: 10px;
-    top: 10px;    
+    top: 10px; 
+     @include respond(desktop) {       
+        width: 100%; 
+        right: -90%;          
+    }    
 }
 
 .title{
@@ -23,12 +35,12 @@
     margin: 40px 0 25px 0;
 }
 .card{
-    position: relative;
+    position: relative;   
 }
 .box{
     position: absolute;
     top:10px;
-    right: 10px;
+    right: 10%;
     display: flex;
     gap:8px;
     z-index: 3;

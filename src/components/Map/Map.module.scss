@@ -1,0 +1,10 @@
+@use "../../styles/mixin_adaptiv.scss" as *;
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    @include respond(desktop) {
+        width: 60vw;      
+       
+    }   
+}

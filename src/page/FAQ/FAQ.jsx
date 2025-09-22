@@ -1,5 +1,5 @@
 import typography from "../../styles/typography.module.css";
-import layout from "../../styles/layout.module.css";
+import layout from "../../styles/layout.module.scss";
 
 
 export const FAQ = () => {

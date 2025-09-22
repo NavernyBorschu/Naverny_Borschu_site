@@ -12,7 +12,7 @@ import aboutIcon from '../../assets/images/profile-info-icon.png';
 import helpIcon from '../../assets/images/profile-help-icon.png';
 import policyIcon from '../../assets/images/profile-policy-icon.png';
 import arrowIcon from '../../assets/images/profile-arrow-icon.png';
-import layout from '../../styles/layout.module.css';
+import layout from '../../styles/layout.module.scss';
 import typography from '../../styles/typography.module.css';
 import style from './Profile.module.css';
 import {ModalPleaseRegister} from "../../components/ModalPleaseRegister/ModalPleaseRegister";
@@ -21,6 +21,8 @@ export const Profile = () => {
     const [activeButton, setActiveButton] = useState('profile'); // 'settings'
     const [showModal, setShowModal] = useState(false);
     const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+     console.log(showRegistrationModal);
+     
 
     const user = JSON.parse(localStorage.getItem('userProfile'));
 

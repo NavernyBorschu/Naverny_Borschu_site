@@ -1,4 +1,12 @@
 @use "../../styles/mixin_font.scss" as *;
+@use "../../styles/mixin_adaptiv.scss" as *;
+.desctop{
+  display: none;
+  @include respond(desktop) {
+    display:block;
+  }   
+}
+
 .filterWrap{
   position: absolute;
   z-index: 99;
@@ -8,7 +16,13 @@
   gap: 10px;
   width: 100%;
   padding: 16px;
-  background-color:var(--color-bg-main);    
+  background-color:var(--color-bg-main); 
+  left: 0;  
+  top:0; 
+  @include respond(desktop) {
+    justify-content:space-between;  
+    padding: 16px 40px; 
+  }   
 }
 .inputWrap {
   position: relative;
@@ -105,7 +119,8 @@
 }
 
 
-.buttonFilter,.btnGeo{
+
+.btnFilter,.btnGeo{
   width: 40px;
   height: 40px;
   border: 1px solid var(--color-input-search);
@@ -125,6 +140,24 @@
   align-items: center;
 }
 
+.btnFilter{
+  @include respond(desktop) { 
+    position: absolute;
+    top: 130px; 
+    left: 20%;   
+    width: 135px;
+    display: flex;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+  }   
+}
+.btnFilterText{
+  display: none;
+   @include respond(desktop) {
+    display: block;
+   }
+}
 .iconGeo, .iconFilter {
   width: 24px;
   height: 24px;
@@ -143,13 +176,8 @@
 
 .btnFilter:hover .iconFilterHover, .btnGeo:hover .iconGeoHover  { 
   display: inline-block;
-  opacity: 1; 
-  /* transform: scale(1.05);  */
+  opacity: 1;   
 }
-
-
-
-
 .geoMessage {
   position: absolute;
   margin-top: 10px;
@@ -182,4 +210,24 @@
   cursor: pointer;
   color: inherit;
   padding: 0;
+}
+.btnReg{
+  @include button;
+    padding:10px 33px;   
+    border-radius: 24px;
+    list-style: none;    
+    text-align:center;
+    text-decoration: none;
+    background-color: var(--color-text-active); 
+    color:var( --color-text-btn-active);
+}
+.btnReg:hover{
+    cursor: pointer;   
+    opacity: 0.8; 
+}
+.flex{
+  display: flex;
+  text-align: center;
+  align-items: center;
+  gap:36px;
 }

@@ -70,7 +70,8 @@ export const SelectPlacePageFinish = () => {
   return (
     <div className={style.containerPage}>
       <BtnNavigate />
-      <h4 className={style.title}>{place.name}</h4>
+      <div className={style.container}>        
+        <h4 className={style.title}>{place.name}</h4>
       <div className={style.wrapp}>
         <IconMapPin />
         <p>{street}, місто {city}</p>
@@ -158,6 +159,8 @@ export const SelectPlacePageFinish = () => {
           disabled={!isFormValid}
         />
       </form>
+      </div>     
+      
     </div>
   );
 };

@@ -9,44 +9,37 @@ import { MODES } from '../../components/Map/Map';
 import { usePlaces } from '../../context/PlacesContext';
 import { useBorsch } from '../../context/BorschContext';
 import { useFilters } from '../../context/FiltersContext';
+import { useMediaQuery } from "../../hook/useMediaQuery";
 import style from './MapPage.module.scss';
 
-
-// додати запит на сервер
 const API_KEY=process.env.REACT_APP_API_KEY_MAP;
 const libraries=['places'];
 const defaultCenter = {
   lat: 50.450001,
   lng: 30.523333
 }
-
-
-export const MapPage = ( )=> {  
+export const MapPage = ( )=> { 
+  const isDesktop = useMediaQuery("(min-width: 1280px)"); 
   const [center, setCenter] = useState(() => {
     const savedLocation = localStorage.getItem('user_location');
     return savedLocation ? JSON.parse(savedLocation) : defaultCenter;
-  });
-  
-    // Сохраняем исходный центр для возврата при очистке поиска
+  });    
   const [originalCenter, setOriginalCenter] = useState(() => {
     const savedLocation = localStorage.getItem('user_location');
     return savedLocation ? JSON.parse(savedLocation) : defaultCenter;
-  });
-  
-
-  
+  });  
   const { places, loading: placesLoading, addPlace, updatePlacesBySearch, getFirstPlaceCenter, restoreAllPlaces } = usePlaces();
   const { borsch, loading: borschLoading } = useBorsch();
   const { filters, setRestorePlaces, clearSearchQuery } = useFilters();
 
-  // Обновляем центры при изменении геолокации в localStorage
+  
   React.useEffect(() => {
     const handleStorageChange = () => {
       const savedLocation = localStorage.getItem('user_location');
       if (savedLocation) {
         const newLocation = JSON.parse(savedLocation);
         setOriginalCenter(newLocation);
-        // Если поиск не активен, обновляем текущий центр
+        
         if (!filters.searchQuery || filters.searchQuery.trim() === '') {
           setCenter(newLocation);
         }
@@ -57,16 +50,16 @@ export const MapPage = ( )=> {
     return () => window.removeEventListener('storage', handleStorageChange);
   }, [filters.searchQuery]);
   
-  // Теперь places уже содержит отфильтрованные данные при поиске
+
   const placesToShow = places;
   
-  // При изменении поискового запроса обновляем места
+  
   React.useEffect(() => {
-    // Проверяем, есть ли сохраненные отфильтрованные места
+    
     const savedFilteredPlaces = localStorage.getItem('filteredPlaces');
     const savedFilters = localStorage.getItem('borschFilters');
     
-    // Если есть сохраненные отфильтрованные места, но поиск пустой - это восстановление
+   
     if (savedFilteredPlaces && savedFilters && (!filters.searchQuery || filters.searchQuery.trim() === '') && places.length === 0) {
       try {
         const parsedFilters = JSON.parse(savedFilters);
@@ -85,27 +78,25 @@ export const MapPage = ( )=> {
     }
   }, [filters.searchQuery, updatePlacesBySearch, places.length]);
 
-  // Устанавливаем callback для восстановления мест
+
   React.useEffect(() => {
     setRestorePlaces(restoreAllPlaces);
   }, [setRestorePlaces, restoreAllPlaces]);
 
-  // Центрирование карты при изменении поиска или мест
-  React.useEffect(() => {
-    // Ждем загрузки данных
+  
+  React.useEffect(() => {    
     if (placesLoading) {
       return;
-    }
+    }  
     
-    // Если есть активный поиск и найдены места
     if (filters.searchQuery && filters.searchQuery.trim() !== '' && places.length > 0) {
       const firstPlaceCenter = getFirstPlaceCenter();
       if (firstPlaceCenter) {
-        // console.log('🎯 Центрируем карту на:', firstPlaceCenter);
+        
         setCenter(firstPlaceCenter);
       }
     } else if (!filters.searchQuery || filters.searchQuery.trim() === '') {
-      // Если поиск не активен - возвращаемся к исходному центру
+     
       setCenter(originalCenter);
     }
   }, [places, filters.searchQuery, placesLoading, getFirstPlaceCenter, originalCenter]);
@@ -138,18 +129,22 @@ export const MapPage = ( )=> {
   
  const onPlaceSelect=useCallback((coordinates)=>{
     setCenter(coordinates);
-    setOriginalCenter(coordinates); // Обновляем исходный центр при выборе места
+    setOriginalCenter(coordinates); 
   },[])
  
 
   return (        
     <div className={style.pageHome}>      
-      {mode===MODES.SET_MARKER && 
+      {!isDesktop && mode===MODES.SET_MARKER && 
       < div className={style.boxGeo}>
         <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect}/>
         <GeoButton />
-      </div>
-      
+      </div>      
+      }
+      {isDesktop && mode===MODES.SET_MARKER &&
+      <div div className={style.boxGeoDesctop}>
+        <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect}/>
+      </div>      
       }
       {mode===MODES.MOVE &&   
       <> 
@@ -166,10 +161,9 @@ export const MapPage = ( )=> {
           )}
         </div>
       </>
-     }           
+      }           
       {isLoaded && !placesLoading ? (
-        <>
-          {/* Сообщение, если ничего не найдено */}
+        <>          
           {filters.searchQuery && filters.searchQuery.trim() !== '' && places.length === 0 && (
             <div className={style.noResultsMessage}>
               <button 

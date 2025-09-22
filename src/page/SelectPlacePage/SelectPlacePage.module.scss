@@ -1,8 +1,15 @@
 @use "../../styles/mixin_font.scss" as *;
+@use "../../styles/mixin_adaptiv.scss" as *;
 .containerPage{
   padding: 16px;  
   background-color: var(--color-bg-main);
-  height: 100vh;  
+  height: 100vh; 
+  @include respond(desktop) {    
+    background-color:var(--color-text-btn-active);
+    padding: 0 18px;   
+    margin: 0 auto;
+    margin-top: 110px;
+  }   
 }
 .container {
   display: flex;
@@ -10,6 +17,10 @@
   gap: 24px;
   margin-top: 15px; 
   margin-bottom: 34px; 
+  @include respond(desktop) {  
+    width: 50%;
+    margin: 0 auto;   
+  }  
 }
 
 .card {

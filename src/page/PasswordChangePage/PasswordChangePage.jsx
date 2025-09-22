@@ -1,4 +1,4 @@
-import layout from "../../styles/layout.module.css";
+import layout from "../../styles/layout.module.scss";
 import typography from "../../styles/typography.module.css";
 import style from "../UserPasswordPage/UserPasswordPage.module.css";
 import {InputField} from "../../components/InputField";

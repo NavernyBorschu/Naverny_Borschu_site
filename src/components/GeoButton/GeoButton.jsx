@@ -108,7 +108,7 @@ export const GeoButton = () => {
   } 
 
   return (
-    <div>
+    <div className={style.container}>
       <button type="button" className={style.btnGeo} onClick={openModal}>
         <IconGeo className={`${style.iconGeo} ${style.iconGeoDefault}`} />
         <IconGeoActive className={`${style.iconGeo} ${style.iconGeoHover}`} />

@@ -1,4 +1,5 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
+// import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Grade } from "../../components/Grade";
 import { GradeWithIcons } from "../../components/GradeWithIcons";
@@ -65,10 +66,11 @@ const GradesArray = [
   },
 ];
 
-export const EvaluationsPage = () => {
+export const EvaluationsPage = ({ borschId: propId }) => {
     const [isActive, setIsActive] = useState(false);
     const [isSent, setIsSent] = useState(false);
-    const { borschId } = useParams();
+    const params = useParams();
+    const  id = propId || params?.borschId;
     const [comment, setComment] = useState("");
     const [grades, setGrades] = useState({
       meat: null,
@@ -80,52 +82,41 @@ export const EvaluationsPage = () => {
       overall: null,
     });
     
-    // Используем контекст вместо прямых импортов JSON
+    
     const { getBorschById } = useBorsch();
     const { getPlaceById } = usePlaces();
     const { addComment } = useComments();
     
-    const borschOne = getBorschById(borschId);
+    const borschOne = getBorschById(id);
     const place = borschOne ? getPlaceById(borschOne.place_id) : null;
     
     // Проверяем, что ВСЕ обязательные оценки заполнены (кроме комментария)
     const isFormValid = grades.meat !== null && grades.beetroot !== null && 
-                        grades.density !== null && grades.salt !== null && 
-                        grades.aftertaste !== null && grades.serving !== null && 
-                        grades.overall !== null;
+    grades.density !== null && grades.salt !== null && 
+    grades.aftertaste !== null && grades.serving !== null && 
+    grades.overall !== null;
     
     // Инициализируем оценки как null - пользователь должен их заполнить сам
-    useEffect(() => {
-      if (borschOne) {
-        // console.log('📥 Инициализируем оценки для борща:', borschOne);
-        // console.log('🎯 Все оценки начинаются как null - пользователь должен их заполнить');
-        // НЕ загружаем существующие оценки - пользователь должен поставить свои
-      }
-    }, [borschOne]);
+    // useEffect(() => {
+    //   if (borschOne) {
+    //     // console.log('📥 Инициализируем оценки для борща:', borschOne);
+    //     // console.log('🎯 Все оценки начинаются как null - пользователь должен их заполнить');
+    //     // НЕ загружаем существующие оценки - пользователь должен поставить свои
+    //   }
+    // }, [borschOne]);
     
-    const handleGradeChange = (key, value) => {
-      // console.log(`📊 Изменение оценки для ${key}: ${value}`);
+    const handleGradeChange = (key, value) => {      
       setGrades((prev) => {
-        const newGrades = { ...prev, [key]: value };
-        // console.log('🔄 Новые оценки:', newGrades);
-        // console.log('✅ Все оценки заполнены:', Object.values(newGrades).every((val) => val !== null));
+        const newGrades = { ...prev, [key]: value };        
         return newGrades;
       });
     };
 
-        const handleSubmitForm = (e) => {
-      e.preventDefault();
-      // console.log('📝 Проверяем валидность формы...');
-      // console.log('📊 Текущие оценки:', grades);
-      // console.log('✅ Форма валидна:', isFormValid);
-      // console.log('💬 Текст комментария:', comment);
-      // console.log('🍲 Данные борща:', borschOne);
-      
+      const handleSubmitForm = (e) => {
+      e.preventDefault();      
       setIsSent((prev) => !prev);
-      if (!isFormValid) {
-        // console.log('❌ Форма не валидна, прерываем отправку');
-        return;
-      }
+      if (!isFormValid) {        
+        return;      }
       
       // Преобразуем ключи оценок в формат, который ожидает контекст
       const ratingUpdates = {
@@ -135,30 +126,20 @@ export const EvaluationsPage = () => {
         rating_salt: grades.salt,
         rating_aftertaste: grades.aftertaste,
         rating_serving: grades.serving
-      };
-      
-      // console.log("🔄 Преобразованные оценки:", ratingUpdates);
+      };    
       
       // Сохраняем комментарий с оценками через контекст комментариев
       if (borschOne) {
         const newComment = {
-          id_borsch: borschId,
+          id_borsch: id,
           messege: comment,
           ...ratingUpdates,
           overall_rating: grades.overall?.toString() || "5.0"
-        };
-        
-        // console.log("📤 Отправляем комментарий в контекст:", newComment);
-        // console.log("📊 Оценки для отправки:", ratingUpdates);
-        // console.log("🍲 ID борща:", borschId);
-        
-                 addComment(newComment);
-        //  console.log("✅ Комментарий с оценками сохранен:", newComment);
+        };         
+        addComment(newComment);        
       } else {
         console.log("❌ Данные борща не найдены");
-      }
-      
-      // console.log("Данные для отправки:", { ...grades, comment });
+      }      
     };
 
     const onCloseForm = useCallback(() => {
@@ -179,7 +160,7 @@ export const EvaluationsPage = () => {
   return (
     <div className={style.wrapp} key={"evaluations_page"}>
       <FotoBorschGallary images={borschOne.photo_urls} height={"215px"}/>
-      <Link className={style.back} to={`/borsch/${borschId}`}><IconBack/></Link>
+      <Link className={style.back} to={`/borsch/${id}`}><IconBack/></Link>
       <div className={style.contentImg}>
         <div className={style.nameBox1}>
           <p className={style.textName}>{borschOne.name}</p>

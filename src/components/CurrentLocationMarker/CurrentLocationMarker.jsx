@@ -2,11 +2,7 @@ import { Marker } from "@react-google-maps/api";
 
 export const CurrentLocationMarker = ({ position, onClick, id, grade, zIndexBase = 0 }) => {
   const labelText = grade !== null && grade !== undefined ? String(grade) : '';
-
-  // zIndex — больше широта (севернее) → выше маркер
   const zIndex = Math.round((position.lat + 90) * 1000) + zIndexBase * 100;
-
-//   console.log(`Marker ${id}: lat=${position.lat} → zIndex=${zIndex}`); // для отладки
 
   return (
     <Marker
@@ -18,7 +14,7 @@ export const CurrentLocationMarker = ({ position, onClick, id, grade, zIndexBase
       }}
       position={position}
       icon={{
-        url: 'beet-icon.png',
+        url: '../../beet-icon.png',
         scaledSize: new window.google.maps.Size(70, 45),
         labelOrigin: new window.google.maps.Point(50, 20),
       }}

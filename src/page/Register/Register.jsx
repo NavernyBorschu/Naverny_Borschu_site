@@ -3,7 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {Logo} from '../../components/Logo';
 import {GoogleAuth} from "../../components/GoogleAuth";
 import {ModalRegistrationSuccess} from "../../components/ModalRegistrationSuccess";
-import layout from '../../styles/layout.module.css';
+import layout from '../../styles/layout.module.scss';
 import typography from '../../styles/typography.module.css';
 import style from "./Register.module.css";
 

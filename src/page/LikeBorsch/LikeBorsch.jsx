@@ -1,17 +1,12 @@
 import { useNavigate} from "react-router-dom";
 import { ButtonVertion } from "../../components/ButtonVersion";
 import { ReactComponent as IconLikeActive } from './likeActive.svg';
-import { ReactComponent as IconDitail } from './ditail.svg';
 import { ReactComponent as IconLink } from './link.svg';
 import { FotoBorschGallary } from "../../components/FotoBorschGallary";
 import { RatingIconsSvg } from "../../components/RatingIconsSvg";
 import borsch from '../../data/borsch.json';
 import data from '../../data/places.json';
 import style from "./LikeBorsch.module.scss";
-
-
-
-// додати запит на сервер
 
 const fallbackCopy = (text) => {
   const tempInput = document.createElement("input");
@@ -96,16 +91,16 @@ export const LikeBorsch=()=>{
                     <p className={style.borschName}>{el.name}</p>
                     <p className={style.borschPrice}>{el.price}</p>                    
                   </div>
+                  <p className={style.grade}>Моя оцінка</p>
                   <RatingIconsSvg overall_rating={el.overall_rating} /> 
                   <div className={style.flex}>
                     <p className={style.namePlace}>{nameBorsch(el.place_id)}</p>
-                    <ButtonVertion
+                    <button
+                      className={style.btnAbout}
                       type="button"
                       onClick={() => onClickCard(el.id_borsch)}
-                      icon={IconDitail}
-                    />
-                  </div>
-                  
+                    >Про борщик</button>
+                  </div>                  
                 </div>
               )                    
             })} 

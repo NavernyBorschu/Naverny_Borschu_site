@@ -1,11 +1,20 @@
-
+@use "../../styles/mixin_adaptiv.scss" as *;
 .container{
     height: 100vh;
     max-width: 100vw;   
     display: flex; 
     flex-direction: column;
     justify-content:space-between;
-    margin:0 auto ;     
+    margin:0 auto ;  
+    @include respond(desktop) {
+    display: grid;
+    grid-template-columns: 210px 1fr;  
+    background-color: var(--color-text-btn-active);  
+    
+    }   
+}
+.desktop{
+    display: flex;
 }
  
 .header{   
@@ -13,14 +22,39 @@
     padding: 3px 23px 34px 23px;   
     background-color:var(--color-bg-main);
     color: var(--color-text-layout);    
-    border-top: 2px solid var(--color-header-border);    
+    border-top: 2px solid var(--color-header-border);   
+    @include respond(desktop) {
+    order: 1;
+    border-radius:0 24px 0 0;
+    border: 1px solid var(--color-bg-main);
+    margin-top: 100px;
+    padding: 20px 40px;    
+    }   
 }
+.headerDesctop{
+    display: none;
+    @include respond(desktop) {
+       display: block;
+    }  
+   
+}
+.main{
+    @include respond(desktop) {
+        order: 2;
+        // display: flex;
+    }  
+}
+
 
 .navContainer{    
     display: flex;
     justify-content: space-between;    
     list-style: none; 
     max-width: 100vw; 
+    @include respond(desktop) {
+    flex-direction: column;
+    gap:20px
+    }
 }
 
 .link {
@@ -31,6 +65,9 @@
   text-decoration: none;
   color: var(--color-text-layout);
   font-size: 10px;
+    @include respond(desktop) {
+    flex-direction: row;
+    }  
 }
 
 .icon {
@@ -51,12 +88,13 @@
 }
 .link:hover .iconHover  { 
     display: inline-block;
-    opacity: 1; 
-    /* transform: scale(1.05);  */
+    opacity: 1;    
 }
 .link:hover .text { 
     color: var(--color-text-active);     
 }
+
+
 .addBorsch{
     background-color: var(--color-add-btn);
     border-radius: 50%;
@@ -65,10 +103,20 @@
     justify-content: center;
     padding: 10px;
     margin-top: -12px;
+    @include respond(desktop) {
+    background-color: var(--color-bg-main);
+    justify-content: left;
+    padding: 0;
+    margin-top: 0;
+    } 
 }
 .addBorsch:hover{
     background-color: var(--color-add-btn-active);
+    @include respond(desktop) {
+    background-color: var(--color-bg-main);   
+    } 
 }
+
 .active .iconDefault {
   display: none;
   opacity: 0;
@@ -82,22 +130,3 @@
 .active .text {
   color: var(--color-text-active);
 }
-/* @media (min-width: 768px) and (max-width: 1440px) {
-    .navContainer{       
-        min-width: 768px;  
-    }
-    .link{    
-        gap: 10px;    
-        font-size: 30px;     
-    }
-}
-
-@media (min-width: 1440px) {
-    .navContainer{       
-        min-width: 1440px;  
-    }
-    .link{    
-        gap: 10px;    
-        font-size: 30px;     
-    }
-} */

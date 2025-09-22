@@ -1,18 +1,28 @@
 @use "../../styles//mixin_font.scss" as *;
+@use "../../styles/mixin_adaptiv.scss" as *;
 .page{
     display: flex;
     justify-content: center; 
     flex-direction: column;
     text-align: center;
-    margin:0 auto ; 
+    // margin:0 auto ; 
     background-color:var(--color-bg-main); 
     height: 100vh; 
     overflow: hidden;
     padding: 18px 0;
+    @include respond(desktop) {
+        margin-top: 110px;
+        background-color:var(--color-text-btn-active);
+        padding: 0 18px;
+    }
 }
 .title{
     @include mobileH2;
     color: var(--color-text-btn);
+    @include respond(desktop) {
+        text-align: left;
+        margin-top: 10px;
+    }
 }
 .wrappBorsch{
     margin-top: 24px;
@@ -23,12 +33,20 @@
     scrollbar-width: none;
     width: 100%;
     padding: 0 16px;
+    @include respond(desktop) {        
+        flex-wrap: wrap;
+    }
 }
 .card{
     position: relative;
     background-color: var(--color-text-btn-active);
     border-radius: 12px;
     padding: 6px;  
+    @include respond(desktop) {
+       height: 340px;
+       width: 200px;
+      box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    } 
 }
 
 .flex{
@@ -64,4 +82,21 @@
   justify-content: space-between;
   align-items: center;
   margin: 10px 0;  
+}
+
+.btnAbout{
+  @include caption;
+  color: var(--color-text-btn);
+  border: none;
+  background-color: var(--color-bg-main);
+}
+.btnAbout:hover{
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.grade{
+    @include caption;
+    color: var(--color-text-btn);
+    text-align: left;
 }

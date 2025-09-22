@@ -5,7 +5,7 @@ import { CurrentLocationMarker } from "../CurrentLocationMarker/CurrentLocationM
 import { Modal } from "../Modal/Modal";
 import { Gallery } from "../Gallery/Gallary";
 import { useBorsch } from "../../context/BorschContext";
-import style from "./Map.module.css";
+import style from "./Map.module.scss";
 import { AddBorsch } from "../AddBorsch/AddBorsch";
 
 const containerStyle = {
@@ -233,7 +233,7 @@ export const Map = ({ center, mode, places, onMarkerAdd }) => {
             position={pos.location}
             id={pos.id}
             onClick={onClickMarker}
-                         grade={getAverageOverallRating(pos.id)}
+            grade={getAverageOverallRating(pos.id)}
             zIndexBase={zoomLevel}
           />
         ))}

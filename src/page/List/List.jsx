@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ButtonVertion } from "../../components/ButtonVersion";
 import { ReactComponent as IconLike } from './like.svg';
-import { ReactComponent as IconDitail } from './ditail.svg';
 import { ReactComponent as IconLink } from './link.svg';
 import { FotoBorschGallary } from "../../components/FotoBorschGallary";
 import { RatingIconsSvg } from "../../components/RatingIconsSvg";
@@ -16,8 +15,7 @@ const fallbackCopy = (text) => {
   tempInput.select();
   document.execCommand("copy");
   document.body.removeChild(tempInput);
-  console.log("Скопійовано через fallback:", text);
-  // alert вызываем только из handleCopyAndShare
+  console.log("Скопійовано через fallback:", text);  
 };
 
 export const List = () => {
@@ -25,7 +23,10 @@ export const List = () => {
 
   const onClickCard = (borschId) => {
     navigate(`/borsch/${borschId}`);
+
   };
+
+
 
   const nameBorsch = (place_id) => {
     const place = data.find(i => String(i.id) === String(place_id));
@@ -67,6 +68,7 @@ export const List = () => {
   };
 
 
+
   return (
     <div className={style.page}>
       <h2 className={style.title}>Мої відгуки</h2>
@@ -90,14 +92,15 @@ export const List = () => {
               <p className={style.borschName}>{el.name}</p>
               <p className={style.borschPrice}>{el.price}</p>
             </div>
+            <p className={style.grade}>Моя оцінка</p>
             <RatingIconsSvg overall_rating={el.overall_rating} />
             <div className={style.flex}>
               <p className={style.namePlace}>{nameBorsch(el.place_id)}</p>
-              <ButtonVertion
+              <button
+                className={style.btnAbout}
                 type="button"
                 onClick={() => onClickCard(el.id_borsch)}
-                icon={IconDitail}
-              />
+              >Про борщик</button>
             </div>
           </div>
         ))}

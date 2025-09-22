@@ -1,7 +1,6 @@
 {
   "name": "my-app",
-  "version": "0.1.0",
-  "homepage": "https://github.com/NavernyBorschu/Naverny_Borschu_site",
+  "version": "0.1.0", 
   "private": true,
   "dependencies": {
     "@react-google-maps/api": "^2.20.6",

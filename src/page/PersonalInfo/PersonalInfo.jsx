@@ -3,7 +3,7 @@ import {AvatarUploader} from "../../components/AvatarUploader";
 import {Button} from "../../components/Button";
 import {InputField} from "../../components/InputField";
 import Logo from '../../assets/images/logo.svg';
-import layout from '../../styles/layout.module.css';
+import layout from '../../styles/layout.module.scss';
 import typography from '../../styles/typography.module.css';
 import style from './PersonalInfo.module.css';
 

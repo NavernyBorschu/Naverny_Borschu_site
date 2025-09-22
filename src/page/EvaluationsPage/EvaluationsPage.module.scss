@@ -1,11 +1,19 @@
 @use "../../styles/mixin_font.scss" as *;
+@use "../../styles/mixin_adaptiv.scss" as *;
 .wrapp{
-  position: relative;
-  padding: 16px;
+  position: relative;  
+  @include respond(desktop) {
+    margin-top: 150px;        
+    padding: 0 18px;    
+  }
 }
+
 .back{
   position: absolute;
   top:20px;
+  @include respond(desktop) {
+    top:-50px;    
+  }
 }
 .contentImg{
   display: flex;
@@ -15,7 +23,7 @@
   border-radius:  0 0 12px 12px;
   position: absolute;
   width: 92%;
-  top:182px;
+  top:170px;
 }
 
 .nameBox1{

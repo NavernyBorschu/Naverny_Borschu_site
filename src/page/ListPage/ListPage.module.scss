@@ -1,11 +1,23 @@
 @use "../../styles//mixin_font.scss" as *;
+@use "../../styles/mixin_adaptiv.scss" as *;
+.containerFilter{
+    @include respond(desktop) {
+        display: none;
+    }
+}
+
 .pageList{
     display: flex;
     justify-content: center; 
     margin:0 auto ; 
     background-color:var(--color-bg-main); 
     height: 100vh; 
-    overflow: hidden;
+    overflow: hidden;   
+    @include respond(desktop) {
+        background-color:var(--color-text-btn-active); 
+        margin-top: 120px;
+        width: 70%;
+    }
 }
 .btnWrap{
     position: absolute;
@@ -15,6 +27,9 @@
     background-color: var(--color-text-btn-active);
     border-radius: 14px;
     padding: 3px;   
+    @include respond(desktop) {
+        display: none;        
+    }  
 }
 .btn_base{
     @include button;
@@ -51,7 +66,10 @@
     border-radius: 14px;
     @include footnote;     
     color:var( --color-text-btn); 
-    background-color: var(--color-text-btn-active);    
+    background-color: var(--color-text-btn-active); 
+    @include respond(desktop) {
+        display: none;    
+    }     
 }
 .wrappBorsch{
     margin-top: 210px;
@@ -62,6 +80,9 @@
     scrollbar-width: none;
     width: 100%;
     padding: 0 16px;
+    @include respond(desktop) {
+        margin-top: 180px; 
+    } 
 }
 .card{
     position: relative;
@@ -95,7 +116,7 @@
     justify-content: center;
     align-items: center;
     gap:8px;
-    z-index: 999;
+    z-index: 998;
 }
 .flex {
   display: flex;
@@ -137,4 +158,20 @@
     &:hover{
         background-color: rgba(0, 0, 0, 0.1);
     }
+}
+
+.btnAbout{
+  @include caption;
+  color: var(--color-text-btn);
+  border: none;
+  background-color: var(--color-bg-main);
+}
+.btnAbout:hover{
+  cursor: pointer;
+  opacity: 0.8;
+}
+.grade{
+    @include caption;
+    color: var(--color-text-btn);
+    text-align: left;
 }

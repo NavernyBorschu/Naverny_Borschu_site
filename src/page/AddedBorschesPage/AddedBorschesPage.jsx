@@ -7,7 +7,7 @@ import { ReactComponent as IconDitail } from '../../assets/icons/ditail.svg';
 import { ReactComponent as IconLink } from '../../assets/icons/link.svg';
 import data from "../../data/places.json";
 import borsch from "../../data/borsch.json";
-import layout from '../../styles/layout.module.css';
+import layout from '../../styles/layout.module.scss';
 import typography from "../../styles/typography.module.css";
 import style from "./AddedBorschesPage.module.css";
 

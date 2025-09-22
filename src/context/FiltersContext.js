@@ -122,6 +122,7 @@ export const FiltersProvider = ({ children }) => {
     if (restorePlacesCallback) {
       restorePlacesCallback();
     }
+    localStorage.removeItem('borschFilters');
   };
 
   // Сброс всех фильтров

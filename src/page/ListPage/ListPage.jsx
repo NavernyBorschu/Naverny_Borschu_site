@@ -5,7 +5,6 @@ import { RatingIconsSvg } from "../../components/RatingIconsSvg";
 import { ButtonVertion } from "../../components/ButtonVersion";
 import { ReactComponent as IconLike } from './like.svg';
 import { ReactComponent as IconLink } from './link.svg';
-import { ReactComponent as IconDitail } from './ditail.svg';
 import { FotoBorschGallary } from "../../components/FotoBorschGallary";
 import { usePlaces } from '../../context/PlacesContext';
 import { useBorsch } from '../../context/BorschContext';
@@ -85,22 +84,21 @@ export const ListPage=()=>{
   };
     return( 
       <div className={style.pageList}>
-        <> 
+        <div className={style.containerFilter}> 
           <Filters/>  
           <div className={style.btnWrap}> 
             <Link to="/"  className={style.btn}>Мапа</Link>          
             <Link to="/list"  className={style.btn_inl}>Список</Link>               
           </div>
               <div className={style.borsch}>(зареєстровано {borsch?.length || 0} борщів)</div>
-        </>
+        </div>
         <div className={style.wrappBorsch}>
             {(() => {
               const filteredBorsch = borsch?.filter(el => {
                 // Показываем борщ только если его место есть в отфильтрованных местах
                 return places.some(place => String(place.id) === String(el.place_id));
-              });
-              
-                             if (filteredBorsch && filteredBorsch.length === 0) {
+              });              
+                if (filteredBorsch && filteredBorsch.length === 0) {
                  return (
                    <div className={style.noResults}>
                      <button 
@@ -135,16 +133,16 @@ export const ListPage=()=>{
                       <p className={style.borschName}>{el.name}</p>
                       <p className={style.borschPrice}>{el.price}</p>                    
                     </div>
+                    <p className={style.grade}>Моя оцінка</p>
                     <RatingIconsSvg overall_rating={el.overall_rating} /> 
                     <div className={style.flex}>
                       <p className={style.namePlace}>{nameBorsch(el.place_id)}</p>
-                      <ButtonVertion
+                      <button
+                        className={style.btnAbout}
                         type="button"
                         onClick={() => onClickCard(el.id_borsch)}
-                        icon={IconDitail}
-                      />
-                    </div>
-                    
+                      >Про борщик</button>                      
+                    </div>                    
                   </div>
                 )                    
               });

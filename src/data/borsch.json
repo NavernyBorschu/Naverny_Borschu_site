@@ -11,7 +11,7 @@
         "rating_aftertaste":"8",
         "overall_rating":"9", 
         "rating_serving":"9",      
-        "price":"≈4.55 ₴", 
+        "price":"≈350 ₴", 
         "weight":"600 g.",
         "photo_urls":["image1.png","image3.png","image2.png"]        
     },
@@ -27,7 +27,7 @@
         "rating_aftertaste":"8",
         "overall_rating":"9,0",
         "rating_serving":"9",
-        "price":"≈5.55 ₴", 
+        "price":"≈250 ₴", 
         "weight":"500 g.",
         "photo_urls":["image2.png","image1.png"]
         
@@ -44,7 +44,7 @@
         "rating_aftertaste":"8",
         "rating_serving":"10",
         "overall_rating":"5,0",
-        "price":"≈6.55 ₴", 
+        "price":"≈100 ₴", 
         "weight":"500 g.",
         "photo_urls":["image3.png","image2.png"]
         
@@ -61,7 +61,7 @@
         "rating_aftertaste":"8",
         "overall_rating":"9,0",
         "rating_serving":"7",
-        "price":"≈5.55 ₴", 
+        "price":"≈250 ₴", 
         "weight":"500 g.",
         "photo_urls":["image3.png","image1.png"]
         
@@ -78,7 +78,7 @@
         "rating_aftertaste":"8",
         "overall_rating":"7,0",
         "rating_serving":"5",
-        "price":"≈5.55 ₴", 
+        "price":"≈800 ₴", 
         "weight":"500 g.",
         "photo_urls":["image1.png","image3.png","image1.png"]        
     },
@@ -94,7 +94,7 @@
         "rating_aftertaste":"8",
         "overall_rating":"6,0",
         "rating_serving":"10",
-        "price":"≈4.55 ₴", 
+        "price":"≈1000 ₴", 
         "weight":"500 g.",
         "photo_urls":["image2.png","image3.png"]        
     },
@@ -113,5 +113,21 @@
         "price":"≈505 ₴", 
         "weight":"600 g.",
         "photo_urls":["image3.png","image2.png","image1.png"]        
+    },
+    {
+        "id_borsch":"8",
+        "name":"Борщ зелений",
+        "place_id":"50.37289856705872",
+        "type_meat":"Яловичина",
+        "rating_salt":"5",
+        "rating_meat":"8",
+        "rating_beet":"5",
+        "rating_density":"10",
+        "rating_aftertaste":"8",
+        "overall_rating":"6,0",
+        "rating_serving":"10",
+        "price":"≈505 ₴", 
+        "weight":"500 g.",
+        "photo_urls":["image2.png","image3.png"]        
     }
 ]

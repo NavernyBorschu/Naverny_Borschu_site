@@ -1,11 +1,18 @@
+@use "../styles/mixin_adaptiv.scss" as *;
 .wrapper {
     background-color: var(--color-bg-grey);
     min-height: 100vh;
     padding: 16px 16px 24px;
     text-align: center;
+     @include respond(desktop) {
+       margin-top: 150px;
+    }
 }
 
 .authContainer {
+    @include respond(desktop) {
+       margin-top: 110px;
+    }
     padding: 40px 28px 28px;
     text-align: center;
 }
