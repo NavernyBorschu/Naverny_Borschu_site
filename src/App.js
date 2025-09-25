@@ -27,7 +27,7 @@ import { AppProvider } from "./context/AppProvider";
 export default function App() {   
   return (
     <AppProvider>
-      <BrowserRouter  basename="/">
+      <BrowserRouter  basename="/Naverny_Borschu_site">
       <Layout>              
           <Routes>          
             <Route path="/" element={<MapPage />} />
