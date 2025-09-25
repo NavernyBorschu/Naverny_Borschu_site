@@ -97,7 +97,7 @@ export const SelectPlacePage = () => {
                 <Marker
                   position={place.location}
                   icon={{
-                    url: "/marker.png",
+                    url: `${process.env.PUBLIC_URL}/marker.png`,
                     scaledSize: new window.google.maps.Size(140, 40),
                     labelOrigin: new window.google.maps.Point(90, 20), 
                   }}

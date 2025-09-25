@@ -14,7 +14,7 @@ export const CurrentLocationMarker = ({ position, onClick, id, grade, zIndexBase
       }}
       position={position}
       icon={{
-        url: '../../beet-icon.png',
+        url: `${process.env.PUBLIC_URL}/beet-icon.png`,
         scaledSize: new window.google.maps.Size(70, 45),
         labelOrigin: new window.google.maps.Point(50, 20),
       }}
