@@ -46,7 +46,7 @@ export const PersonalInfo = () => {
     }
 
     return (
-        <div className={layout.wrapper}>
+        <div className={`${layout.wrapper} ${style.desktopWrapper}`}>
             <h1 className={typography.mobileTitle}>Особиста інформація</h1>
             <Link className={style.back} to={`/profile`}><IconBack/></Link>
             <div className={style.infoContainer}>

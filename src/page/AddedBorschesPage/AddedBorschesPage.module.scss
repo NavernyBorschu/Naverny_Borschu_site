@@ -1,6 +1,18 @@
 @use "../../styles/mixin_font.scss" as *;
 @use "../../styles/mixin_adaptiv.scss" as *;
 
+.desktopWrapper {
+    @include respond(desktop) {
+        margin-top: 0;
+        width: calc(100vw - 550px);
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        min-height: auto;
+        height: auto;
+    }
+}
+
 .back{
     position: absolute;
     top:20px;
@@ -56,4 +68,42 @@
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
+}
+
+/* кнопки навігації */
+.arrows {
+    display: none; // ❌ приховані на мобілці
+}
+
+/* 💻 десктоп */
+@media (min-width: 1280px) {
+    .arrows {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-bottom: 12px;
+
+        button {
+            border: none;
+            background: #eee;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+    }
+
+    .wrapBorsch {
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 16px;
+        padding: 8px 0;
+    }
+
+    .card {
+        min-width: 250px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+    }
 }

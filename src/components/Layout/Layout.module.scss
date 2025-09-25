@@ -44,6 +44,7 @@
         // display: flex;
       flex: 1;             // зайняти всю доступну висоту
       overflow-y: auto;   // скролл
+      max-width: 100%;
     }  
 }
 

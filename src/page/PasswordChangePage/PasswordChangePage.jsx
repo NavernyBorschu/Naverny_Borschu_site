@@ -36,7 +36,7 @@ export const PasswordChangePage = () => {
 
 
     return (
-        <div className={layout.wrapper}>
+        <div className={`${layout.wrapper} ${style.desktopWrapper}`}>
             <h2 className={`${typography.mobileTitle} ${style.title}`}>Зміна пароля</h2>
             <Link className={style.back} to={`/profile`}><IconBack/></Link>
 
