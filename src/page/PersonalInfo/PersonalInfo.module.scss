@@ -1,3 +1,15 @@
+@use "../../styles/mixin_font.scss" as *;
+@use "../../styles/mixin_adaptiv.scss" as *;
+
+.back{
+    position: absolute;
+    top:20px;
+    left: 17px;
+    @include respond(desktop) {
+        display: none;
+    }
+}
+
 .infoContainer {
     display: flex;
     align-items: center;

@@ -1,15 +1,16 @@
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {FotoBorschGallary} from "../../components/FotoBorschGallary";
 import {ButtonVertion} from "../../components/ButtonVersion";
 import {RatingIconsSvg} from "../../components/RatingIconsSvg";
 import { ReactComponent as IconLikeActive } from '../../assets/icons/likeActive.svg';
 import { ReactComponent as IconDitail } from '../../assets/icons/ditail.svg';
 import { ReactComponent as IconLink } from '../../assets/icons/link.svg';
+import { ReactComponent as IconBack } from '../../assets/icons/arrow_back.svg';
 import data from "../../data/places.json";
 import borsch from "../../data/borsch.json";
 import layout from '../../styles/layout.module.scss';
 import typography from "../../styles/typography.module.css";
-import style from "./AddedBorschesPage.module.css";
+import style from "./AddedBorschesPage.module.scss";
 
 export const AddedBorschesPage = () => {
     const navigate = useNavigate();
@@ -24,6 +25,7 @@ export const AddedBorschesPage = () => {
     return (
         <div className={layout.wrapper}>
             <h1 className={typography.mobileTitle}>Додані борщі</h1>
+            <Link className={style.back} to={`/profile`}><IconBack/></Link>
             <div className={style.wrapBorsch}>
                 {borsch.map((el, index) => {
                     return (
