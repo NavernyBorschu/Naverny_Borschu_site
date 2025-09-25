@@ -1,10 +1,5 @@
 @use "../../styles//mixin_font.scss" as *;
 @use "../../styles/mixin_adaptiv.scss" as *;
-.containerFilter{
-    @include respond(desktop) {
-        display: none;
-    }
-}
 
 .pageList{
     display: flex;
@@ -12,18 +7,24 @@
     margin:0 auto ; 
     background-color:var(--color-bg-main); 
     height: 100vh; 
-    overflow: hidden;   
     @include respond(desktop) {
         background-color:var(--color-text-btn-active); 
-        margin-top: 120px;
+        margin-top: 10px;
         width: 70%;
     }
 }
+.containerFilter{    
+    @include respond(desktop) {
+        display: none;
+    }
+}
+
 .btnWrap{
     position: absolute;
     z-index: 99;
     top:90px;
-    display: flex;   
+    left: 15%;
+    display: flex;     
     background-color: var(--color-text-btn-active);
     border-radius: 14px;
     padding: 3px;   
@@ -62,6 +63,7 @@
     position: absolute;
     z-index: 99; 
     top: 145px;  
+    left: 30%;
     padding: 10px; 
     border-radius: 14px;
     @include footnote;     

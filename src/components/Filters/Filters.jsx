@@ -15,20 +15,21 @@ import style from "./Filters.module.scss";
 
 export const Filters = () => {
   const [isActiveFilter, setIsActiveFilter] = useState(false);
-  const location = useLocation(); 
+  const location = useLocation();  
   const { 
     filters, 
     updateSearchQuery, 
-    clearSearchQuery, 
+    resetAllFilters,    
     activateSearch,
     hasActiveFilters 
   } = useFilters();
-  const [searchValue, setSearchValue] = useState(filters.searchQuery);
-
+  const {searchQuery}=filters;
+  const [searchValue, setSearchValue] = useState(searchQuery);
+  
   // Синхронизация с фильтрами при изменении
   useEffect(() => {
-    setSearchValue(filters.searchQuery);
-  }, [filters.searchQuery]);
+    setSearchValue(searchQuery);
+  }, [searchQuery]);
 
   const changeIsActiveFilter = useCallback(() => {
     setIsActiveFilter((prev) => !prev);
@@ -44,13 +45,13 @@ export const Filters = () => {
       activateSearch();
     } else {
       // Если поиск пустой, деактивируем поиск и показываем все места
-      clearSearchQuery();
+      resetAllFilters();
     }
   };
 
   const handleClearSearch = () => {
     setSearchValue('');
-    clearSearchQuery();    
+    resetAllFilters();    
   };
 
   const handleKeyPress = (e) => {

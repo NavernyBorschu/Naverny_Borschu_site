@@ -8,16 +8,13 @@ const meatOptions = ['Без м\'яса', 'Курка', 'Свинина', 'Ял�
 
 export const CardFilters=({onClose})=>{    
     const { 
-        filters, 
-        // updateSearchQuery, 
-        // clearSearchQuery, 
-        // activateSearch,
+        filters,        
         togglePlaceType, 
         updateMeatType, 
         updatePriceRange, 
-        resetFilters: resetContextFilters 
+        resetAllFilters,
     } = useFilters();
-    
+   
     const [selectedTypes, setSelectedTypes] = useState(filters.selectedTypes);
     const [selectedMeat, setSelectedMeat] = useState(filters.selectedMeat);
     const [minPrice, setMinPrice] = useState(filters.minPrice);
@@ -127,15 +124,7 @@ export const CardFilters=({onClose})=>{
         console.log('Применены фильтры:', appliedFilters);  
         onClose();
     };
-//     const handleSearch = () => {
-//     if (selectedTypes.trim()) {
-//       updateSearchQuery(selectedTypes.trim());
-//       activateSearch();
-//     } else {
-//       // Если поиск пустой, деактивируем поиск и показываем все места
-//       clearSearchQuery();
-//     }
-//   };
+
    
   const handleReset = (e) => {
     e.preventDefault();
@@ -146,7 +135,7 @@ export const CardFilters=({onClose})=>{
     setAppliedFilters(null);
     
     // Сбрасываем фильтры в контексте
-    resetContextFilters();
+   resetAllFilters();
   };
 
 

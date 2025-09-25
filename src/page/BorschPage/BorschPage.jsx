@@ -41,7 +41,7 @@ export const BorschPage=({ borschId: propId })=>{
     const { getBorschById } = useBorsch();
     const { getPlaceById } = usePlaces();
     const { getCommentsByBorschId } = useComments();
-     // Если id нет — сразу возврат
+   
       if (!id) {
         return (
           <div style={{ padding: 20 }}>
@@ -50,12 +50,12 @@ export const BorschPage=({ borschId: propId })=>{
         );
       }
 
-    // Загружаем данные
+  
     const borschOne = getBorschById(id);
     const place = borschOne ? getPlaceById(borschOne.place_id) : null;
     const borschComents = getCommentsByBorschId(id);
 
-    // 🟡 Показываем скелетон, если данные ещё не пришли
+  
     if (!borschOne || !place) {
       return (
         <div className={style.BorschPage}>
@@ -66,11 +66,11 @@ export const BorschPage=({ borschId: propId })=>{
 
     const mergeCommentsWithUsers=(comments, users) =>{
         return comments
-            .filter(comment => comment.messege && comment.messege.trim()) // Фильтруем комментарии с пустым текстом
+            .filter(comment => comment.messege && comment.messege.trim()) 
             .map((comment, index) => {
                 const user = users.find(u => u.user_id === comment.user_id);
                 
-                // Если пользователь найден в users.json - используем его данные
+                
                 if (user) {
                     return {
                         name: `${user.name} ${user.surname}`,
@@ -81,19 +81,18 @@ export const BorschPage=({ borschId: propId })=>{
                     };
                 }
                 
-                // Если это временный пользователь (новый комментарий) - генерируем временное имя
-                // В будущем здесь будет реальное имя пользователя из системы авторизации
+               
                 if (comment.user_id && comment.user_id.startsWith('temp_user_')) {
                     return {
                         name: `Користувач ${index + 1}`,
-                        photo: "avatar.png", // Используем стандартную аватарку
+                        photo: "avatar.png", 
                         overall_rating: comment.overall_rating,
                         created_at: comment.created_at,
                         messege: comment.messege
                     };
                 }
                 
-                // Fallback для неизвестных пользователей
+                
                 return {
                     name: "Невідомо",
                     photo: "avatar.png",
@@ -127,7 +126,7 @@ export const BorschPage=({ borschId: propId })=>{
     const handleCopyAndShare = (id_borsch) => {
   const url = `${window.location.origin}/borsch/${id_borsch}`;
 
-  // Проверяем Web Share API
+ 
   if (navigator.share) {
     navigator.share({
       title: 'Перегляньте цей борщ',
@@ -137,7 +136,7 @@ export const BorschPage=({ borschId: propId })=>{
     .then(() => console.log("Поділитися успішно"))
     .catch((err) => {
       console.error("Помилка при шерингу:", err);
-      // Если шеринга нет, копируем ссылку в буфер один раз
+      
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(url).then(() => {
           alert("Посилання скопійоване в буфер. Поділитись можна вручну.");
@@ -147,7 +146,7 @@ export const BorschPage=({ borschId: propId })=>{
       }
     });
   } else {
-    // Если Web Share API нет — копируем один раз и alert
+    
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(url).then(() => {
         alert("Посилання скопійоване в буфер. Поділитись можна вручну.");

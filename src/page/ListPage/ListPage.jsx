@@ -94,8 +94,7 @@ export const ListPage=()=>{
         </div>
         <div className={style.wrappBorsch}>
             {(() => {
-              const filteredBorsch = borsch?.filter(el => {
-                // Показываем борщ только если его место есть в отфильтрованных местах
+              const filteredBorsch = borsch?.filter(el => {                
                 return places.some(place => String(place.id) === String(el.place_id));
               });              
                 if (filteredBorsch && filteredBorsch.length === 0) {
@@ -147,8 +146,7 @@ export const ListPage=()=>{
                 )                    
               });
             })()} 
-        </div>
-         
+        </div>         
       </div>
     )   
   }

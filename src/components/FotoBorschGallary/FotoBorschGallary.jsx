@@ -13,7 +13,7 @@ export const FotoBorschGallary = ({ images, height}) => {
     <div className={style.gallery}>
       <div style={{height:`${height}`}}>        
         <img
-          src={`/${images[currentIndex]}`}
+          src={`${process.env.PUBLIC_URL}/${images[currentIndex]}`}
           alt={`Slide ${currentIndex}`}
           className={style.image}
         />       
