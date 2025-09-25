@@ -1,20 +1,30 @@
 @use "../../styles/mixin_font.scss" as *;
 @use "../../styles/mixin_adaptiv.scss" as *;
-.BorschPage{   
-    position: relative;   
-    @include respond(desktop) {         
-        margin-top: 110px;        
-        padding: 0 18px;        
-    }    
+
+.BorschPage {
+  position: relative;
+  @include respond(desktop) {
+    height: calc(100vh - 110px);
+    margin-top: 110px;
+    padding: 0 18px;
+    overflow-y: auto;
+    
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;         
+    }
+  }
 }
+
 
 .wrap{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 16px;
+    padding: 16px;    
     @include respond(desktop) {       
-        width: 100%;        
+        width: 100%;          
     }       
 }
 
@@ -22,7 +32,7 @@
     position: absolute;   
     right: 10px;
     top: 10px; 
-     @include respond(desktop) {       
+    @include respond(desktop) {       
         width: 100%; 
         right: -90%;          
     }    
@@ -36,6 +46,7 @@
 }
 .card{
     position: relative;   
+       
 }
 .box{
     position: absolute;

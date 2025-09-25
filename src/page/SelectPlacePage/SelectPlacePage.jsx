@@ -7,7 +7,7 @@ import { BtnNavigate } from "../../components/BtnNavigate/BtnNavigate";
 import style from "./SelectPlacePage.module.scss";
 const containerStyle = {
   width: "100%",
-  height: "280px",
+  height: "450px",
 };
 
 const defoultOptions = {
@@ -84,43 +84,45 @@ export const SelectPlacePage = () => {
           <p className={style.value}>{street}</p>
         </div>
       </div>
+      <div className={style.container}>
       {isLoaded ? (
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={place.location}
-          zoom={zoomLevel}
-          onLoad={onLoad}
-          onUnmount={onUnmount}
-          options={defoultOptions}
-        >
-          <Marker
-            position={place.location}
-            icon={{
-              url: "/marker.png",
-              scaledSize: new window.google.maps.Size(140, 40),
-              labelOrigin: new window.google.maps.Point(90, 20), 
-            }}
-            label={{
-              text:
-                place.name.length > 10
-                  ? place.name.slice(0, 12) + " ..."
-                  : place.name,
-              color: "#1A1A1A",
-              fontSize: "12px",
-              fontWeight: "bold",
-            }}
-          />
-        </GoogleMap>
-      ) : (
-        <p>Завантаження карти...</p>
-      )}
-      <div className={style.btn}>
-        <Button
-          type="button"
-          name="Підтвердити адресу"
-          onClick={handleSelect}
-        />
-      </div>
-    </div>
+              <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={place.location}
+                zoom={zoomLevel}
+                onLoad={onLoad}
+                onUnmount={onUnmount}
+                options={defoultOptions}
+              >
+                <Marker
+                  position={place.location}
+                  icon={{
+                    url: "/marker.png",
+                    scaledSize: new window.google.maps.Size(140, 40),
+                    labelOrigin: new window.google.maps.Point(90, 20), 
+                  }}
+                  label={{
+                    text:
+                      place.name.length > 10
+                        ? place.name.slice(0, 12) + " ..."
+                        : place.name,
+                    color: "#1A1A1A",
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                  }}
+                />
+              </GoogleMap>
+            ) : (
+              <p>Завантаження карти...</p>
+            )}
+            <div className={style.btn}>
+              <Button
+                type="button"
+                name="Підтвердити адресу"
+                onClick={handleSelect}
+              />
+            </div>
+          </div>
+      </div>      
   );
 };

@@ -58,19 +58,7 @@ export const FiltersProvider = ({ children }) => {
   // Обновление фильтров
   const updateFilters = (newFilters) => {
     setFilters(prev => ({ ...prev, ...newFilters }));
-  };
-
-  // Сброс фильтров
-  const resetFilters = () => {
-    const defaultFilters = {
-      selectedTypes: [],
-      selectedMeat: '',
-      minPrice: 50,
-      maxPrice: 5000,
-      searchQuery: ''
-    };
-    setFilters(defaultFilters);
-  };
+  };  
 
   // Обновление типа заведения
   const togglePlaceType = (type) => {
@@ -107,25 +95,8 @@ export const FiltersProvider = ({ children }) => {
     }));
   };
 
-  // Очистка поискового запроса
-  const clearSearchQuery = () => {
-    setFilters(prev => ({
-      ...prev,
-      searchQuery: ''
-    }));
-    setIsSearchActive(false);
-    // При очистке поиска удаляем сохраненные отфильтрованные места
-    localStorage.removeItem('filteredPlaces');
-    // Сбрасываем флаг восстановления
-    localStorage.removeItem('searchRestored');
-    // Восстанавливаем полный список мест
-    if (restorePlacesCallback) {
-      restorePlacesCallback();
-    }
-    localStorage.removeItem('borschFilters');
-  };
-
-  // Сброс всех фильтров
+ 
+ 
   const resetAllFilters = () => {
     const defaultFilters = {
       selectedTypes: [],
@@ -133,25 +104,24 @@ export const FiltersProvider = ({ children }) => {
       minPrice: 50,
       maxPrice: 5000,
       searchQuery: ''
-    };
+    };    
+    
     setFilters(defaultFilters);
     setIsSearchActive(false);
-    // При сбросе фильтров удаляем сохраненные отфильтрованные места
-    localStorage.removeItem('filteredPlaces');
-    // Сбрасываем флаг восстановления
-    localStorage.removeItem('searchRestored');
-    // Восстанавливаем полный список мест
+    localStorage.setItem('borschFilters', JSON.stringify(defaultFilters)); 
+    localStorage.removeItem('filteredPlaces');    
+    localStorage.removeItem('searchRestored');    
     if (restorePlacesCallback) {
       restorePlacesCallback();
     }
   };
 
-  // Активация поиска
+
   const activateSearch = () => {
     setIsSearchActive(true);
   };
 
-  // Деактивация поиска
+ 
   const deactivateSearch = () => {
     setIsSearchActive(false);
   };
@@ -192,14 +162,12 @@ export const FiltersProvider = ({ children }) => {
   const value = {
     filters,
     isSearchActive,
-    updateFilters,
-    resetFilters,
+    updateFilters,    
     resetAllFilters,
     togglePlaceType,
     updateMeatType,
     updatePriceRange,
-    updateSearchQuery,
-    clearSearchQuery,
+    updateSearchQuery,   
     activateSearch,
     deactivateSearch,
     hasActiveFilters,

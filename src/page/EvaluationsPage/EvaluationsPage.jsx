@@ -80,30 +80,17 @@ export const EvaluationsPage = ({ borschId: propId }) => {
       aftertaste: null,
       serving: null,
       overall: null,
-    });
-    
-    
+    });    
     const { getBorschById } = useBorsch();
     const { getPlaceById } = usePlaces();
-    const { addComment } = useComments();
-    
+    const { addComment } = useComments();    
     const borschOne = getBorschById(id);
-    const place = borschOne ? getPlaceById(borschOne.place_id) : null;
-    
-    // Проверяем, что ВСЕ обязательные оценки заполнены (кроме комментария)
+    const place = borschOne ? getPlaceById(borschOne.place_id) : null;    
     const isFormValid = grades.meat !== null && grades.beetroot !== null && 
     grades.density !== null && grades.salt !== null && 
     grades.aftertaste !== null && grades.serving !== null && 
     grades.overall !== null;
-    
-    // Инициализируем оценки как null - пользователь должен их заполнить сам
-    // useEffect(() => {
-    //   if (borschOne) {
-    //     // console.log('📥 Инициализируем оценки для борща:', borschOne);
-    //     // console.log('🎯 Все оценки начинаются как null - пользователь должен их заполнить');
-    //     // НЕ загружаем существующие оценки - пользователь должен поставить свои
-    //   }
-    // }, [borschOne]);
+   
     
     const handleGradeChange = (key, value) => {      
       setGrades((prev) => {
@@ -118,7 +105,7 @@ export const EvaluationsPage = ({ borschId: propId }) => {
       if (!isFormValid) {        
         return;      }
       
-      // Преобразуем ключи оценок в формат, который ожидает контекст
+      
       const ratingUpdates = {
         rating_meat: grades.meat,
         rating_beet: grades.beetroot,
@@ -128,7 +115,7 @@ export const EvaluationsPage = ({ borschId: propId }) => {
         rating_serving: grades.serving
       };    
       
-      // Сохраняем комментарий с оценками через контекст комментариев
+      
       if (borschOne) {
         const newComment = {
           id_borsch: id,
@@ -146,7 +133,7 @@ export const EvaluationsPage = ({ borschId: propId }) => {
       setIsActive((prev) => !prev);
     }, []);
     
-    // Проверяем, что данные загружены
+    
     if (!borschOne || !place) {
       return (
         <div className={style.wrapp}>

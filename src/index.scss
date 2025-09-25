@@ -1,4 +1,5 @@
 @use "./styles/mixin_font.scss" as *;
+@use "./styles/mixin_adaptiv.scss" as *;
 *,
 *::before,
 *::after {
@@ -8,8 +9,7 @@
 :root {
   --color-text-btn: #1A1A1A;
   --color-text-btn-active: #FFFFFF;
-  --color-bg-main: #F8F8F8;
-  //--color-bg-pages: #F8F8F8;
+  --color-bg-main: #F8F8F8; 
   --color-bg-grey: #F2F2F2; /* Grey/300 */
   --color-header-border: #DDDDDD; /*Grey/500 */
   --color-grey-400: #E9E9E9; /*Grey/400 */
@@ -38,12 +38,12 @@
 }
 
 main,html {
-  overflow-x: hidden;
-  // overflow-y: hidden;
+  overflow-x: hidden;  
   height: 100%;
+  @include respond(desktop) {
+    overflow-y: hidden;    
+  }
 }
-
-
 
 body {
   @include body;

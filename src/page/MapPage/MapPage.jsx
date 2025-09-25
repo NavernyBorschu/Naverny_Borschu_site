@@ -30,7 +30,7 @@ export const MapPage = ( )=> {
   });  
   const { places, loading: placesLoading, addPlace, updatePlacesBySearch, getFirstPlaceCenter, restoreAllPlaces } = usePlaces();
   const { borsch, loading: borschLoading } = useBorsch();
-  const { filters, setRestorePlaces, clearSearchQuery } = useFilters();
+  const { filters, setRestorePlaces, resetAllFilters} = useFilters();
 
   
   React.useEffect(() => {
@@ -168,7 +168,7 @@ export const MapPage = ( )=> {
             <div className={style.noResultsMessage}>
               <button 
                 className={style.closeButton}
-                onClick={() => clearSearchQuery()}
+                onClick={() => resetAllFilters()}
                 aria-label="Закрити повідомлення"
               >
                 ×

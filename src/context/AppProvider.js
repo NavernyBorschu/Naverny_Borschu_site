@@ -7,15 +7,15 @@ import { CommentsProvider } from './CommentsContext';
 export const AppProvider = ({ children }) => {
   return (
     <UserProvider>
-      <PlacesProvider>
-        <BorschProvider>
-          <CommentsProvider>
-            <FiltersProvider>
-              {children}
-            </FiltersProvider>
-          </CommentsProvider>
-        </BorschProvider>
-      </PlacesProvider>
+      <FiltersProvider>
+        <PlacesProvider>
+          <BorschProvider>
+            <CommentsProvider>              
+                {children}              
+            </CommentsProvider>
+          </BorschProvider>
+        </PlacesProvider>
+      </FiltersProvider>
     </UserProvider>
   );
 };
