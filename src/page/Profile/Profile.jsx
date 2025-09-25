@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {ButtonProfile} from '../../components/ButtonProfile';
 import {ModalLogout} from "../../components/ModalLogout";
 import {ModalPleaseRegister} from "../../components/ModalPleaseRegister/ModalPleaseRegister";
@@ -23,7 +23,8 @@ export const Profile = () => {
     const [activeButton, setActiveButton] = useState('profile'); // 'settings'
     const [showModal, setShowModal] = useState(false);
     const [showRegistrationModal, setShowRegistrationModal] = useState(false);
-     console.log(showRegistrationModal);
+    const navigate = useNavigate();
+     //console.log(showRegistrationModal);
      
 
     const user = JSON.parse(localStorage.getItem('userProfile'));
@@ -32,12 +33,8 @@ export const Profile = () => {
         return (
             <ModalPleaseRegister
                 onClose={() => setShowRegistrationModal(false)}
-                onRegisterPage={() => {
-                    window.location.href = '/register';
-                }}
-                onGoToMap={() => {
-                    window.location.href = '/';
-                }}
+                onRegisterPage={() => navigate('/register')}
+                onGoToMap={() => navigate('/')}
             />
         );
     }
@@ -66,7 +63,7 @@ export const Profile = () => {
         localStorage.removeItem("mode");
 
         setShowModal(false);
-        window.location.href = "/";
+        navigate("/");
     };
 
 
