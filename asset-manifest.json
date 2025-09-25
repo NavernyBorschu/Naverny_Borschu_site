@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Naverny_Borschu_site/static/css/main.f9ec19dd.css",
-    "main.js": "/Naverny_Borschu_site/static/js/main.2325a384.js",
+    "main.js": "/Naverny_Borschu_site/static/js/main.6406ba23.js",
     "static/media/logo.svg": "/Naverny_Borschu_site/static/media/logo.6162c19bb38f75c3108540758d673a6b.svg",
     "static/media/profile-advert-img.png": "/Naverny_Borschu_site/static/media/profile-advert-img.432cbcb78b836d3b9664.png",
     "static/media/beetroot.svg": "/Naverny_Borschu_site/static/media/beetroot.9112accab87ff858784a864d42bfc6e9.svg",
@@ -42,10 +42,10 @@
     "static/media/searchGray.svg": "/Naverny_Borschu_site/static/media/searchGray.1ee9574bc83066bcc987c1c197f7fe53.svg",
     "static/media/Button.svg": "/Naverny_Borschu_site/static/media/Button.52691bced03930c7ec5ff0dab841a503.svg",
     "main.f9ec19dd.css.map": "/Naverny_Borschu_site/static/css/main.f9ec19dd.css.map",
-    "main.2325a384.js.map": "/Naverny_Borschu_site/static/js/main.2325a384.js.map"
+    "main.6406ba23.js.map": "/Naverny_Borschu_site/static/js/main.6406ba23.js.map"
   },
   "entrypoints": [
     "static/css/main.f9ec19dd.css",
-    "static/js/main.2325a384.js"
+    "static/js/main.6406ba23.js"
   ]
 }
