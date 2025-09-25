@@ -1,9 +1,11 @@
-import layout from "../../styles/layout.module.scss";
-import typography from "../../styles/typography.module.css";
-import style from "../UserPasswordPage/UserPasswordPage.module.css";
+import {useState} from "react";
+import {Link} from "react-router-dom";
+import { ReactComponent as IconBack } from '../../assets/icons/arrow_back.svg';
 import {InputField} from "../../components/InputField";
 import {Button} from "../../components/Button";
-import {useState} from "react";
+import layout from "../../styles/layout.module.scss";
+import typography from "../../styles/typography.module.css";
+import style from "./PasswordChangePage.module.scss";
 
 export const PasswordChangePage = () => {
     const [currentPassword, setCurrentPassword] = useState('');
@@ -36,6 +38,7 @@ export const PasswordChangePage = () => {
     return (
         <div className={layout.wrapper}>
             <h2 className={`${typography.mobileTitle} ${style.title}`}>Зміна пароля</h2>
+            <Link className={style.back} to={`/profile`}><IconBack/></Link>
 
             <InputField
                 label='Поточний пароль' id='currentPassword' type='password' placeholder='Поточний пароль'

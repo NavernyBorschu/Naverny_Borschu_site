@@ -1,11 +1,13 @@
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import {AvatarUploader} from "../../components/AvatarUploader";
+import { ReactComponent as IconBack } from '../../assets/icons/arrow_back.svg';
 import {Button} from "../../components/Button";
 import {InputField} from "../../components/InputField";
 import Logo from '../../assets/images/logo.svg';
 import layout from '../../styles/layout.module.scss';
 import typography from '../../styles/typography.module.css';
-import style from './PersonalInfo.module.css';
+import style from './PersonalInfo.module.scss';
 
 export const PersonalInfo = () => {
     const [name, setName] = useState('');
@@ -46,6 +48,7 @@ export const PersonalInfo = () => {
     return (
         <div className={layout.wrapper}>
             <h1 className={typography.mobileTitle}>Особиста інформація</h1>
+            <Link className={style.back} to={`/profile`}><IconBack/></Link>
             <div className={style.infoContainer}>
 
                 <AvatarUploader initialAvatar={Logo} />

@@ -1,7 +1,9 @@
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {ButtonProfile} from '../../components/ButtonProfile';
 import {ModalLogout} from "../../components/ModalLogout";
+import {ModalPleaseRegister} from "../../components/ModalPleaseRegister/ModalPleaseRegister";
+import { ReactComponent as IconBack } from '../../assets/icons/arrow_back.svg';
 import Logo from '../../assets/images/logo.svg';
 import advertIcon from '../../assets/images/profile-advert-img.png';
 import personalInfoIcon from '../../assets/images/profile-personal-icon.png';
@@ -14,14 +16,15 @@ import policyIcon from '../../assets/images/profile-policy-icon.png';
 import arrowIcon from '../../assets/images/profile-arrow-icon.png';
 import layout from '../../styles/layout.module.scss';
 import typography from '../../styles/typography.module.css';
-import style from './Profile.module.css';
-import {ModalPleaseRegister} from "../../components/ModalPleaseRegister/ModalPleaseRegister";
+import style from './Profile.module.scss';
+
 
 export const Profile = () => {
     const [activeButton, setActiveButton] = useState('profile'); // 'settings'
     const [showModal, setShowModal] = useState(false);
     const [showRegistrationModal, setShowRegistrationModal] = useState(false);
-     console.log(showRegistrationModal);
+    const navigate = useNavigate();
+     //console.log(showRegistrationModal);
      
 
     const user = JSON.parse(localStorage.getItem('userProfile'));
@@ -30,12 +33,8 @@ export const Profile = () => {
         return (
             <ModalPleaseRegister
                 onClose={() => setShowRegistrationModal(false)}
-                onRegisterPage={() => {
-                    window.location.href = '/register';
-                }}
-                onGoToMap={() => {
-                    window.location.href = '/';
-                }}
+                onRegisterPage={() => navigate('/register')}
+                onGoToMap={() => navigate('/')}
             />
         );
     }
@@ -64,13 +63,14 @@ export const Profile = () => {
         localStorage.removeItem("mode");
 
         setShowModal(false);
-        window.location.href = "/";
+        navigate("/");
     };
 
 
     return (
         <div className={layout.wrapper}>
             <h1 className={typography.mobileTitle}>Мій профіль</h1>
+            <Link className={style.back} to={`/`}><IconBack/></Link>
             <div className={style.userHeader}>
                 <img src={Logo} alt='User avatar'/>
                 <div>

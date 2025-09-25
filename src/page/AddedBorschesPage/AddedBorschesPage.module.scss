@@ -1,3 +1,15 @@
+@use "../../styles/mixin_font.scss" as *;
+@use "../../styles/mixin_adaptiv.scss" as *;
+
+.back{
+    position: absolute;
+    top:20px;
+    left: 17px;
+    @include respond(desktop) {
+        display: none;
+    }
+}
+
 .wrapBorsch{
     margin-top: 24px;
     display: flex;
@@ -8,6 +20,7 @@
     width: 100%;
     padding: 0 16px;
 }
+
 .card{
     position: relative;
     background-color: var(--color-text-btn-active);
