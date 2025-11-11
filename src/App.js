@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import {MapPage} from "./page/MapPage";
 import {Login} from "./page/Login";
 import { Layout } from "./components/Layout";
@@ -27,7 +27,7 @@ import { AppProvider } from "./context/AppProvider";
 export default function App() {   
   return (
     <AppProvider>
-      <BrowserRouter  basename="/Naverny_Borschu_site">
+      <HashRouter>
       <Layout>              
           <Routes>          
             <Route path="/" element={<MapPage />} />
@@ -51,7 +51,7 @@ export default function App() {
             {/*<Route path="/profile/password" element={<UserPasswordPage/>}/>*/}            
           </Routes>
       </Layout>
-    </BrowserRouter> 
+    </HashRouter> 
     </AppProvider>        
   );
 }

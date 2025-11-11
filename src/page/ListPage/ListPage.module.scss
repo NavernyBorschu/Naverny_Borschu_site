@@ -1,7 +1,8 @@
 @use "../../styles//mixin_font.scss" as *;
 @use "../../styles/mixin_adaptiv.scss" as *;
 
-.pageList{
+.pageList{    
+    position: relative;
     display: flex;
     justify-content: center; 
     margin:0 auto ; 
@@ -23,7 +24,8 @@
     position: absolute;
     z-index: 99;
     top:90px;
-    left: 15%;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;     
     background-color: var(--color-text-btn-active);
     border-radius: 14px;
@@ -63,7 +65,8 @@
     position: absolute;
     z-index: 99; 
     top: 145px;  
-    left: 30%;
+	left: 50%;
+	transform: translateX(-50%);
     padding: 10px; 
     border-radius: 14px;
     @include footnote;     
@@ -73,24 +76,39 @@
         display: none;    
     }     
 }
-.wrappBorsch{
-    margin-top: 210px;
+.wrappBorsch{ 
+    position: absolute;  
+    top: 210px;
+	left: 50%;
+	transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
+    flex-direction: column;    
+	align-items: center;
     gap: 12px;
-    overflow-y: auto;
+    overflow-y: scroll;
     scrollbar-width: none;
-    width: 100%;
+	width: 100%;
     padding: 0 16px;
-    @include respond(desktop) {
-        margin-top: 180px; 
+    @include respond(tablet) {
+        top: 200px;
+		left: 50%;
+		transform: translateX(-50%);
     } 
+    @include respond(desktop) {        
+		left: 50%;
+		transform: translateX(-50%);        
+    } 
+    
 }
 .card{
     position: relative;
+	width: min(344px, 100%);
     background-color: var(--color-text-btn-active);
     border-radius: 12px;
     padding: 6px;  
+    @include respond(tablet) {
+		width: min(380px, 100%);
+    } 
 }
 
 .flex{

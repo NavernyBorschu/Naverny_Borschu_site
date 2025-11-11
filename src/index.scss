@@ -40,6 +40,7 @@
 main,html {
   overflow-x: hidden;  
   height: 100%;
+  width: 100%;
   @include respond(desktop) {
     overflow-y: hidden;    
   }
@@ -51,8 +52,9 @@ body {
   text-decoration: none;
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh; 
+  overflow-x: hidden;  
+  height: 100%;
+  width: 100%;
 }
 
 ul {

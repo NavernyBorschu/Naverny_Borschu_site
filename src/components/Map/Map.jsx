@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { GoogleMap } from "@react-google-maps/api";
+import React, { useCallback, useMemo, useState } from "react";
+import { GoogleMap, MarkerClustererF } from "@react-google-maps/api";
 import { defaultTheme } from "./Theme";
 import { CurrentLocationMarker } from "../CurrentLocationMarker/CurrentLocationMarker";
 import { Modal } from "../Modal/Modal";
@@ -7,6 +7,7 @@ import { Gallery } from "../Gallery/Gallary";
 import { useBorsch } from "../../context/BorschContext";
 import style from "./Map.module.scss";
 import { AddBorsch } from "../AddBorsch/AddBorsch";
+import beetRootIcon from "../../page/EvaluationsPage/beetroot.svg";
 
 const containerStyle = {
   width: "100%",
@@ -216,6 +217,15 @@ export const Map = ({ center, mode, places, onMarkerAdd }) => {
     return getAveragePlaceRating(placeId);
   };
 
+  // Кластеры: используем иконку свёклы из EvaluationsPage и белую цифру
+  const clusterStyles = useMemo(() => {
+    return [
+      { url: beetRootIcon, width: 40, height: 40, textColor: "#A71E5B", textSize: 20, anchorText: [0, 25] },
+      { url: beetRootIcon, width: 50, height: 50, textColor: "#A71E5B", textSize: 22, anchorText: [0, 25] },
+      { url: beetRootIcon, width: 60, height: 60, textColor: "#A71E5B", textSize: 24, anchorText: [0, 25] },
+    ];
+  }, []);
+
   return (
     <div className={style.container}>
       <GoogleMap
@@ -227,16 +237,29 @@ export const Map = ({ center, mode, places, onMarkerAdd }) => {
         options={defoultOptions}
         onClick={onClickMap}
       >
-        {places.map((pos) => (
-          <CurrentLocationMarker
-            key={pos.id}
-            position={pos.location}
-            id={pos.id}
-            onClick={onClickMarker}
-            grade={getAverageOverallRating(pos.id)}
-            zIndexBase={zoomLevel}
-          />
-        ))}
+        <MarkerClustererF
+          options={{
+            minimumClusterSize: 2,
+            gridSize: 50,
+            maxZoom: 19,
+            styles: clusterStyles
+          }}
+        >
+          {(clusterer) =>
+            places.map((pos) => (
+              <CurrentLocationMarker
+                key={pos.id}
+                position={pos.location}
+                id={pos.id}
+                onClick={onClickMarker}
+                grade={getAverageOverallRating(pos.id)}
+                zIndexBase={zoomLevel}
+                zoomLevel={zoomLevel}
+                clusterer={clusterer}
+              />
+            ))
+          }
+        </MarkerClustererF>
 
         {isActiveAbout && (
           <Modal onClose={onClickMarker}>
