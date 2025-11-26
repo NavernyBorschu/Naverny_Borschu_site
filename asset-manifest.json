@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Naverny_Borschu_site/static/css/main.e8d1cfa6.css",
-    "main.js": "/Naverny_Borschu_site/static/js/main.39eff6e1.js",
+    "main.css": "/Naverny_Borschu_site/static/css/main.5c3b6d40.css",
+    "main.js": "/Naverny_Borschu_site/static/js/main.48d3d8a9.js",
     "static/media/logo.svg": "/Naverny_Borschu_site/static/media/logo.6162c19bb38f75c3108540758d673a6b.svg",
     "static/media/profile-advert-img.png": "/Naverny_Borschu_site/static/media/profile-advert-img.432cbcb78b836d3b9664.png",
     "static/media/beetroot.svg": "/Naverny_Borschu_site/static/media/beetroot.9112accab87ff858784a864d42bfc6e9.svg",
@@ -13,6 +13,7 @@
     "static/media/lsicon_soup-filled.svg": "/Naverny_Borschu_site/static/media/lsicon_soup-filled.6412d5c987eda7bd320faa89a630d4dc.svg",
     "static/media/fxemoji_smiletongue.svg": "/Naverny_Borschu_site/static/media/fxemoji_smiletongue.f9831f509c909056815cd6844b05a001.svg",
     "static/media/fxemoji_angry.svg": "/Naverny_Borschu_site/static/media/fxemoji_angry.66ba5847f6b8213f1a197c572ae1de77.svg",
+    "static/media/restaurant.svg": "/Naverny_Borschu_site/static/media/restaurant.90a696e4383496ef297499c2f3c9d092.svg",
     "static/media/filter.svg": "/Naverny_Borschu_site/static/media/filter.89fc6001d4de75f546bddf979a5d101d.svg",
     "static/media/filterActive.svg": "/Naverny_Borschu_site/static/media/filterActive.835abde8985ea4b11cd96dd4c6cee3a7.svg",
     "static/media/like.svg": "/Naverny_Borschu_site/static/media/like.dbeb6ed92db080b163756c2278537c66.svg",
@@ -41,11 +42,11 @@
     "static/media/search.svg": "/Naverny_Borschu_site/static/media/search.2dd25b2aa8f31ea65704b265b1e46f5f.svg",
     "static/media/searchGray.svg": "/Naverny_Borschu_site/static/media/searchGray.1ee9574bc83066bcc987c1c197f7fe53.svg",
     "static/media/Button.svg": "/Naverny_Borschu_site/static/media/Button.52691bced03930c7ec5ff0dab841a503.svg",
-    "main.e8d1cfa6.css.map": "/Naverny_Borschu_site/static/css/main.e8d1cfa6.css.map",
-    "main.39eff6e1.js.map": "/Naverny_Borschu_site/static/js/main.39eff6e1.js.map"
+    "main.5c3b6d40.css.map": "/Naverny_Borschu_site/static/css/main.5c3b6d40.css.map",
+    "main.48d3d8a9.js.map": "/Naverny_Borschu_site/static/js/main.48d3d8a9.js.map"
   },
   "entrypoints": [
-    "static/css/main.e8d1cfa6.css",
-    "static/js/main.39eff6e1.js"
+    "static/css/main.5c3b6d40.css",
+    "static/js/main.48d3d8a9.js"
   ]
 }
