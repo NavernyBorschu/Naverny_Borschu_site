@@ -9,12 +9,14 @@ export const FotoBorschGallary = ({ images, height}) => {
   };
 
 
+  if (!images || images.length === 0) return null;
+
   return (
     <div className={style.gallery}>
       <div style={{height:`${height}`}}>        
         <img
-          src={`${process.env.PUBLIC_URL}/${images[currentIndex]}`}
-          alt={`Slide ${currentIndex}`}
+          src={images[currentIndex]?.startsWith('http') ? images[currentIndex] : `https://map.navernyborshchu.com${images[currentIndex]}`}
+          alt={images[currentIndex]?.split('/').pop() || 'Фото борща'}
           className={style.image}
         />       
         <div className={style.dots}>

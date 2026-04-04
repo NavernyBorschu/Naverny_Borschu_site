@@ -22,6 +22,8 @@ export const SelectPlacePageFinish = () => {
     weight: null,
     photo_urls: []
   });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   if (!state) {
     return (
@@ -54,15 +56,67 @@ export const SelectPlacePageFinish = () => {
     fileInputRef.current.click();
   };
 
-  const isFormValid = Object.values(newBorsch).every((val) => val !== null && val !== "");
+  const isFormValid = newBorsch.name && newBorsch.meat;
 
-  const handleSubmitForm = (e) => {
+  const API_BASE = process.env.REACT_APP_API_URL || 'https://api.navernyborshchu.com/api';
+
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
-    if (!isFormValid) return;
-    const data = { ...newBorsch };
-    // todo відправка на сервер
-    console.log("Відправлено:", data);
-    navigate("/");
+    if (!isFormValid || submitting) return;
+    setSubmitting(true);
+    setSubmitError('');
+
+    try {
+      // Step 1: Create or find place
+      let placeId = null;
+      const searchRes = await fetch(`${API_BASE}/places/?search=${encodeURIComponent(place.name)}`);
+      const searchData = await searchRes.json();
+      const existing = (searchData.results || []).find(p => p.name === place.name);
+
+      if (existing) {
+        placeId = existing.id;
+      } else {
+        const placeRes = await fetch(`${API_BASE}/places/`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: place.name,
+            address: `${street}, ${city}`,
+            city: city,
+            type: place.type || '',
+            latitude: place.location?.lat || 0,
+            longitude: place.location?.lng || 0,
+          }),
+        });
+        if (!placeRes.ok) throw new Error('Не вдалося створити заклад');
+        const placeData = await placeRes.json();
+        placeId = placeData.id;
+      }
+
+      // Step 2: Create borsch
+      const borschRes = await fetch(`${API_BASE}/borsches/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: newBorsch.name,
+          place: placeId,
+          type_meat: newBorsch.meat,
+          price: newBorsch.price ? parseFloat(newBorsch.price) : null,
+          grams: newBorsch.weight ? parseInt(newBorsch.weight) : null,
+          date: new Date().toISOString(),
+        }),
+      });
+      if (!borschRes.ok) throw new Error('Не вдалося додати борщ');
+      const borschData = await borschRes.json();
+
+      // Notify context to refresh
+      window.dispatchEvent(new Event('borschDataUpdated'));
+      navigate(`/#/borsch/${borschData.id}`);
+    } catch (err) {
+      setSubmitError(err.message || 'Помилка. Спробуйте ще раз.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const { place, street, city } = state;
@@ -153,10 +207,11 @@ export const SelectPlacePageFinish = () => {
             ))}
           </div>
         </div>
+        {submitError && <p style={{ color: 'red', fontSize: 13, marginBottom: 8 }}>{submitError}</p>}
         <Button
           type="submit"
-          name="Продовжити"
-          disabled={!isFormValid}
+          name={submitting ? 'Зберігаємо...' : 'Додати борщ'}
+          disabled={!isFormValid || submitting}
         />
       </form>
       </div>     

@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import { placesAPI } from '../api';
 import placesData from '../data/places.json';
 
 const PlacesContext = createContext();
@@ -6,27 +7,27 @@ const PlacesContext = createContext();
 export const PlacesProvider = ({ children }) => {
   const [places, setPlaces] = useState([]);
   const [loading, setLoading] = useState(true);
+  const allPlacesRef = useRef([]);
 
-  // Загрузка данных при инициализации
   useEffect(() => {
-    // Проверяем, есть ли сохраненные отфильтрованные места
     const savedFilteredPlaces = localStorage.getItem('filteredPlaces');
     const savedFilters = localStorage.getItem('borschFilters');
-    
+
     if (savedFilteredPlaces && savedFilters) {
       try {
         const parsedFilteredPlaces = JSON.parse(savedFilteredPlaces);
         const parsedFilters = JSON.parse(savedFilters);
-        
-        // Проверяем, что есть активный поиск
+
         if (parsedFilters.searchQuery && parsedFilters.searchQuery.trim() !== '') {
           setPlaces(parsedFilteredPlaces);
           setLoading(false);
+          // Still load full data in background for search base
+          loadPlacesData(true);
         } else {
           loadPlacesData();
         }
       } catch (error) {
-        console.error('❌ Ошибка восстановления:', error);
+        console.error('Ошибка восстановления:', error);
         loadPlacesData();
       }
     } else {
@@ -34,85 +35,85 @@ export const PlacesProvider = ({ children }) => {
     }
   }, []);
 
-  // Загрузка данных из исходного JSON (всегда полный список)
-  const loadPlacesData = () => {
+  const loadPlacesData = async (backgroundOnly = false) => {
     try {
-      setPlaces(placesData);
-      localStorage.setItem('places', JSON.stringify(placesData));
+      const apiPlaces = await placesAPI.getAll();
+      allPlacesRef.current = apiPlaces;
+      if (!backgroundOnly) {
+        setPlaces(apiPlaces);
+      }
+      localStorage.setItem('places', JSON.stringify(apiPlaces));
     } catch (error) {
-      console.error('❌ Ошибка загрузки данных мест:', error);
-      setPlaces(placesData);
+      console.error('API error, falling back to local data:', error);
+      // Fallback: try localStorage, then JSON
+      const stored = localStorage.getItem('places');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        allPlacesRef.current = parsed;
+        if (!backgroundOnly) setPlaces(parsed);
+      } else {
+        allPlacesRef.current = placesData;
+        if (!backgroundOnly) setPlaces(placesData);
+        localStorage.setItem('places', JSON.stringify(placesData));
+      }
     } finally {
-      setLoading(false);
+      if (!backgroundOnly) setLoading(false);
     }
   };
 
-  // Получение места по ID
   const getPlaceById = (id) => {
-    return places.find(place => place.id === id);
+    return places.find(place => String(place.id) === String(id));
   };
 
-  // Получение всех мест
   const getAllPlaces = () => {
     return places;
   };
 
-  // Получение мест по типу
   const getPlacesByType = (type) => {
     return places.filter(place => place.type === type);
   };
 
-  // Получение мест по городу
   const getPlacesByCity = (city) => {
     return places.filter(place => place.city === city);
   };
 
-  // Поиск мест по названию (регистронезависимый)
   const searchPlacesByName = useCallback((searchQuery) => {
     if (!searchQuery || searchQuery.trim() === '') {
-      // Если поиск пустой, очищаем отфильтрованных места и возвращаем все
       localStorage.removeItem('filteredPlaces');
       return places;
     }
-    
+
     const query = searchQuery.toLowerCase().trim();
-    
-    // Ищем только по полю name
-    const filteredPlaces = places.filter(place => 
+    const source = allPlacesRef.current.length > 0 ? allPlacesRef.current : places;
+    const filteredPlaces = source.filter(place =>
       place.name && place.name.toLowerCase().includes(query)
     );
-    
-    // Сохраняем отфильтрованные места в localStorage
+
     localStorage.setItem('filteredPlaces', JSON.stringify(filteredPlaces));
-    
     return filteredPlaces;
   }, [places]);
 
-
-
-  // Обновление мест по поисковому запросу
   const updatePlacesBySearch = useCallback((searchQuery) => {
     if (!searchQuery || searchQuery.trim() === '') {
-      // Если поиск пустой, загружаем все места обратно
-      loadPlacesData();
+      // Restore all places
+      const all = allPlacesRef.current.length > 0 ? allPlacesRef.current : places;
+      setPlaces(all);
+      localStorage.setItem('places', JSON.stringify(all));
+      localStorage.removeItem('filteredPlaces');
       return;
     }
-    
+
     const query = searchQuery.toLowerCase().trim();
-    
-    // Всегда фильтруем по исходным данным из JSON
-    const filteredPlaces = placesData.filter(place => 
+    const source = allPlacesRef.current.length > 0 ? allPlacesRef.current : places;
+    const filteredPlaces = source.filter(place =>
       place.name && place.name.toLowerCase().includes(query)
     );
-    
-    // Обновляем основной массив places отфильтрованными данными
+
     setPlaces(filteredPlaces);
-    // Сохраняем в localStorage
     localStorage.setItem('places', JSON.stringify(filteredPlaces));
     localStorage.setItem('filteredPlaces', JSON.stringify(filteredPlaces));
-  }, []);
+  }, [places]);
 
-  // Получение центра первого элемента отфильтрованного массива
   const getFirstPlaceCenter = useCallback(() => {
     if (places.length > 0 && places[0].location) {
       return places[0].location;
@@ -120,14 +121,12 @@ export const PlacesProvider = ({ children }) => {
     return null;
   }, [places]);
 
-  // При изменении places (например, после фильтрации) обновляем localStorage
   useEffect(() => {
     if (places.length > 0) {
       localStorage.setItem('places', JSON.stringify(places));
     }
   }, [places]);
 
-  // Добавление нового места
   const addPlace = (newPlace) => {
     const placeWithId = {
       ...newPlace,
@@ -137,24 +136,23 @@ export const PlacesProvider = ({ children }) => {
 
     const updatedPlaces = [...places, placeWithId];
     setPlaces(updatedPlaces);
+    allPlacesRef.current = [...allPlacesRef.current, placeWithId];
     localStorage.setItem('places', JSON.stringify(updatedPlaces));
-    
+
     return placeWithId;
   };
 
-  // Обновление места
   const updatePlace = (id, updates) => {
-    const updatedPlaces = places.map(place => 
-      place.id === id ? { ...place, ...updates, updated_at: new Date().toISOString() } : place
+    const updatedPlaces = places.map(place =>
+      String(place.id) === String(id) ? { ...place, ...updates, updated_at: new Date().toISOString() } : place
     );
-    
+
     setPlaces(updatedPlaces);
     localStorage.setItem('places', JSON.stringify(updatedPlaces));
   };
 
-  // Удаление места
   const deletePlace = (id) => {
-    const updatedPlaces = places.filter(place => place.id !== id);
+    const updatedPlaces = places.filter(place => String(place.id) !== String(id));
     setPlaces(updatedPlaces);
     localStorage.setItem('places', JSON.stringify(updatedPlaces));
   };
@@ -173,7 +171,7 @@ export const PlacesProvider = ({ children }) => {
     updatePlace,
     deletePlace,
     loadPlacesData,
-    restoreAllPlaces: loadPlacesData
+    restoreAllPlaces: () => loadPlacesData()
   };
 
   return (

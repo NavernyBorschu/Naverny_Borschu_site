@@ -99,34 +99,43 @@ export const EvaluationsPage = ({ borschId: propId }) => {
       });
     };
 
-      const handleSubmitForm = (e) => {
-      e.preventDefault();      
-      setIsSent((prev) => !prev);
-      if (!isFormValid) {        
-        return;      }
-      
-      
-      const ratingUpdates = {
+      const handleSubmitForm = async (e) => {
+      e.preventDefault();
+      if (!isFormValid) return;
+
+      const payload = {
+        borschi: Number(id),
         rating_meat: grades.meat,
         rating_beet: grades.beetroot,
         rating_density: grades.density,
         rating_salt: grades.salt,
         rating_aftertaste: grades.aftertaste,
-        rating_serving: grades.serving
-      };    
-      
-      
-      if (borschOne) {
-        const newComment = {
-          id_borsch: id,
-          messege: comment,
-          ...ratingUpdates,
-          overall_rating: grades.overall?.toString() || "5.0"
-        };         
-        addComment(newComment);        
-      } else {
-        console.log("❌ Данные борща не найдены");
-      }      
+        rating_serving: grades.serving,
+        overall_rating: grades.overall || 5,
+      };
+
+      try {
+        const res = await fetch(`${process.env.REACT_APP_API_URL || 'https://api.navernyborshchu.com/api'}/ratings/`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error(await res.text());
+        // Also save comment locally for UI
+        if (comment.trim() && borschOne) {
+          addComment({ id_borsch: id, messege: comment, overall_rating: grades.overall?.toString() || '5.0' });
+        }
+        // Save to rated list
+        const ratedIds = JSON.parse(localStorage.getItem('ratedBorsch') || '[]');
+        if (!ratedIds.includes(String(id))) {
+          localStorage.setItem('ratedBorsch', JSON.stringify([...ratedIds, String(id)]));
+        }
+        window.dispatchEvent(new Event('borschDataUpdated'));
+        setIsSent(true);
+      } catch (err) {
+        console.error('❌ Помилка збереження оцінки:', err);
+        alert('Не вдалося зберегти оцінку. Спробуйте ще раз.');
+      }
     };
 
     const onCloseForm = useCallback(() => {

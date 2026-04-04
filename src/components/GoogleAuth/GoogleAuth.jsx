@@ -3,7 +3,7 @@ import {FcGoogle} from "react-icons/fc";
 import {MODES} from '../../components/Map/Map';
 import style from "./GoogleAuth.module.css";
 
-export const GoogleAuth = ({onSuccess}) => {
+export const GoogleAuth = ({onSuccess, disabled = false}) => {
 
     const login = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
@@ -35,7 +35,13 @@ export const GoogleAuth = ({onSuccess}) => {
     });
 
     return (
-        <button className={style.googleBtn} onClick={() => login()}>
+        <button
+            className={style.googleBtn}
+            onClick={() => !disabled && login()}
+            disabled={disabled}
+            style={disabled ? { opacity: 0.4, cursor: 'not-allowed' } : {}}
+            title={disabled ? 'Погодьтесь з умовами користування' : ''}
+        >
             <FcGoogle size={24} className={style.googleIcon}/>
         </button>
     )

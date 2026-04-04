@@ -231,3 +231,29 @@
   align-items: center;
   gap:36px;
 }
+.userBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 24px;
+  transition: background 0.2s;
+  &:hover { background: rgba(0,0,0,0.06); }
+}
+
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-text-active);
+}
+
+.userName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-btn);
+}

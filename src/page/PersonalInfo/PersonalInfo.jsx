@@ -9,18 +9,34 @@ import layout from '../../styles/layout.module.scss';
 import typography from '../../styles/typography.module.css';
 import style from './PersonalInfo.module.scss';
 
+// Map Google locale codes to country names
+const localeToCountry = {
+  'uk': 'Україна', 'en': 'USA', 'en-US': 'USA', 'en-GB': 'UK',
+  'pl': 'Польща', 'de': 'Німеччина', 'fr': 'Франція',
+  'es': 'Іспанія', 'it': 'Італія', 'cs': 'Чехія',
+  'sk': 'Словаччина', 'hu': 'Угорщина', 'ro': 'Румунія',
+  'bg': 'Болгарія', 'ru': 'Росія', 'be': 'Білорусь',
+  'he': 'Ізраїль', 'lt': 'Литва', 'lv': 'Латвія', 'et': 'Естонія',
+};
+
 export const PersonalInfo = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [country, setCountry] = useState('');
+    const [avatar, setAvatar] = useState(Logo);
+    const [saved, setSaved] = useState(false);
 
-    // ✅ Load user from localStorage on mount
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem("userProfile"));
         if (storedUser) {
             setName(storedUser.given_name || storedUser.name || '');
             setEmail(storedUser.email || '');
-            setCountry(storedUser.locale || '');
+            // Auto-fill country from Google locale
+            const locale = storedUser.locale || '';
+            const autoCountry = localeToCountry[locale] || localeToCountry[locale.split('-')[0]] || '';
+            setCountry(storedUser.country || autoCountry);
+            // Use Google avatar
+            if (storedUser.picture) setAvatar(storedUser.picture);
         }
     }, []);
 
@@ -28,21 +44,11 @@ export const PersonalInfo = () => {
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
-
-        console.log(name, email, country);
-
-        const updatedUser = {
-            given_name: name,
-            email,
-            country,
-            picture: JSON.parse(localStorage.getItem("userProfile"))?.picture || ''
-        };
-
-        // ✅ Save back to localStorage
+        const existing = JSON.parse(localStorage.getItem("userProfile")) || {};
+        const updatedUser = { ...existing, given_name: name, email, country };
         localStorage.setItem("userProfile", JSON.stringify(updatedUser));
-
-        console.log("Updated user:", updatedUser);
-        alert("Зміни збережені ✅");
+        setSaved(true);
+        setTimeout(() => setSaved(false), 2500);
     }
 
     return (
@@ -51,7 +57,7 @@ export const PersonalInfo = () => {
             <Link className={style.back} to={`/profile`}><IconBack/></Link>
             <div className={style.infoContainer}>
 
-                <AvatarUploader initialAvatar={Logo} />
+                <AvatarUploader initialAvatar={avatar} />
 
                 <div>
                     <h2 className={typography.mobileTitleSmall}>{name || "Ім'я"}</h2>
@@ -87,7 +93,7 @@ export const PersonalInfo = () => {
                     onChange={e => setCountry(e.target.value)}
                 />
 
-                <Button type='submit' name='Зберегти' disabled={!isFormFilled}/>
+                <Button type='submit' name={saved ? 'Збережено ✅' : 'Зберегти'} disabled={!isFormFilled}/>
             </form>
         </div>
     )

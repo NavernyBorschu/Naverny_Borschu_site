@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
 import { ButtonVertion } from "../../components/ButtonVersion";
 import { ReactComponent as IconLike } from './like.svg';
 import { ReactComponent as IconLink } from './link.svg';
 import { FotoBorschGallary } from "../../components/FotoBorschGallary";
 import { RatingIconsSvg } from "../../components/RatingIconsSvg";
-import borsch from '../../data/borsch.json';
-import data from '../../data/places.json';
+import { useBorsch } from '../../context/BorschContext';
+import { usePlaces } from '../../context/PlacesContext';
 import style from "./List.module.scss";
 
 const fallbackCopy = (text) => {
@@ -20,21 +21,34 @@ const fallbackCopy = (text) => {
 
 export const List = () => {
   const navigate = useNavigate();
+  const { getAllBorsch } = useBorsch();
+  const { getPlaceById } = usePlaces();
+  const [borschList, setBorschList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const all = await getAllBorsch();
+      // Show only rated borsch (stored in localStorage)
+      const ratedIds = JSON.parse(localStorage.getItem('ratedBorsch') || '[]');
+      const filtered = ratedIds.length > 0 ? all.filter(b => ratedIds.includes(String(b.id_borsch))) : [];
+      setBorschList(filtered);
+      setLoading(false);
+    };
+    loadData();
+  }, [getAllBorsch]);
 
   const onClickCard = (borschId) => {
-    navigate(`/borsch/${borschId}`);
-
+    navigate(`/#/borsch/${borschId}`);
   };
 
-
-
   const nameBorsch = (place_id) => {
-    const place = data.find(i => String(i.id) === String(place_id));
+    const place = getPlaceById(place_id);
     return place ? place.name : "Невідоме місце";
   };
 
   const handleCopyAndShare = (id_borsch) => {
-  const url = `${window.location.origin}/borsch/${id_borsch}`;
+  const url = `${window.location.origin}/#/borsch/${id_borsch}`;
 
   
   if (navigator.share) {
@@ -72,8 +86,16 @@ export const List = () => {
   return (
     <div className={style.page}>
       <h2 className={style.title}>Мої відгуки</h2>
+      {loading && <p>Завантаження...</p>}
+      {!loading && borschList.length === 0 && (
+        <div style={{ padding: '32px 16px', textAlign: 'center', opacity: 0.6 }}>
+          <p style={{ fontSize: 32 }}>📝</p>
+          <p>Поки немає відгуків</p>
+          <p style={{ fontSize: 13 }}>Оцініть борщ, і вони з’являться тут</p>
+        </div>
+      )}
       <div className={style.wrappBorsch}>
-        {borsch.map((el, index) => (
+        {borschList.map((el, index) => (
           <div key={index} className={style.card}>
             <FotoBorschGallary images={el.photo_urls} height={"120px"} />
             <div className={style.box}>

@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import {Link} from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ReactComponent as IconSearch } from './search.svg';
 import { ReactComponent as IconSearchGray } from './searchGray.svg';
 import { ReactComponent as IconFilter } from './filter.svg';
@@ -15,7 +15,22 @@ import style from "./Filters.module.scss";
 
 export const Filters = () => {
   const [isActiveFilter, setIsActiveFilter] = useState(false);
-  const location = useLocation();  
+  const [user, setUser] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('userProfile')); } catch { return null; }
+  });
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Re-check auth when storage changes (after login/logout)
+  useEffect(() => {
+    const onStorage = () => {
+      try { setUser(JSON.parse(localStorage.getItem('userProfile'))); } catch { setUser(null); }
+    };
+    window.addEventListener('storage', onStorage);
+    // Also poll — same-tab login won't fire 'storage'
+    const interval = setInterval(onStorage, 1000);
+    return () => { window.removeEventListener('storage', onStorage); clearInterval(interval); };
+  }, []);  
   const { 
     filters, 
     updateSearchQuery, 
@@ -94,8 +109,24 @@ export const Filters = () => {
           </button>
         )}
         </div>  
-        <div  className={style.desctop}>
-          <Link to="/register"  className={style.btnReg}>Зареєструватись</Link> 
+        <div className={style.desctop}>
+          {user ? (
+            <button
+              className={style.userBtn}
+              onClick={() => navigate('/profile')}
+              title={user.email}
+            >
+              <img
+                src={user.picture || '/avatar.png'}
+                alt={user.name}
+                className={style.userAvatar}
+                onError={(e) => { e.target.src = '/avatar.png'; }}
+              />
+              <span className={style.userName}>{user.given_name || user.name}</span>
+            </button>
+          ) : (
+            <Link to="/register" className={style.btnReg}>Зареєструватись</Link>
+          )}
         </div> 
         <GeoButton />              
       </div> 

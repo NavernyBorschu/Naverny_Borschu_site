@@ -4,8 +4,9 @@ import { ReactComponent as IconLikeActive } from './likeActive.svg';
 import { ReactComponent as IconLink } from './link.svg';
 import { FotoBorschGallary } from "../../components/FotoBorschGallary";
 import { RatingIconsSvg } from "../../components/RatingIconsSvg";
-import borsch from '../../data/borsch.json';
-import data from '../../data/places.json';
+import { useBorsch } from '../../context/BorschContext';
+import { usePlaces } from '../../context/PlacesContext';
+import { useState, useEffect } from 'react';
 import style from "./LikeBorsch.module.scss";
 
 const fallbackCopy = (text) => {
@@ -21,16 +22,41 @@ const fallbackCopy = (text) => {
 
 export const LikeBorsch=()=>{   
   const navigate = useNavigate();
+  const { getAllBorsch } = useBorsch();
+  const { getPlaceById } = usePlaces();
+  const [borschList, setBorschList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const all = await getAllBorsch();
+      // Show only liked borsch (stored in localStorage as array of ids)
+      const likedIds = JSON.parse(localStorage.getItem('likedBorsch') || '[]');
+      const filtered = likedIds.length > 0 ? all.filter(b => likedIds.includes(String(b.id_borsch))) : [];
+      setBorschList(filtered);
+      setLoading(false);
+    };
+    loadData();
+  }, [getAllBorsch]);
+
   const onClickCard = (borschId) => {
-    navigate(`/borsch/${borschId}`);
+    navigate(`/#/borsch/${borschId}`);
   };
-  const nameBorsch=(place_id)=>{  
-    const place = data.find(i => String(i.id) === String(place_id));   
+
+  const handleUnlike = (borschId) => {
+    const likedIds = JSON.parse(localStorage.getItem('likedBorsch') || '[]');
+    const updated = likedIds.filter(id => id !== String(borschId));
+    localStorage.setItem('likedBorsch', JSON.stringify(updated));
+    setBorschList(prev => prev.filter(b => String(b.id_borsch) !== String(borschId)));
+  };
+  
+  const nameBorsch = (place_id) => {
+    const place = getPlaceById(place_id);
     return place ? place.name : "Невідоме місце";
-  }  
+  };  
 
    const handleCopyAndShare = (id_borsch) => {
-    const url = `${window.location.origin}/borsch/${id_borsch}`;
+    const url = `${window.location.origin}/#/borsch/${id_borsch}`;
 
     // Если Web Share API поддерживается — вызываем нативное окно
     if (navigator.share) {
@@ -70,8 +96,16 @@ export const LikeBorsch=()=>{
   return( 
     <div className={style.page}>
       <h2 className={style.title}>Обране</h2>        
+        {loading && <p>Завантаження...</p>}
+        {!loading && borschList.length === 0 && (
+          <div style={{ padding: '32px 16px', textAlign: 'center', opacity: 0.6 }}>
+            <p style={{ fontSize: 32 }}>🍲</p>
+            <p>Поки немає обраних борщів</p>
+            <p style={{ fontSize: 13 }}>Натисніть ♥ на борщі, що сподобались</p>
+          </div>
+        )}
         <div className={style.wrappBorsch}>
-            {borsch.map((el,index)=>{                   
+            {borschList.map((el,index)=>{                   
               return (
                 <div key={index} className={style.card}>
                   <FotoBorschGallary images={el.photo_urls} height={"120px"}/>                  
@@ -83,7 +117,7 @@ export const LikeBorsch=()=>{
                     />
                     <ButtonVertion
                       type="button"
-                      onClick={()=>console.log("Тут буде функція яка змінює ключ лайку")}
+                      onClick={() => handleUnlike(el.id_borsch)}
                       icon={IconLikeActive}
                     />
                   </div>                  

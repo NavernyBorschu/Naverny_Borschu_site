@@ -2,7 +2,10 @@ import styles from "./ProgressLine.module.scss";
 
 export const ProgressLine = ({ title, icon: Icon, value }) => {
   const maxValue = 10;
-  const percent = Math.min(Math.max(value, 0), maxValue) * 10;
+  // Handle non-numeric values (like "—")
+  const numericValue = parseFloat(value);
+  const displayValue = isNaN(numericValue) ? value : numericValue;
+  const percent = isNaN(numericValue) ? 0 : Math.min(Math.max(numericValue, 0), maxValue) * 10;
 
   return (
     <div className={styles.wrapper}>

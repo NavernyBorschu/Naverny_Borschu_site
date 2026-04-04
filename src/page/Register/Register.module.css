@@ -1,12 +1,17 @@
 
 .title {
     margin-top: 50px;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
 }
 
 .linkRedirect {
-    margin-top: 157px;
-    margin-bottom: 37px;
+    margin-top: 24px;
+    margin-bottom: 0;
+}
+
+.googleBtnWrapper {
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 
 .checkboxWrapper {

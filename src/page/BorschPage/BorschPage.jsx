@@ -10,6 +10,7 @@ import { ReactComponent as IconServing } from './serving.svg';
 import { ReactComponent as IconArrowLeft } from './arrow_left.svg';
 import { ReactComponent as IconArrowRight } from './arrow_right.svg';
 import { ReactComponent as IconLike } from './like.svg';
+import { ReactComponent as IconLikeActive } from './like.svg';
 import { ReactComponent as IconLink } from './link.svg';
 import { ButtonVertion } from "../../components/ButtonVersion";
 import { RatingIconsSvg } from "../../components/RatingIconsSvg";
@@ -34,12 +35,24 @@ const fallbackCopy = (text) => {
 };
 export const BorschPage=({ borschId: propId })=>{
   const [currentPage, setCurrentPage] = useState(0); const commentsPerPage = 2;
+  const [isLiked, setIsLiked] = useState(() => {
+    const liked = JSON.parse(localStorage.getItem('likedBorsch') || '[]');
+    return liked.includes(String(propId));
+  });
+
+  const handleToggleLike = (borschId) => {
+    const liked = JSON.parse(localStorage.getItem('likedBorsch') || '[]');
+    const id = String(borschId);
+    const updated = liked.includes(id) ? liked.filter(i => i !== id) : [...liked, id];
+    localStorage.setItem('likedBorsch', JSON.stringify(updated));
+    setIsLiked(!liked.includes(id));
+  };
     const params = useParams();
     const  id = propId || params?.borschId;
     const navigate = useNavigate();
 
-    const { getBorschById } = useBorsch();
-    const { getPlaceById } = usePlaces();
+    const { getBorschById, loading: borschLoading } = useBorsch();
+    const { getPlaceById, loading: placesLoading } = usePlaces();
     const { getCommentsByBorschId } = useComments();
    
       if (!id) {
@@ -56,10 +69,19 @@ export const BorschPage=({ borschId: propId })=>{
     const borschComents = getCommentsByBorschId(id);
 
   
-    if (!borschOne || !place) {
+    if (borschLoading || placesLoading) {
       return (
         <div className={style.BorschPage}>
           <p>Завантаження борща...</p>
+        </div>
+      );
+    }
+
+    if (!borschOne || !place) {
+      return (
+        <div className={style.BorschPage}>
+          <p>Борщ не знайдено</p>
+          <button onClick={() => navigate('/')} className={style.btn}>На головну</button>
         </div>
       );
     }
@@ -124,7 +146,7 @@ export const BorschPage=({ borschId: propId })=>{
     }
 
     const handleCopyAndShare = (id_borsch) => {
-  const url = `${window.location.origin}/borsch/${id_borsch}`;
+  const url = `${window.location.origin}/#/borsch/${id_borsch}`;
 
  
   if (navigator.share) {
@@ -176,8 +198,9 @@ export const BorschPage=({ borschId: propId })=>{
                     />
                     <ButtonVertion
                         type="button"
-                        onClick={()=>console.log("Тут буде функція яка змінює ключ лайку")}
-                        icon={IconLike}
+                        onClick={() => handleToggleLike(borschOne.id_borsch)}
+                        icon={isLiked ? IconLikeActive : IconLike}
+                        style={isLiked ? { filter: 'invert(27%) sepia(82%) saturate(700%) hue-rotate(330deg)' } : {}}
                     />
                 </div>                
                 {borschOne && <FotoBorschGallary images={borschOne.photo_urls} height={"215px"}/>}                

@@ -55,9 +55,9 @@ export const Profile = () => {
     ];
 
     const linksForSettingsBtn = [
-        {path: '/about', label: 'Про додаток', icon: aboutIcon},
+        {path: '/app-guide', label: 'Про додаток', icon: aboutIcon},
         {path: '/help', label: 'Help', icon: helpIcon},
-        {path: '/profile/policy', label: 'Політика конфіденційності', icon: policyIcon},
+        {path: '/faq', label: 'Політика конфіденційності', icon: policyIcon},
     ]
 
     const activeLinks = activeButton === 'profile' ? linksForProfileBtn : linksForSettingsBtn;
@@ -218,9 +218,15 @@ export const Profile = () => {
                     <h1 className={typography.mobileTitle}>Мій профіль</h1>
                     <Link className={style.back} to={`/`}><IconBack/></Link>
                     <div className={style.userHeader}>
-                        <img src={Logo} alt='User avatar'/>
+                        <img
+                            src={user.picture || Logo}
+                            alt='User avatar'
+                            onError={(e) => { e.target.src = Logo; }}
+                            style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover' }}
+                        />
                         <div>
-                            <h2 className={typography.mobileTitleSmall}>{user.given_name}</h2>
+                            <h2 className={typography.mobileTitleSmall}>{user.given_name || user.name}</h2>
+                            <p style={{ fontSize: 13, color: '#888', margin: 0 }}>{user.email}</p>
                         </div>
                     </div>
 

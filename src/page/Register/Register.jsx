@@ -24,14 +24,6 @@ export const Register = () => {
             <Logo/>
             <h2 className={`${typography.mobileTitle} ${style.title}`}>Реєстрація</h2>
 
-            <GoogleAuth onSuccess={handleGoogleSuccess}/>
-
-            <p className={style.linkRedirect}>Вже маєте акаунт? <Link to="/login" className={typography.mobileBtn}>
-                Вхід
-            </Link>
-            </p>
-
-
             <label className={style.checkboxWrapper}>
                 <input
                     type="checkbox"
@@ -53,6 +45,13 @@ export const Register = () => {
           </Link>
         </span>
             </label>
+
+            <GoogleAuth onSuccess={handleGoogleSuccess} disabled={!accepted}/>
+
+            <p className={style.linkRedirect}>Вже маєте акаунт? <Link to="/login" className={typography.mobileBtn}>
+                Вхід
+            </Link>
+            </p>
 
             {showModal && <ModalRegistrationSuccess
                 onClose={handleCloseModal}

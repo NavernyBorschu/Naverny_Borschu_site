@@ -28,7 +28,7 @@ export const ListPage=()=>{
   const { filters, clearSearchQuery } = useFilters();
   
   const onClickCard = (borschId) => {
-    navigate(`/borsch/${borschId}`);
+    navigate(`/#/borsch/${borschId}`);
   };
   
   const nameBorsch=(place_id)=>{  
@@ -45,7 +45,7 @@ export const ListPage=()=>{
     }
   }, [filters.searchQuery, updatePlacesBySearch]); 
   const handleCopyAndShare = (id_borsch) => {
-    const url = `${window.location.origin}/borsch/${id_borsch}`;
+    const url = `${window.location.origin}/#/borsch/${id_borsch}`;
 
     // Если Web Share API поддерживается — вызываем нативное окно
     if (navigator.share) {
